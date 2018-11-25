@@ -1,69 +1,69 @@
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\DeliverNET.dll.config
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\DeliverNET.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\DeliverNET.pdb
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\csc.exe
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\csc.exe.config
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\csc.rsp
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\csi.exe
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\csi.exe.config
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\csi.rsp
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.Managed.Core.targets
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.AppContext.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Console.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Diagnostics.StackTrace.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.IO.Compression.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.IO.FileSystem.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.IO.FileSystem.Primitives.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.IO.Pipes.AccessControl.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.IO.Pipes.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.AccessControl.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.Claims.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.Algorithms.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.Encoding.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.Primitives.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Security.Principal.Windows.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Text.Encoding.CodePages.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.ValueTuple.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Xml.ReaderWriter.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Xml.XmlDocument.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Xml.XPath.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\System.Xml.XPath.XDocument.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\vbc.exe
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\vbc.exe.config
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\vbc.rsp
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\VBCSCompiler.exe
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Helpers.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Mvc.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Razor.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Webpages.Deployment.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Webpages.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Webpages.Razor.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Razor.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Webpages.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Webpages.Deployment.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Webpages.Razor.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Helpers.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\System.Web.Mvc.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\DeliverNET.csprojAssemblyReference.cache
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\DeliverNET.csproj.CoreCompileInputs.cache
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\DeliverNET.csproj.CopyComplete
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\DeliverNET.dll
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\DeliverNET.pdb
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\DeliverNET.dll.config
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\DeliverNET.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\DeliverNET.pdb
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\csc.exe
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\csc.exe.config
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\csc.rsp
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\csi.exe
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\csi.exe.config
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\csi.rsp
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.AppContext.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Console.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.IO.Compression.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.Claims.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.ValueTuple.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\vbc.exe
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\vbc.exe.config
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\vbc.rsp
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\VBCSCompiler.exe
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Helpers.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Mvc.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Razor.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Webpages.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Webpages.Razor.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Razor.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Webpages.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Webpages.Razor.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Helpers.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\System.Web.Mvc.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\obj\Debug\DeliverNET.csprojAssemblyReference.cache
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\obj\Debug\DeliverNET.csproj.CoreCompileInputs.cache
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\obj\Debug\DeliverNET.csproj.CopyComplete
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\obj\Debug\DeliverNET.dll
+C:\Users\Stathis\Desktop\C# Class\DeliverNET\DeliverNET\obj\Debug\DeliverNET.pdb
