@@ -1,0 +1,181 @@
+﻿@{
+    Layout = null;
+}
+
+
+@* Clear Layout and build it up again, for the register pages only,
+    since we don't have a check to run in order to use partial view.*@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DeliveNET | Delivery Source</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="~/Content/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/freelancer.min.css" rel="stylesheet">
+
+    <!-- Popup CSS -->
+    <link href="~/Content/css/popup.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")"><strong>Deliver</strong><i>NET</i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="nav-item">
+            <a class="btn btn-danger" style="color:whitesmoke" href="@Url.Action("Index", "Home")">
+                <font size="+1"><strong>Regret</strong></font>	<font size="+2"><span style="color:black"><strong>&#9760;</strong></span></font>
+            </a>
+        </div>
+
+    </nav>
+
+    <!-- Page Content -->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container">
+            <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
+            <h1 class="text-white mb-5">Ride your Boiz, Make <i>$$$</i></h1>
+            <hr class="star-light">
+            <h3 class="font-weight-light mb-0">Fill your <i>Slaver Form</i> below</h3>
+        </div>
+    </header>
+
+
+    <!-- Registration Form -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+            <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                <div class="control-group">
+                    <div class="row">
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>FName</label>
+                            <input class="form-control" style="background-color:inherit"
+                                   id="fname" placeholder="First Name" required="required"
+                                   data-validation-required-message="Please enter your First name.">
+                        </div>
+                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                            <label>LName</label>
+                            <input class="form-control" style="background-color:inherit"
+                                   id="lname" placeholder="Last Name" required="required"
+                                   data-validation-required-message="Please enter your Last name.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>Email Address</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="email" placeholder="Email Address" required="required"
+                               data-validation-required-message="Please enter your email address.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>Phone Number</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="phone" placeholder="Phone Number" required="required"
+                               data-validation-required-message="Please enter your phone number.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>Age</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="age" placeholder="Age" required="required"
+                               data-validation-required-message="Please enter your Age.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>Shop</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="shop" placeholder="Shop Name" required="required"
+                               data-validation-required-message="Please enter your Shop.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>Username</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="username" placeholder="Username" required="required"
+                               data-validation-required-message="Please enter your Username.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>Password</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="password" placeholder="Password" required="required"
+                               data-validation-required-message="Please enter your Password.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                        <label>RePassword</label>
+                        <input class="form-control" style="background-color:inherit"
+                               id="repassword" placeholder="Re-enter Password" required="required"
+                               data-validation-required-message="Please re-enter your Password.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark" id="sendMessageButton"><font size="+2">Submit</font></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/Content/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="~/Content/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="~/Content/js/freelancer.min.js"></script>
+
+</body>
+
+</html>
