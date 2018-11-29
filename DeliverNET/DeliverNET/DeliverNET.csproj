@@ -1517,6 +1517,7 @@
     </Compile>
     <Compile Include="Models\VMBoi.cs" />
     <Compile Include="Models\VMSlaver.cs" />
+    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
