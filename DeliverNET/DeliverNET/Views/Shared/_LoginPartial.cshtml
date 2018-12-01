@@ -1,73 +1,25 @@
-﻿@if (User.Identity.IsAuthenticated)
-{
-    @* Logout Button *@
-    <li class="nav-item">
-        <a class="btn btn-danger" style="color:whitesmoke" href="@Url.Action("Index", "Home")">
-            <font size="+1"><strong>Logout</strong></font>	<font size="+2">&#128690;</font>
-        </a>
-    </li>}
+@using Microsoft.AspNetCore.Identity
 
+@inject SignInManager<DeliverNETUser> SignInManager
+@inject UserManager<DeliverNETUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
 else
 {
-    @* Boi Button *@
-    <li class="nav-item">
-        <a class="btn btn-warning" style="color:whitesmoke" href="@Url.Action("BoiIndex", "Boi")">
-            <font size="+1"><strong>Become A Deliverer</strong></font>	<font size="+2">&#128690;</font>
-        </a>
-    </li>
-
-    <li>
-        <text>&emsp;&emsp;&emsp;</text>
-    </li>
-
-    @* Login Button *@
-    <li class="nav-item">
-        <a class="btn btn-danger" style="color:whitesmoke" onclick="document.getElementById('popup').style.display='block'">
-            <font size="+2"><strong>Login</strong></font>
-        </a>
-
-        <div id="popup" class="modal">
-
-            <form class="modal-content animate" action="/action_page.php">
-
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('popup').style.display='none'" class="close" title="Close Login">&times;</span>
-                    <h1 style="text-align:center">
-                        <font size="5">Connect to Deliver<i><span style="color:cadetblue">NET</span></i></font>
-                    </h1>
-                </div>
-
-                <div class="container">
-                    <input type="text" placeholder="Username / E-mail" name="uname">
-                    <input type="password" placeholder="Password" name="psw">
-                    <button type="submit">Login</button>
-                    <input type="checkbox" style="margin:26px 30px;"> Remember me
-                    <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
-                </div>
-
-            </form>
-
-        </div>
-
-        @* If user clicks anywhere outside of the modal, Modal will close *@
-        <script>
-            var modal = document.getElementById('popup');
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-    </li>
-
-
-    <li>
-        <text>&emsp;&emsp;&emsp;</text>
-    </li>
-
-    @* Slaver Button *@
-    <li class="nav-item">
-        <a class="btn btn-success" href="@Url.Action("SlaverIndex", "Slaver")">
-            <font size="+1"><strong>Become A Slaver</strong></font>	<font size="+2">&#9832;</font>
-        </a>
-    </li>}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+}

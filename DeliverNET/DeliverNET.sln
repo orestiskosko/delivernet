@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliverNET", "DeliverNET\DeliverNET.csproj", "{EF70B770-55A1-40B6-A91C-D52E057AFA82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliverNET", "DeliverNET\DeliverNET.csproj", "{F164192D-D7FF-427C-9738-9E0B1624BFFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF70B770-55A1-40B6-A91C-D52E057AFA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF70B770-55A1-40B6-A91C-D52E057AFA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF70B770-55A1-40B6-A91C-D52E057AFA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF70B770-55A1-40B6-A91C-D52E057AFA82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F164192D-D7FF-427C-9738-9E0B1624BFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F164192D-D7FF-427C-9738-9E0B1624BFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F164192D-D7FF-427C-9738-9E0B1624BFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F164192D-D7FF-427C-9738-9E0B1624BFFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {79D7B0D8-E335-4071-BB43-1483ADECEBC4}
+		SolutionGuid = {BE47092F-1935-4FFD-88E9-7B2564468DE0}
 	EndGlobalSection
 EndGlobal
