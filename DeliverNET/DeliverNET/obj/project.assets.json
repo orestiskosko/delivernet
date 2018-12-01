@@ -12579,11 +12579,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Orestis\\Desktop\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
+      "projectUniqueName": "C:\\Users\\Orestis\\Documents\\GitRepos\\delivernet\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
       "projectName": "DeliverNET",
-      "projectPath": "C:\\Users\\Orestis\\Desktop\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
+      "projectPath": "C:\\Users\\Orestis\\Documents\\GitRepos\\delivernet\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
       "packagesPath": "C:\\Users\\Orestis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Orestis\\Desktop\\DeliverNET\\DeliverNET\\obj\\",
+      "outputPath": "C:\\Users\\Orestis\\Documents\\GitRepos\\delivernet\\DeliverNET\\DeliverNET\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
