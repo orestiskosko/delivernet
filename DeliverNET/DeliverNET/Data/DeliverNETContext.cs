@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DeliverNET.Areas.Identity.Data;
+using DeliverNET.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace DeliverNET.Models
+{
+    public class DeliverNETContext : IdentityDbContext<DeliverNETUser>
+    {
+        public DeliverNETContext(DbContextOptions<DeliverNETContext> options)
+            : base(options)
+        {
+        }
+
+        DbSet<Business> Businesses { get; set; }
+        DbSet<BusinessOwner> BusinessOwners { get; set; }
+        DbSet<BusinessCashier> BusinessCashiers { get; set; }
+        DbSet<Deliverer> Deliverers { get; set; }
+        DbSet<Order> Orders { get; set; }
+        DbSet<Rating> Ratings { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            // Customize the ASP.NET Identity model and override the defaults if needed.
+            // For example, you can rename the ASP.NET Identity table names and more.
+            // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<Business>().HasKey(b => b.Id);
+            builder.Entity<BusinessOwner>().HasKey(bo => bo.DeliverNetUserId);
+            builder.Entity<BusinessCashier>().HasKey(bc => bc.DeliverNetUserId);
+            builder.Entity<Deliverer>().HasKey(d => d.DeliverNetUserId);
+
+            builder.Entity<DeliverNETUser>()
+                .HasOne(u => u.BusinessOwner)
+                .WithOne(bo => bo.DeliverNETUser)
+                .HasForeignKey<BusinessOwner>(bo => bo.DeliverNetUserId);
+
+            builder.Entity<DeliverNETUser>()
+               .HasOne(u => u.BusinessCashier)
+               .WithOne(bo => bo.DeliverNETUser)
+               .HasForeignKey<BusinessCashier>(bo => bo.DeliverNetUserId);
+
+            builder.Entity<DeliverNETUser>()
+               .HasOne(u => u.Deliverer)
+               .WithOne(d => d.DeliverNETUser)
+               .HasForeignKey<Deliverer>(d => d.DeliverNetUserId);
+
+
+            builder.Entity<Business>()
+                .HasOne(b => b.BusinessOwner)
+                .WithOne(bo => bo.Business)
+                .HasForeignKey<BusinessOwner>(bo => bo.BusinessId);
+
+            builder.Entity<Business>()
+                .HasOne(b => b.BusinessCashier)
+                .WithOne(bc => bc.Business)
+                .HasForeignKey<BusinessCashier>(bc => bc.BusinessId);
+
+        }
+
+    }
+}

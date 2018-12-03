@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DeliverNET.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DeliverNET.Controllers
 {
@@ -14,7 +15,7 @@ namespace DeliverNET.Controllers
         {
             return View();
         }
-
+           
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

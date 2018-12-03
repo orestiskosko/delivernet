@@ -22,7 +22,8 @@ namespace DeliverNET.Areas.Identity
                         context.Configuration.GetConnectionString("DeliverNETContextConnection")));
 
                 services.AddDefaultIdentity<DeliverNETUser>()
-                    .AddEntityFrameworkStores<DeliverNETContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<DeliverNETContext>();
             });
         }
     }

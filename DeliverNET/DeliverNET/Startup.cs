@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using DeliverNET.Areas.Identity.Data;
+using DeliverNET.Data;
+using System.Security.Claims;
 
 namespace DeliverNET
 {
@@ -36,6 +38,17 @@ namespace DeliverNET
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // TODO Strict password requirements
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
@@ -46,7 +59,7 @@ namespace DeliverNET
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +84,8 @@ namespace DeliverNET
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            new Seeder().Seed(serviceProvider).Wait();
         }
     }
 }

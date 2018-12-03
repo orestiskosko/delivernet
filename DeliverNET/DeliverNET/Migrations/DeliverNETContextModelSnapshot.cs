@@ -29,10 +29,16 @@ namespace DeliverNET.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<DateTime>("DOB");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -68,6 +74,177 @@ namespace DeliverNET.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Business", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("Credentials");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("IsVerified");
+
+                    b.Property<double>("Lat");
+
+                    b.Property<double>("Long");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<DateTime>("SignupDate");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("VerificationDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Businesses");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.BusinessCashier", b =>
+                {
+                    b.Property<string>("DeliverNetUserId");
+
+                    b.Property<Guid>("BusinessId");
+
+                    b.HasKey("DeliverNetUserId");
+
+                    b.HasIndex("BusinessId")
+                        .IsUnique();
+
+                    b.ToTable("BusinessCashiers");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.BusinessOwner", b =>
+                {
+                    b.Property<string>("DeliverNetUserId");
+
+                    b.Property<Guid>("BusinessId");
+
+                    b.HasKey("DeliverNetUserId");
+
+                    b.HasIndex("BusinessId")
+                        .IsUnique();
+
+                    b.ToTable("BusinessOwners");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Deliverer", b =>
+                {
+                    b.Property<string>("DeliverNetUserId");
+
+                    b.Property<string>("Credentials");
+
+                    b.Property<bool>("IsDelivering");
+
+                    b.Property<bool>("IsValidated");
+
+                    b.Property<bool>("IsWorking");
+
+                    b.Property<double>("Lat");
+
+                    b.Property<double>("Long");
+
+                    b.Property<string>("OperationalRegion");
+
+                    b.HasKey("DeliverNetUserId");
+
+                    b.ToTable("Deliverer");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AcceptedTime");
+
+                    b.Property<string>("Address");
+
+                    b.Property<Guid?>("BusinessId");
+
+                    b.Property<string>("CashierDeliverNetUserId");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Comments");
+
+                    b.Property<string>("Country");
+
+                    b.Property<DateTime>("DeliveredTime");
+
+                    b.Property<string>("DelivererDeliverNetUserId");
+
+                    b.Property<string>("DoorName");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<int>("FloorNo");
+
+                    b.Property<bool>("IsAccepted");
+
+                    b.Property<bool>("IsDelivered");
+
+                    b.Property<bool>("IsPickedup");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<double>("Lat");
+
+                    b.Property<double>("Long");
+
+                    b.Property<int>("PaymentTYpeId");
+
+                    b.Property<DateTime>("PickupTime");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<float>("Price");
+
+                    b.Property<string>("StateProvince");
+
+                    b.Property<float>("Tariff");
+
+                    b.Property<DateTime>("Tstamp");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessId");
+
+                    b.HasIndex("CashierDeliverNetUserId");
+
+                    b.HasIndex("DelivererDeliverNetUserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Rating", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comment")
+                        .IsRequired();
+
+                    b.Property<string>("RateeId");
+
+                    b.Property<string>("Rater");
+
+                    b.Property<DateTime>("Tstamp");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RateeId");
+
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -182,6 +359,62 @@ namespace DeliverNET.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.BusinessCashier", b =>
+                {
+                    b.HasOne("DeliverNET.Data.Business", "Business")
+                        .WithOne("BusinessCashier")
+                        .HasForeignKey("DeliverNET.Data.BusinessCashier", "BusinessId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DeliverNET.Areas.Identity.Data.DeliverNETUser", "DeliverNETUser")
+                        .WithOne("BusinessCashier")
+                        .HasForeignKey("DeliverNET.Data.BusinessCashier", "DeliverNetUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.BusinessOwner", b =>
+                {
+                    b.HasOne("DeliverNET.Data.Business", "Business")
+                        .WithOne("BusinessOwner")
+                        .HasForeignKey("DeliverNET.Data.BusinessOwner", "BusinessId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DeliverNET.Areas.Identity.Data.DeliverNETUser", "DeliverNETUser")
+                        .WithOne("BusinessOwner")
+                        .HasForeignKey("DeliverNET.Data.BusinessOwner", "DeliverNetUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Deliverer", b =>
+                {
+                    b.HasOne("DeliverNET.Areas.Identity.Data.DeliverNETUser", "DeliverNETUser")
+                        .WithOne("Deliverer")
+                        .HasForeignKey("DeliverNET.Data.Deliverer", "DeliverNetUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Order", b =>
+                {
+                    b.HasOne("DeliverNET.Data.Business", "Business")
+                        .WithMany()
+                        .HasForeignKey("BusinessId");
+
+                    b.HasOne("DeliverNET.Data.BusinessCashier", "Cashier")
+                        .WithMany()
+                        .HasForeignKey("CashierDeliverNetUserId");
+
+                    b.HasOne("DeliverNET.Data.Deliverer", "Deliverer")
+                        .WithMany()
+                        .HasForeignKey("DelivererDeliverNetUserId");
+                });
+
+            modelBuilder.Entity("DeliverNET.Data.Rating", b =>
+                {
+                    b.HasOne("DeliverNET.Areas.Identity.Data.DeliverNETUser", "Ratee")
+                        .WithMany("Ratings")
+                        .HasForeignKey("RateeId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
