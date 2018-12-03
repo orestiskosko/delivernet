@@ -9792,7 +9792,7 @@
       ]
     },
     "System.Net.Http/4.3.0": {
-      "sha512": "Z1UfSF6dlpCdZdxh6LeoGlYH+q6ptG/iiIWgUUeKhE3DbQACmZkU7Sz2nOX0qdHjz72MOdYRbkSJ5Qwl6sZgvg==",
+      "sha512": "sYg+FtILtRQuYWSIAuNOELwVuVsxVyJGWQyOnlAzhV4xvhyFnON1bAzYYC+jjRW8JREM45R0R5Dgi8MTC5sEwA==",
       "type": "package",
       "path": "system.net.http/4.3.0",
       "files": [
@@ -12573,23 +12573,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Stathis\\.nuget\\packages\\": {},
+    "C:\\Users\\Orestis\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Stathis\\Documents\\GIT\\delivernet\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
+      "projectUniqueName": "C:\\Users\\Orestis\\Documents\\GitRepos\\delivernet\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
       "projectName": "DeliverNET",
-      "projectPath": "C:\\Users\\Stathis\\Documents\\GIT\\delivernet\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
-      "packagesPath": "C:\\Users\\Stathis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Stathis\\Documents\\GIT\\delivernet\\DeliverNET\\DeliverNET\\obj\\",
+      "projectPath": "C:\\Users\\Orestis\\Documents\\GitRepos\\delivernet\\DeliverNET\\DeliverNET\\DeliverNET.csproj",
+      "packagesPath": "C:\\Users\\Orestis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Orestis\\Documents\\GitRepos\\delivernet\\DeliverNET\\DeliverNET\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Stathis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Orestis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
