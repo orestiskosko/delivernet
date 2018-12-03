@@ -1,0 +1,99 @@
+﻿body {
+    font-family: 'Segoe UI';
+}
+
+.font-pacifico {
+    font-family: 'Pacifico', cursive;
+    font-size: 20px;
+}
+
+.text-bone {
+    color: #E0DDC3;
+}
+
+.text-my-dark {
+    color: #2F332E;
+}
+
+.text-carmine {
+    color: #AA4836;
+}
+
+.text-winter {
+    color: #518282;
+}
+
+.bg-carmine {
+    background-color: #AA4836;
+}
+
+.bg-winter {
+    background-color: #518282;
+}
+
+.bg-my-dark {
+    background-color: #2F332E;
+}
+
+.btn-nav {
+    background-color: transparent;
+    border: solid;
+    border-color: transparent;
+    border-width: 1px;
+    padding: 5px;
+}
+
+.btn-my-dark {
+    background-color: #2F332E;
+    color: #E0DDC3;
+    border: solid;
+    border-color: transparent;
+    border-width: 1px;
+    padding: 5px;
+}
+
+.btn-nav-border {
+    background-color: transparent;
+    border: solid;
+    border-color: #E0DDC3;
+    border-width: 1px;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.separator-big {
+    height: 500px;
+    background-color: transparent;
+}
+
+.separator-small {
+    height: 130px;
+    background-color: transparent;
+}
+
+.hov-carmine:hover{
+    background-color: #AA5242;
+}
+
+.hov-winter:hover {
+    background-color: #588E8E;
+}
+
+.hov-not-bone:hover {
+    color: #EDEAD3;
+    text-decoration: none;
+}
+
+.hov-not-carmine:hover {
+    color: #AA5242;
+    text-decoration: none;
+}
+
+.hov-not-winter:hover {
+    color: #588E8E;
+    text-decoration: none;
+}
+
+.nav-padding {
+    padding-top: 80px;
+}

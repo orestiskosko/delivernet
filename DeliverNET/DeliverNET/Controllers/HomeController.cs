@@ -15,22 +15,24 @@ namespace DeliverNET.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
            
         public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+=======
 
+        public IActionResult AboutBusi()
+>>>>>>> front
+        {
+            
+            return View();
+        }
+
+        public IActionResult AboutIndi()
+        {
             return View();
         }
 
         public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
