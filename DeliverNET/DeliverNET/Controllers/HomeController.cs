@@ -16,18 +16,17 @@ namespace DeliverNET.Controllers
             return View();
         }
            
-        public IActionResult AboutBusi()
+        public IActionResult About()
         {
-            return View();
-        }
+            ViewData["Message"] = "Your application description page.";
 
-        public IActionResult AboutIndi()
-        {
             return View();
         }
 
         public IActionResult Contact()
         {
+            ViewData["Message"] = "Your contact page.";
+
             return View();
         }
 
