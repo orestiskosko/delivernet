@@ -53,8 +53,8 @@ namespace DeliverNET
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
-                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId");
+                facebookOptions.AppSecret = Environment.GetEnvironmentVariable("Authentication:Facebook:AppSecret");
             });
 
             services.AddSingleton<IEmailSender, MailSender>();
