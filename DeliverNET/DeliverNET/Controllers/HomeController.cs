@@ -16,12 +16,13 @@ namespace DeliverNET.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AboutBusi()
         {
+            
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult AboutIndi()
         {
             return View();
         }
