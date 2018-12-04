@@ -18,8 +18,25 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    </ul>
+    <style>
+        li:hover {
+            cursor: pointer
+        }
+    </style>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+                <a class="btn-nav text-carmine hov-not-carmine text-nowrap border-0" asp-area="" asp-controller="Home" asp-action="AboutIndi">For Individuals</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn-nav text-winter hov-not-winter text-nowrap border-0 mx-md-2" asp-area="" asp-controller="Home" asp-action="AboutBusi">For Business</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn-nav" style="color: #E0DDC3" id="btnclick">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn-nav-border hov-not-bone text-bone text-nowrap ml-md-5" asp-area="Identity" asp-page="/Account/Register">Register Free</a>
+            </li>
+        </ul>
+    </div>
 }
