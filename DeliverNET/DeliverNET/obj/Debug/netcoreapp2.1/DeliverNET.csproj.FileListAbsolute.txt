@@ -117,10 +117,8 @@ C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\n
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
-C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -270,3 +268,5 @@ C:\Users\orest\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\net
 C:\Users\orest\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\DeliverNET.dll
 C:\Users\orest\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\DeliverNET.pdb
 C:\Users\orest\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\DeliverNET.csproj.CopyComplete
+C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\AboutBusi.g.cshtml.cs
+C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\AboutIndi.g.cshtml.cs

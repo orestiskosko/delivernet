@@ -3,26 +3,29 @@
 @inject SignInManager<DeliverNETUser> SignInManager
 @inject UserManager<DeliverNETUser> UserManager
 
+<style>
+    li:hover {
+        cursor: pointer
+    }
+</style>
+
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
-            </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a class="btn-nav text-carmine hov-not-bone text-nowrap border-0" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                </li>
+                <li class="nav-item">
+                    <button type="submit" class="btn-nav-border hov-not-bone text-bone text-nowrap ml-md-5">Logout</button>
+                </li>
+            </ul>
+        </div>
     </form>
 }
 else
 {
-    <style>
-        li:hover {
-            cursor: pointer
-        }
-    </style>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav align-items-center">
             <li class="nav-item">
@@ -32,7 +35,7 @@ else
                 <a class="btn-nav text-winter hov-not-winter text-nowrap border-0 mx-md-2" asp-area="" asp-controller="Home" asp-action="AboutBusi">For Business</a>
             </li>
             <li class="nav-item">
-                <a class="btn-nav" style="color: #E0DDC3" id="btnclick">Login</a>
+                <a class="btn-nav" style="color: #E0DDC3" id="btnclick" asp-area="Identity" asp-page="/Account/Login">Login</a>
             </li>
             <li class="nav-item">
                 <a class="btn-nav-border hov-not-bone text-bone text-nowrap ml-md-5" asp-area="Identity" asp-page="/Account/Register">Register Free</a>
