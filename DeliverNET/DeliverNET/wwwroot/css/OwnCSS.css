@@ -97,3 +97,20 @@
 .nav-padding {
     padding-top: 80px;
 }
+
+.circle {
+    width: 175px;
+    height: 175px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 225px;
+}
+
+.regiClicked {
+    border-color: #2F332E;
+    border-width: 5px;
+}
+
+.btn-shadow-none:focus{
+    box-shadow: none;
+}

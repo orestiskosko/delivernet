@@ -113,7 +113,7 @@ Write(ViewData["Title"]);
         used in an authenticator app you should ");
             EndContext();
             BeginContext(762, 69, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "33d3ed07f5e44695bab79b35233618d5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8bdcac4276d64cefaf8f31a67a1380ad", async() => {
                 BeginContext(797, 30, true);
                 WriteLiteral("reset your authenticator keys.");
                 EndContext();
@@ -135,7 +135,7 @@ Write(ViewData["Title"]);
             WriteLiteral("\n    </p>\n</div>\n<div>\n    ");
             EndContext();
             BeginContext(858, 137, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8290f90b1b61475b8c598cf90066f61f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0ac17e7f643a4032a2756ae4ea77e5b0", async() => {
                 BeginContext(897, 91, true);
                 WriteLiteral("\n        <button class=\"btn btn-danger\" type=\"submit\">Generate Recovery Codes</button>\n    ");
                 EndContext();
