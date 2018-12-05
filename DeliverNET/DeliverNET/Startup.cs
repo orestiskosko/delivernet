@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using DeliverNET.Areas.Identity.Data;
 using DeliverNET.Data;
 using System.Security.Claims;
+using Microsoft.Extensions.Logging;
 
 namespace DeliverNET
 {
@@ -63,6 +64,7 @@ namespace DeliverNET
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

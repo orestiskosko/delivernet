@@ -1,17 +1,17 @@
 ﻿<!-- Login Modal -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+@*<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content p-0" style="background-color: transparent; border: none">
             <div class="modal-body bg-my-dark" style="border-radius: 20px">
-                <form>
-                    <h5 class="text-bone text-center mb-4">Sign In!</h5>
+                <form asp-controller="Login" asp-action="SendToLoginIdentity">
+                    <h5 class="text-bone text-center mb-4">Login</h5>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="Username / Email">
+                        <input type="email" class="form-control" aria-describedby="emailHelp"
+                               placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <!-- MAKE SURE IT POPS UP EVEN IN THE EVERYWHERE VIEWS -->
 
 <!-- Header -->
@@ -74,18 +74,18 @@
 
 
 @section Scripts{
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $(document).ready(function () {
             $("#btnclick").click(function () {
-                $("#login").modal({
+                $("#loginModal").modal({
                     show: true,
                     focus: true
                 })
             });
 
             $("#HidebtnModal").click(function () {
-                $("#login").modal("hide");
+                $("#loginModal").modal("hide");
             });
         });
-    </script>
+    </script>*@
 }
