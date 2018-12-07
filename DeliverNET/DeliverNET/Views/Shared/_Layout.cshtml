@@ -1,6 +1,10 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "DeliverNET | Delivery Source";
 }
+@inject SignInManager<DeliverNETUser> SignInManager
+@inject UserManager<DeliverNETUser> UserManager
 
 <!DOCTYPE html>
 <html>
@@ -26,11 +30,30 @@
 </head>
 
 
-<body id="page-top">
+<body id="page-top" class="content">
+    <style>
+        body {
+            background: url(~/img/header-bg.jpg);
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top p-1 m-0" id="mainNav" style="background-color: #2F332E">
+    <nav class="navbar navbar-expand-lg fixed-top p-1" id="mainNav" style="background-color: #2F332E">
         <div class="container">
-            <a class="navbar text-bone js-scroll-trigger hov-not-bone font-pacifico js-scroll-trigger bg-#E0DDC3 col-sm-7" asp-area="" asp-controller="Home" asp-action="Index">DeliverNET</a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="navbar text-bone js-scroll-trigger hov-not-bone font-pacifico js-scroll-trigger bg-#E0DDC3 col-sm-7"
+                   asp-area="" asp-controller="ProfileIndi" asp-action="IndexIndi">DeliverNET</a>
+            }
+            else
+            {
+                <!-- TODO :: Set Rediridection Route according to User Role for account Manage -->
+                <a class="navbar text-bone js-scroll-trigger hov-not-bone font-pacifico js-scroll-trigger bg-#E0DDC3 col-sm-7"
+                   asp-area="" asp-controller="Home" asp-action="Index">DeliverNET</a>
+            }
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
                     style="background-color: transparent; color: #E0DDC3">
@@ -50,45 +73,39 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-my-dark text-bone">
+    <footer class="bg-my-dark text-bone p-2" id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Arxiloxou 7</span>
+                <div class="col-md-4 m-auto">
+                    <span class="copyright">Copyright &copy; Ipplos</span>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
                         <li class="list-inline-item">
                             <a href="#">
-                                <i class="fab fa-twitter"></i>
+                                <i class="fab fa-twitter text-bone"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a href="#">
-                                <i class="fab fa-facebook-f"></i>
+                                <i class="fab fa-facebook-f text-bone"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a href="#">
-                                <i class="fab fa-linkedin-in"></i>
+                                <i class="fab fa-linkedin-in text-bone"></i>
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
+                <div class="col-md-4"></div>
             </div>
         </div>
+        <script>
+            (document.body.scrollHeight > document.body.clientHeight) ?
+                document.getElementById('footer').classList.add("fixed-bottom") : document.getElementById('footer').classList.remove("fixed-bottom");
+        </script>
     </footer>
-
 
 
     <environment include="Development">
@@ -105,6 +122,12 @@
 
         <!-- Custom scripts for this template -->
         <script src="~/js/agency.min.js"></script>
+
+        <!-- For fixing Footer depending on page size -->
+        <script>
+            (document.body.scrollHeight > window.innerHeight) ?
+                document.getElementById("footer").classList.remove("fixed-bottom") : document.getElementById("footer").classList.add("fixed-bottom");
+        </script>
     </environment>
     <environment exclude="Development">
         <script src="~/vendor/jquery/jquery.min.js"

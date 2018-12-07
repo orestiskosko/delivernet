@@ -18,7 +18,6 @@ namespace DeliverNET.Controllers
 
         public IActionResult AboutBusi()
         {
-            
             return View();
         }
 

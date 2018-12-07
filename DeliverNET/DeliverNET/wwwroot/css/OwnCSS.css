@@ -114,3 +114,77 @@
 .btn-shadow-none:focus{
     box-shadow: none;
 }
+
+.bike-carmine {
+    content: url(/img/bike-carmine.jpg);
+    height: 100%;
+}
+
+.bike-carmine-rev {
+    content: url(/img/bike-carmine.jpg);
+    transform: scaleX(-1);
+    height: 100%;
+}
+
+.bike-winter {
+    content: url(/img/bike-winter.jpg);
+    height: 100%;
+}
+
+.bike-winter-rev {
+    content: url(/img/bike-winter.jpg);
+    transform: scaleX(-1);
+    height: 100%;
+}
+
+.table-standard {
+    height: 100%;
+    width: 100%;
+    color: #E0DDC3;
+    border: solid;
+    border-collapse: separate;
+    border-width: 10px;
+    border-radius: 15px 40px;
+    outline-color: maroon;
+    box-shadow: 0 0 0 1px hsl(0, 0%, 80%), 0 0 0 1px hsl(0, 0%, 90%);
+}
+
+.table-inputs {
+    display: block;
+    border-bottom: 3px dotted #2F332E;
+    display: inline-table;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 0px;
+    height: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-unavailable {
+    display: block;
+    background: black;
+    border-radius: 50%;
+    height: 230px;
+    width: 230px;
+    margin: 0;
+    background: radial-gradient(circle at 100px 100px, #AA4836, #000);
+}
+
+.btn-unavailable:active {
+    background:  radial-gradient(circle at 100px 100px, maroon, #000);
+}
+
+.btn-available {
+    display: block;
+    background: black;
+    border-radius: 50%;
+    height: 230px;
+    width: 230px;
+    margin: 0;
+    background: radial-gradient(circle at 100px 100px, #72AF64, #000);
+}
+
+.btn-available:active {
+    background: radial-gradient(circle at 100px 100px, #32512b, #000);
+}

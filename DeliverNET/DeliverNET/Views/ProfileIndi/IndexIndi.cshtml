@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "DeliverNET | WorkSpace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ::placeholder is valid, don't change -->
+<style>
+    body {
+        background-image: url("/img/background-wood.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    ::placeholder {
+        color: #529ad1;
+    }
+
+    tbody {
+        max-height: 530px;
+        overflow: auto;
+        line-height: 3;
+    }
+
+    thead > tr, tbody {
+        display: block;
+    }
+</style>
+
+<body>
+    <div class="row nav-padding px-5 pb-5">
+        <div class="container align-items-center">
+            <div class="row align-items-center">
+
+                <!-- Order List for Deliverer -->
+                <div class="col-md-6 m-auto d-block p-0" style="height:550px">
+                    <h3 class="text-center text-bone table-standard bg-carmine m-0 p-1" style="border-radius:50px 10px; height:auto;overflow-y:hidden">Order List</h3>
+                    <table class="table-standard bg-carmine">
+                        <tbody>
+                            <!-- This loop is only for scroll testing. However, we this inside the loop is the setup for each order input -->
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <tr class="table-inputs">
+                                    <th class="col-md-2" style="font-size:large">Restaurant Name</th>
+                                    <th>
+                                        <input class="bg-my-dark text-center p-0" style="border-radius:7px 55px;border-style:none" placeholder="Order Status" disabled />
+                                    </th>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Search for -->
+                <div class="col-md-6" style="text-align:-webkit-center">
+                    <!-- Ignore error here, all good -->
+                    <button class="btn btn-unavailable btn-shadow-none text-bone" id="btnReady">
+                        <i class="fas fa-signal" style="font-size: 70px"></i>
+                        <p>Not Available</p>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+
+    <!-- If Button Pressed -->
+    <script>
+        var IsClicked = false;
+        var btn = document.getElementById('btnReady');
+        var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
+        var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> All Set</p >';
+
+        btn.onclick = function () {
+            IsClicked ? (IsClicked = false, btn.classList.remove("btn-available"), btn.classList.add("btn-unavailable"),
+                btn.innerHTML = htmlON) :
+                (IsClicked = true, btn.classList.remove("btn-unavailable"), btn.classList.add("btn-available"),
+                    btn.innerHTML = htmlOFF);
+        }
+
+
+    </script>
+}
