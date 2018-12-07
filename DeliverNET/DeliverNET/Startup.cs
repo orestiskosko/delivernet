@@ -9,14 +9,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DeliverNET.Areas.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using DeliverNET.Areas.Identity.Data;
 using DeliverNET.Data;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
+using DeliverNET.Models;
 
 namespace DeliverNET
 {
@@ -49,6 +48,15 @@ namespace DeliverNET
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
+
+            services.AddDbContext<DeliverNETContext>(options =>
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<DeliverNETUser, IdentityRole>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<DeliverNETContext>()
+            .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

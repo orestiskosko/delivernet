@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using DeliverNET.Data;
 using Microsoft.AspNetCore.Identity;
 
-namespace DeliverNET.Areas.Identity.Data
+namespace DeliverNET.Data
 {
     // Add profile data for application users by adding properties to the DeliverNETUser class
     public class DeliverNETUser : IdentityUser

@@ -1,31 +1,30 @@
-﻿@page
-@model LoginModel
+﻿@model DeliverNET.Models.ViewModels.LoginViewModel
 
 @{
     ViewData["Title"] = "Log in";
 }
 
 <section>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <form asp-route-returnUrl="ReturnUrl" method="post">
                     <h4>Login to Delivernet</h4>
                     <hr />
                     <div class="form-group">
-                        <input asp-for="Input.Email" class="form-control" placeholder="Email" />
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <input asp-for="Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
-                            <label asp-for="Input.RememberMe">
-                                <input asp-for="Input.RememberMe" />
-                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            <label asp-for="RememberMe">
+                                <input asp-for="RememberMe" />
+                                @Html.DisplayNameFor(m => m.RememberMe)
                             </label>
                         </div>
                     </div>
@@ -34,10 +33,10 @@
                     </div>
                     <div class="form-group">
                         <p>
-                            <a class="text-my-dark" asp-page="./ForgotPassword">Forgot your password?</a>
+                            <a class="text-my-dark">Forgot your password?</a>
                         </p>
                         <p>
-                            <a class="text-my-dark" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            <a class="text-my-dark">Register as a new user</a>
                         </p>
                     </div>
                 </form>
@@ -49,7 +48,7 @@
                 @{
                     if ((Model.ExternalLogins?.Count ?? 0) != 0)
                     {
-                        <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <form asp-route-returnUrl="ReturnUrl" method="post" class="form-horizontal">
                             <div>
                                 <p>
                                     @foreach (var provider in Model.ExternalLogins)
@@ -74,3 +73,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
