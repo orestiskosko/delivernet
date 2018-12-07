@@ -12,5 +12,20 @@ namespace DeliverNET.Controllers
         {
             return View();
         }
+
+        public IActionResult DashboardIndi()
+        {
+            return View();
+        }
+
+        public IActionResult SettingsIndi()
+        {
+            return View();
+        }
+
+        public IActionResult AppFormIndi()
+        {
+            return View();
+        }
     }
 }

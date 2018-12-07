@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "Verify Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-image: url("/img/parchment.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div class="row nav-padding px-5 pb-5">
+    <div class="container align-items-center">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <h3>Verifycation Form</h3>
+                <br />
+                <!-- TODO :: Connect the inputs of this form with Db -->
+                <form class="text-my-dark">
+
+                    <div class="form-group">
+                        <label><strong>City</strong></label>
+                        <span class="text-danger"></span> <!-- Here we enter the asp-validation-for -->
+                        <input class="form-control" placeholder="Choose A City" list="cities" />
+                        <datalist id="cities">
+                            <option>Athens</option>
+                            <option>Patra</option>
+                            <option>Korinthos</option>
+                            <option>Xalkida</option>
+                            <option>Giannena</option>
+                            <option>Thessaloniki</option>
+                            <option>H Poutana H Mana tou Oresti</option>
+                        </datalist>
+                    </div>
+
+                    <hr />
+                    <div class="form-group">
+                        <label><strong>Area</strong></label>
+                        <span class="text-danger"></span>
+                        <input class="form-control" placeholder="Preffered Area of Work" list="region" />
+                        <datalist id="region">
+                            <!-- Connect here IF Statement list depending on City (we need the input above first) -->
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                            <option>Sto mouni tis manas tou Oresti</option>
+                        </datalist>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label><strong>First Name</strong></label>
+                        <input class="form-control" placeholder="e.g. David" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label><strong>Last Name</strong></label>
+                        <input class="form-control" placeholder="e.g. Smith" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label><strong>Date of Birth</strong></label>
+                        <input class="form-control" placeholder="dd/MM/YY" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <hr />
+
+                    <div class="form-group position-relative">
+                        <label><strong>Mobile Phone</strong></label>
+                        <input class="form-control input-with-place" />
+                        <span class="unit" style="color:#808080">+30&ensp;</span>
+                        <span class="text-danger"></span>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <label><strong>Email</strong></label>
+                        <input class="form-control" placeholder="Email Address" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-my-dark">Apply</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>>
