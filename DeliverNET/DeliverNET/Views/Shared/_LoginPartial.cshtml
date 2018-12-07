@@ -4,7 +4,10 @@
 @* emetiko *@
 <style>
     li:hover {
-        cursor: pointer
+        cursor: pointer;
+    }
+    button:hover {
+        cursor: pointer;
     }
 </style>
 
@@ -13,12 +16,32 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home")" method="post" id="logoutForm" class="navbar-right">
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav align-items-center">
-                <li class="nav-item">
-                    <!-- TODO Set Rediridection Route according to User Role for account Manage -->
-                    <a class="btn-nav text-carmine hov-not-bone text-nowrap border-0" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+
+                <li class="text-bone" style="pointer-events:none">
+                    @UserManager.GetUserName(User)
                 </li>
+
                 <li class="nav-item">
-                    <button type="submit" class="btn-nav-border hov-not-bone text-bone text-nowrap ml-md-5">Logout</button>
+                    <a class="collapsible btn-nav hov-not-bone text-bone text-nowrap ml-md-5 pt-1 px-2">
+                        <i class="fas fa-user text-bone" id="profileIcon" style="font-size:large"></i>
+                    </a>
+                    <ul class="collapse-content p-0">
+
+                        <li class="hov-dark pl-2 pr-5 mb-1 py-2">
+                            <a class="btn-nav text-bone hov-not-bone p-0" asp-area="" asp-controller="ProfileIndi" asp-action="DashboardIndi">Dashboard</a>
+                        </li>
+
+                        <li class="hov-dark pl-2 pr-5 mb-2 py-2">
+                            <a class="btn-nav text-bone hov-not-bone p-0" asp-area="" asp-controller="ProfileIndi" asp-action="SettingsIndi">Settings</a>
+                        </li>
+
+                        <li class="hov-dark">
+                            <button type="submit" class="btn-nav btn-shadow-none hov-not-bone text-bone p-0 pl-2 pr-5 py-2"
+                                    style="margin-left:0px!important">
+                                Logout&ensp;
+                            </button>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

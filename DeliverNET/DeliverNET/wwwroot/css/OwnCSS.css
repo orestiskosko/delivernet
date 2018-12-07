@@ -61,6 +61,15 @@
     border-radius: 8px;
 }
 
+.btn-nav-border-circ {
+    background-color: transparent;
+    border: solid;
+    border-color: #E0DDC3;
+    border-width: 1px;
+    padding: 5px;
+    border-radius: 30px;
+}
+
 .separator-big {
     height: 500px;
     background-color: transparent;
@@ -71,12 +80,16 @@
     background-color: transparent;
 }
 
-.hov-carmine:hover{
+.hov-carmine:hover {
     background-color: #AA5242;
 }
 
 .hov-winter:hover {
     background-color: #588E8E;
+}
+
+.hov-dark:hover {
+    background-color: #3C423B;
 }
 
 .hov-not-bone:hover {
@@ -111,7 +124,7 @@
     border-width: 5px;
 }
 
-.btn-shadow-none:focus{
+.btn-shadow-none:focus {
     box-shadow: none;
 }
 
@@ -171,9 +184,9 @@
     background: radial-gradient(circle at 100px 100px, #AA4836, #000);
 }
 
-.btn-unavailable:active {
-    background:  radial-gradient(circle at 100px 100px, maroon, #000);
-}
+    .btn-unavailable:active {
+        background: radial-gradient(circle at 100px 100px, maroon, #000);
+    }
 
 .btn-available {
     display: block;
@@ -185,6 +198,34 @@
     background: radial-gradient(circle at 100px 100px, #72AF64, #000);
 }
 
-.btn-available:active {
-    background: radial-gradient(circle at 100px 100px, #32512b, #000);
+    .btn-available:active {
+        background: radial-gradient(circle at 100px 100px, #32512b, #000);
+    }
+
+.collapsible {
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+}
+
+.collapse-content {
+    padding: 0 18px;
+    color: #E0DDC3;
+    background-color: #2F332E;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.unit {
+    position: absolute;
+    display: block;
+    left: 10px;
+    top: 39px;
+    z-index: 9;
+}
+
+.input-with-place {
+    display: block;
+    padding-left: 50px;
 }
