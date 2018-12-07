@@ -1,4 +1,4 @@
-﻿@model DeliverNET.Models.ViewModels.RegisterViewModel
+﻿@model DeliverNET.Models.AccountViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "DeliverNET | Register";
 }
@@ -16,8 +16,7 @@
                 <h3>Registration Form</h3>
                 <br />
                 <!-- TODO :: Set Rediridection Route according to User Role when just registered -->
-                <form class="text-my-dark" asp-route-returnUrl="ReturnUrl" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+                <form class="text-my-dark" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                     <div class="form-group">
                         <label asp-for="Email"><strong>Email</strong></label>
                         <input asp-for="Email" class="form-control" />
@@ -71,7 +70,7 @@
 
 
 @section Scripts {
-    <partial name="Shared/_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 
     <!-- Button animation -->
     <script>

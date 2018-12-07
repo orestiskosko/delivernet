@@ -10,8 +10,13 @@ namespace DeliverNET.Data
     // Add profile data for application users by adding properties to the DeliverNETUser class
     public class DeliverNETUser : IdentityUser
     {
+        [PersonalData]
         public string FirstName { get; set; }
+
+        [PersonalData]
         public string LastName { get; set; }
+
+        [PersonalData]
         public DateTime DOB { get; set; }
 
         public ICollection<Rating> Ratings { get; set; }

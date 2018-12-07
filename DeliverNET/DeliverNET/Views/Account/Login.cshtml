@@ -1,7 +1,11 @@
-﻿@model DeliverNET.Models.ViewModels.LoginViewModel
+﻿@model DeliverNET.Models.AccountViewModels.LoginViewModel
+
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Authentication
 
 @{
     ViewData["Title"] = "Log in";
+    var authSchemes = (List<AuthenticationScheme>)ViewData["ExternalLogins"];
 }
 
 <section>
@@ -9,9 +13,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <form asp-route-returnUrl="ReturnUrl" method="post">
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                     <h4>Login to Delivernet</h4>
                     <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <input asp-for="Email" class="form-control" placeholder="Email" />
                         <span asp-validation-for="Email" class="text-danger"></span>
@@ -36,7 +41,7 @@
                             <a class="text-my-dark">Forgot your password?</a>
                         </p>
                         <p>
-                            <a class="text-my-dark">Register as a new user</a>
+                            <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="text-my-dark">Register as a new user</a>
                         </p>
                     </div>
                 </form>
@@ -46,16 +51,16 @@
                 <h4>Use another service to log in.</h4>
                 <hr />
                 @{
-                    if ((Model.ExternalLogins?.Count ?? 0) != 0)
+                    if ((authSchemes?.Count ?? 0) != 0)
                     {
-                        <form asp-route-returnUrl="ReturnUrl" method="post" class="form-horizontal">
+                        <form asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
                             <div>
                                 <p>
-                                    @foreach (var provider in Model.ExternalLogins)
+                                    @foreach (var provider in authSchemes)
                                     {
                                         <button type="submit" class="btn bg-transparent" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
                                             <div>
-                                                @*@provider.DisplayName*@
+                                                @*Use this to display the provider's name: @provider.DisplayName*@
                                                 <i class="fab fa-facebook-square" style="font-size:30px; color: dodgerblue"></i>
                                             </div>
                                         </button>

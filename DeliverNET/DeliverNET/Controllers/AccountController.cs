@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using DeliverNET.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-using DeliverNET.Models.ViewModels;
+using DeliverNET.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace DeliverNET.Controllers
 {
@@ -17,8 +18,7 @@ namespace DeliverNET.Controllers
         private readonly UserManager<DeliverNETUser> _userManager;
         private readonly SignInManager<DeliverNETUser> _signInManager;
         private readonly ILogger _logger;
-
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        private string ErrorMessage;
 
         public AccountController(
             UserManager<DeliverNETUser> userManager,
@@ -31,25 +31,28 @@ namespace DeliverNET.Controllers
             _logger = logger;
         }
 
+        #region"Login/Logout"
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            LoginViewModel model = new LoginViewModel()
-            {
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
-            };
+            ViewData["ReturnUrl"] = returnUrl;
 
-            return View(model);
+            // Clear the existing external cookie to ensure a clean login process
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            ViewData["ExternalLogins"] = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                // TODO Change lockout on failure when implemented
+                // TODO Change "lockout on failure" when implemented
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
                 if (result.Succeeded)
                 {
@@ -59,30 +62,201 @@ namespace DeliverNET.Controllers
                     //var user = await _userManager.FindByEmailAsync(model.Email);
                     //var userClaims = await _userManager.GetClaimsAsync(user);
                     //bool IsDeliverer = userClaims.Where(x => x.Value == "DelivererOnly").;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToLocal(returnUrl);
                 }
-
-
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User locked out.");
+                    // TODO Create a lockout view!
+                    return RedirectToAction(nameof(Lockout));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
             }
             return View(model);
         }
 
 
         [HttpGet]
-        public IActionResult Register()
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
+            return View(nameof(AccountController.Login));
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        {
+            // Request a redirect to the external login provider.
+            var redirectUrl = Url.Action("ExternalLoginCallback", returnUrl);
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
+            if (remoteError != null)
+            {
+                ErrorMessage = $"Error from external provider: {remoteError}";
+                return RedirectToAction(nameof(AccountController.Login), new { returnUrl });
+            }
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                ErrorMessage = "Error loading user information from external provider.";
+                return RedirectToAction(nameof(AccountController.Login), new { returnUrl });
+            }
+
+            // Sign in the user with this external login provider if the user already has a login.
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                return LocalRedirect(returnUrl);
+            }
+            if (result.IsLockedOut)
+            {
+                return RedirectToAction(nameof(AccountController.Lockout));
+            }
+            else
+            {
+                // If the user does not have an account, then ask the user to create an account.
+                ViewData["ReturnUrl"] = returnUrl;
+                ViewData["LoginProvider"] = info.LoginProvider;
+                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
+                {
+                    ExternalLoginViewModel Input = new ExternalLoginViewModel
+                    {
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                    };
+                }
+                return View("ExternalLogin");
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
+
+            // Get the information about the user from the external login provider
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                ErrorMessage = "Error loading external login information during confirmation.";
+                return RedirectToAction("Login", new { ReturnUrl = returnUrl });
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = new DeliverNETUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await _userManager.AddLoginAsync(user, info);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        return LocalRedirect(returnUrl);
+                    }
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            ViewData["LoginProvider"] = info.LoginProvider;
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Lockout()
         {
             return View();
         }
 
-
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(RegisterViewModel model, string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction("Index","Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+        #endregion
+
+        #region "Register"
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new DeliverNETUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created new account with password.");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User logged in.");
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something went bad, redisplay form.
+            return View(model);
+        }
+        #endregion
+
+
+
+        #region "Helpers"
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var err in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, err.Description);
+            }
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+        }
+        #endregion
 
     }
 }
