@@ -270,3 +270,5 @@ C:\Users\orest\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\net
 C:\Users\orest\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\DeliverNET.csproj.CopyComplete
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\AboutBusi.g.cshtml.cs
 C:\Users\Orestis\Documents\GitRepos\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\Home\AboutIndi.g.cshtml.cs
+C:\Users\Stathis\Documents\GIT\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\ProfileBusi\IndexBusi.g.cshtml.cs
+C:\Users\Stathis\Documents\GIT\delivernet\DeliverNET\DeliverNET\obj\Debug\netcoreapp2.1\Razor\Views\ProfileIndi\IndexIndi.g.cshtml.cs
