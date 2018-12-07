@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Profile Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background-image: url("/img/background-wood.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div class="nav-padding bg-winter text-bone pl-5 pb-2" style="text-align:center">
+    <h1>Settings go here, will tend to them after the next Pull</h1>
+    <h3>Press <i><u>"Indi"</u></i> for Individual Application Form</h3>
+    <h3>Press <i><u>"Busi"</u></i> for Individual Application Form</h3>
+</div>
+
+<div class="text-bone" style="margin-top:50px; text-align:center">
+    <a class="text-bone bg-carmine hov-not-bone p-3" style="font-size:40px; border:dotted"
+       asp-area="" asp-controller="ProfileIndi" asp-action="AppFormIndi">Indi</a>
+</div>
+<div class="text-bone" style="margin-top:50px; text-align:center">
+    <a class="text-bone bg-winter hov-not-bone p-3" style="font-size:40px; border:dotted"
+       asp-area="" asp-controller="ProfileBusi" asp-action="AppFormBusi">Busi</a>
+</div>
