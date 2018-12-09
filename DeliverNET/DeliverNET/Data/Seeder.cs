@@ -23,7 +23,7 @@ namespace DeliverNET.Data
                 if (!res) { await roleManager.CreateAsync(new IdentityRole(role)); }
             }
 
-
+            // TODO Add claims to those seeded madafaqas
             List<DeliverNETUser> testUsers = new List<DeliverNETUser>
             {
                 new DeliverNETUser(){Email="admin@admins.com", UserName = "admin@admins.com"},

@@ -14,8 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using DeliverNET.Data;
 using System.Security.Claims;
+using DeliverNET.Services;
 using Microsoft.Extensions.Logging;
 using DeliverNET.Models;
+using Microsoft.AspNetCore.Authentication;
 
 namespace DeliverNET
 {
