@@ -24,11 +24,14 @@ namespace DeliverNET.Models.AccountViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        // TODO
-        // Manual input in <input hidden of form> works. JS in cshtml sets value as Individual or Businessman.
-        // Produces error further inside. Have fun.
         // TODO :: Change ErrorMessage to show smth like "Please choose between being an Individual or a Businessman"
-        [Required]
-        public string AccountRole { get; set; }
+        [Required(ErrorMessage = "Choose a job type.")]
+        public JobTypes JobType { get; set; }
+    }
+
+    public enum JobTypes
+    {
+        Individual,
+        Businessman
     }
 }
