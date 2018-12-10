@@ -53,16 +53,12 @@ namespace DeliverNET.Controllers
             if (ModelState.IsValid)
             {
                 // TODO Change "lockout on failure" when implemented
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email.Split('@')[0], model.Password, false, false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User {0} logged in.", model.Email);
-
-                    // TODO Decide if deliverer or business and redirect acoordingly!
-                    //var user = await _userManager.FindByEmailAsync(model.Email);
-                    //var userClaims = await _userManager.GetClaimsAsync(user);
-                    //bool IsDeliverer = userClaims.Where(x => x.Value == "DelivererOnly").;
-                    return RedirectToLocal(returnUrl);
+                    _logger.LogInformation("User {0} logged in.", model.Email);                   
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    return RedirectOnJobType(user);
                 }
                 if (result.IsLockedOut)
                 {
@@ -80,6 +76,7 @@ namespace DeliverNET.Controllers
         }
 
 
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string returnUrl = null)
@@ -87,6 +84,7 @@ namespace DeliverNET.Controllers
             ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
             return View(nameof(AccountController.Login));
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -98,7 +96,7 @@ namespace DeliverNET.Controllers
             return new ChallengeResult(provider, properties);
         }
 
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
@@ -217,14 +215,28 @@ namespace DeliverNET.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new DeliverNETUser { UserName = model.Email, Email = model.Email };
+                var user = new DeliverNETUser { UserName = model.Email.Split('@')[0], Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Add claims
+                    switch (model.JobType)
+                    {
+                        case JobTypes.Individual:
+                            await _userManager.AddClaimAsync(user, new Claim("JobType", JobTypes.Individual.ToString(), ClaimValueTypes.String));
+                            break;
+                        case JobTypes.Businessman:
+                            await _userManager.AddClaimAsync(user, new Claim("JobType", JobTypes.Businessman.ToString(), ClaimValueTypes.String));
+                            break;
+                        default:
+                            break;
+                    }
+
                     _logger.LogInformation("User created new account with password.");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+
+                    return RedirectOnJobType(user);
                 }
                 AddErrors(result);
             }
@@ -255,6 +267,21 @@ namespace DeliverNET.Controllers
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+        }
+
+
+        private IActionResult RedirectOnJobType(DeliverNETUser user)
+        {
+            // Get claims
+            var claims = _userManager.GetClaimsAsync(user).Result;
+
+            // Decide if deliverer or business and redirect acoordingly
+            if (claims.Where(c => c.Value == JobTypes.Individual.ToString()).FirstOrDefault() != null)
+                return RedirectToAction("IndexIndi", "ProfileIndi");
+            else if (claims.Where(c => c.Value == JobTypes.Businessman.ToString()).FirstOrDefault() != null)
+                return RedirectToAction("IndexBusi", "ProfileBusi");
+            else
+                return RedirectToAction("Index", "Home");
         }
         #endregion
 

@@ -36,9 +36,9 @@
                     </div>
                     <hr />
                     <div class="form-group">
-                        <label asp-for="AccountRole"></label>
-                        <input asp-for="AccountRole" id="RoleInput" class="form-control" />
-                        <span asp-validation-for="AccountRole" class="text-danger"></span>
+                        <label asp-for="JobType"></label>
+                        <input asp-for="JobType" id="jobInput" class="form-control" />
+                        <span asp-validation-for="JobType" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-my-dark">Register</button>
                 </form>
@@ -78,16 +78,16 @@
         var busiClicked = false;
         var indi = document.getElementById('btnIndi');
         var busi = document.getElementById('btnBusi');
-        var input = document.getElementById('RoleInput');
+        var input = document.getElementById('jobInput');
 
         indi.onclick = function () {
-            indiClicked ? (busi.disabled = false, indi.classList.remove("regiClicked"), indiClicked = false, input.value = "") :
-                (busi.disabled = true, indi.classList.add("regiClicked"), indiClicked = true, input.value = "Individual");
+            indiClicked ? (busi.disabled = false, indi.classList.remove("regiClicked"), indiClicked = false, input.value="") :
+                (busi.disabled = true, indi.classList.add("regiClicked"), indiClicked = true, input.value = "@JobTypes.Individual.ToString()");
         };
 
         busi.onclick = function () {
             busiClicked ? (indi.disabled = false, busi.classList.remove("regiClicked"), busiClicked = false, input.value = "") :
-                (indi.disabled = true, busi.classList.add("regiClicked"), busiClicked = true, input.value = "Businessman");
+                (indi.disabled = true, busi.classList.add("regiClicked"), busiClicked = true, input.value = "@JobTypes.Businessman.ToString()");
         };
     </script>
 }
