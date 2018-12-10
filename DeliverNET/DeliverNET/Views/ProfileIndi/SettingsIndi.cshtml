@@ -11,17 +11,166 @@
     }
 </style>
 
-<div class="nav-padding bg-winter text-bone pl-5 pb-2" style="text-align:center">
-    <h1>Settings go here, will tend to them after the next Pull</h1>
-    <h3>Press <i><u>"Indi"</u></i> for Individual Application Form</h3>
-    <h3>Press <i><u>"Busi"</u></i> for Individual Application Form</h3>
+<div class="row">
+    <div class="nav-padding col-md-3 px-5 align-items-center" style="text-align:center">
+
+        <!--Profile Settings-->
+        <div>
+            <button class="btn bg-carmine-3d hov-carmine-3d circle btn-shadow-none text-bone p-0" id="btnSett">
+                <i class="fas fa-user-edit" style="font-size: 80px"></i>
+            </button>
+            <button class="btn btn-dead btn-shadow-none bg-carmine-3d text-bone py-0"
+                    style="border-radius:20px;font-size:25px;width:100%" id="labSett">
+                Profile Settings
+            </button>
+        </div>
+
+        <!--Contact-->
+        <div class="mt-5">
+            <button class="btn bg-carmine-3d hov-carmine-3d circle btn-shadow-none text-bone p-0" id="btnCont">
+                <i class="fas fa-at" style="font-size: 80px"></i>
+            </button>
+            <button class="btn btn-dead btn-shadow-none bg-carmine-3d text-bone py-0"
+                    style="border-radius:20px;font-size:25px;width:100%" id="labCont">
+                Contact
+            </button>
+        </div>
+
+    </div>
+
+    <div class="nav-padding col-md-3 px-5" style="text-align:center;margin-top:60px">
+
+        <!--Edit Information-->
+        <div>
+            <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnInfo">
+                <i class="fas fa-unlock-alt" style="font-size: 80px"></i>
+            </button>
+            <button class="btn btn-dead btn-shadow-none bg-winter-3d text-bone py-0"
+                    style="border-radius:20px;font-size:25px;width:100%" id="labInfo">
+                Edit
+            </button>
+        </div>
+
+        <!--Help-->
+        <div class="mt-5">
+            <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnHelp">
+                <i class="fas fa-question" style="font-size: 80px"></i>
+            </button>
+            <button class="btn btn-dead btn-shadow-none bg-winter-3d text-bone p-0"
+                    style="border-radius:20px;font-size:25px;width:100%" id="labHelp">
+                Help
+            </button>
+        </div>
+
+    </div>
+
+    <!-- All the different Menus inside this partial -->
+    <partial name="SettingsIndiPartial" />
+
+
+
 </div>
 
-<div class="text-bone" style="margin-top:50px; text-align:center">
-    <a class="text-bone bg-carmine hov-not-bone p-3" style="font-size:40px; border:dotted"
-       asp-area="" asp-controller="ProfileIndi" asp-action="AppFormIndi">Indi</a>
-</div>
-<div class="text-bone" style="margin-top:50px; text-align:center">
-    <a class="text-bone bg-winter hov-not-bone p-3" style="font-size:40px; border:dotted"
-       asp-area="" asp-controller="ProfileBusi" asp-action="AppFormBusi">Busi</a>
-</div>
+@section Scripts {
+
+    <script>
+
+        var settClicked = false;
+        var infoClicked = false;
+        var contClicked = false;
+        var helpClicked = false;
+
+        var sett = document.getElementById('btnSett');
+        var info = document.getElementById('btnInfo');
+        var cont = document.getElementById('btnCont');
+        var help = document.getElementById('btnHelp');
+
+        var settLab = document.getElementById('labSett');
+        var infoLab = document.getElementById('labInfo');
+        var contLab = document.getElementById('labCont');
+        var helpLab = document.getElementById('labHelp');
+
+        var settMenu = document.getElementById('menuSett');
+        var infoMenu = document.getElementById('menuInfo');
+        var contMenu = document.getElementById('menuCont');
+        var helpMenu = document.getElementById('menuHelp');
+
+
+        sett.onmouseover = function () {
+            settLab.classList.add("bg-carmine-3d-hover");
+        };
+
+        sett.onmouseout = function () {
+            settLab.classList.remove("bg-carmine-3d-hover");
+        };
+
+        info.onmouseover = function () {
+            infoLab.classList.add("bg-winter-3d-hover");
+        };
+
+        info.onmouseout = function () {
+            infoLab.classList.remove("bg-winter-3d-hover");
+        };
+
+        cont.onmouseover = function () {
+            contLab.classList.add("bg-carmine-3d-hover");
+        };
+
+        cont.onmouseout = function () {
+            contLab.classList.remove("bg-carmine-3d-hover");
+        };
+
+        help.onmouseover = function () {
+            helpLab.classList.add("bg-winter-3d-hover");
+        };
+
+        help.onmouseout = function () {
+            helpLab.classList.remove("bg-winter-3d-hover");
+        };
+
+        function disableAll() {
+            if (settClicked) {
+                sett.classList.remove("regiClicked"), settLab.classList.remove("regiClicked"),
+                    settMenu.classList.add("invisible"), settClicked = false
+            };
+            if (infoClicked) {
+                info.classList.remove("regiClicked"), infoLab.classList.remove("regiClicked"),
+                    infoMenu.classList.add("invisible"), infoClicked = false
+            };
+            if (contClicked) {
+                cont.classList.remove("regiClicked"), contLab.classList.remove("regiClicked"),
+                    contMenu.classList.add("invisible"), contClicked = false
+            };
+            if (helpClicked) {
+                help.classList.remove("regiClicked"), helpLab.classList.remove("regiClicked"),
+                    helpMenu.classList.add("invisible"), helpClicked = false
+            };
+        };
+
+        sett.onclick = function () {
+            settClicked ? (disableAll()) :
+                (disableAll(), sett.classList.add("regiClicked"), settLab.classList.add("regiClicked"),
+                    settMenu.classList.remove("invisible"), settClicked = true);
+        };
+
+        info.onclick = function () {
+            infoClicked ? (disableAll()) :
+                (disableAll(), info.classList.add("regiClicked"), infoLab.classList.add("regiClicked"),
+                    infoMenu.classList.remove("invisible"), infoClicked = true);
+        };
+
+        cont.onclick = function () {
+            contClicked ? (disableAll()) :
+                (disableAll(), cont.classList.add("regiClicked"), contLab.classList.add("regiClicked"),
+                    contMenu.classList.remove("invisible"), contClicked = true);
+        };
+
+        help.onclick = function () {
+            helpClicked ? (disableAll()) :
+                (disableAll(), help.classList.add("regiClicked"), helpLab.classList.add("regiClicked"),
+                    helpMenu.classList.remove("invisible"), helpClicked = true);
+        };
+
+    </script>
+
+}

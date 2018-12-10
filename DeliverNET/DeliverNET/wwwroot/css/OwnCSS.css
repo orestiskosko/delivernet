@@ -229,3 +229,53 @@
     display: block;
     padding-left: 50px;
 }
+
+.btn-dead {
+    pointer-events: none;
+    height: 47px;
+}
+
+.bg-carmine-3d {
+    background: radial-gradient(circle at 100px 100px, #AA4836, #3a1b16);
+}
+
+.bg-carmine-3d-square {
+    background: radial-gradient(circle at 250px 300px, #AA5242, #6d291d);
+}
+
+.bg-carmine-3d-hover {
+    background: radial-gradient(circle at 100px 100px, #AA5242, #3c231f);
+}
+
+.hov-carmine-3d:hover {
+    background: radial-gradient(circle at 100px 100px, #AA5242, #3c231f);
+}
+
+.bg-winter-3d {
+    background: radial-gradient(circle at 100px 100px, #629696, #2c3c3c);
+}
+
+.bg-winter-3d-hover {
+    background: radial-gradient(circle at 100px 100px, #79a9a9, #384646);
+}
+
+.hov-winter-3d:hover {
+    background: radial-gradient(circle at 100px 100px, #79a9a9, #384646);
+}
+
+.div-image-parch {
+    background-image: url("/img/parchment.jpg");
+}
+
+.complete-center {
+    column-fill:balance;
+    transform: translateY(-50%);
+}
+
+.settings-menu {
+    color: #E0DDC3;
+    border: solid;
+    border-width: 10px;
+    border-radius: 15px 80px;
+    box-shadow: 0 0 0 1px hsl(0, 0%, 80%), 0 0 0 1px hsl(0, 0%, 90%);
+}

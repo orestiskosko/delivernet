@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label asp-for="Email"><strong>Email</strong></label>
                         <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span asp-validation-for="Email" class="text-danger "></span>
                     </div>
                     <hr />
                     <div class="form-group">
@@ -81,7 +81,7 @@
         var input = document.getElementById('RoleInput');
 
         indi.onclick = function () {
-            indiClicked ? (busi.disabled = false, indi.classList.remove("regiClicked"), indiClicked = false, input.value="") :
+            indiClicked ? (busi.disabled = false, indi.classList.remove("regiClicked"), indiClicked = false, input.value = "") :
                 (busi.disabled = true, indi.classList.add("regiClicked"), indiClicked = true, input.value = "Individual");
         };
 

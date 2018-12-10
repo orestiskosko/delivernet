@@ -1,11 +1,11 @@
 @inject SignInManager<DeliverNETUser> SignInManager
 @inject UserManager<DeliverNETUser> UserManager
 
-@* emetiko *@
 <style>
     li:hover {
         cursor: pointer;
     }
+
     button:hover {
         cursor: pointer;
     }
@@ -16,6 +16,18 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home")" method="post" id="logoutForm" class="navbar-right">
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav align-items-center">
+
+                <li class="mr-5">
+                    <a class="hov-not-bone" style="color:#E0DDC3" asp-area="" asp-controller="ProfileIndi" asp-action="IndexIndi">
+                        <i class="fas fa-desktop" style="font-size:larger"></i>&ensp;WorkSpace
+                    </a>
+                </li>
+
+                <li class="ml-4" style="margin-right:230px">
+                    <a class="hov-not-bone" style="color:#E0DDC3" asp-area="" asp-controller="ProfileIndi" asp-action="DashboardIndi">
+                        DashBoard&ensp;<i class="fas fa-chart-line" style="font-size:larger"></i>
+                    </a>
+                </li>
 
                 <li class="text-bone" style="pointer-events:none">
                     @UserManager.GetUserName(User)
@@ -28,7 +40,7 @@
                     <ul class="collapse-content p-0">
 
                         <li class="hov-dark pl-2 pr-5 mb-1 py-2">
-                            <a class="btn-nav text-bone hov-not-bone p-0" asp-area="" asp-controller="ProfileIndi" asp-action="DashboardIndi">Dashboard</a>
+                            <a class="btn-nav text-bone hov-not-bone p-0" asp-area="" asp-controller="ProfileIndi" asp-action="ReviewsIndi">Reviews</a>
                         </li>
 
                         <li class="hov-dark pl-2 pr-5 mb-2 py-2">
