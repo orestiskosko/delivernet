@@ -24,7 +24,6 @@ namespace DeliverNET.Models.AccountViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        // TODO :: Change ErrorMessage to show smth like "Please choose between being an Individual or a Businessman"
         [Required(ErrorMessage = "Choose a job type.")]
         public JobTypes JobType { get; set; }
     }

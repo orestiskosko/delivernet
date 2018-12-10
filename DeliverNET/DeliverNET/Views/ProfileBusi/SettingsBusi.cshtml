@@ -149,14 +149,24 @@
 
         sett.onclick = function () {
             settClicked ? (disableAll()) :
-                (disableAll(), sett.classList.add("regiClicked"), settLab.classList.add("regiClicked"),
-                    settMenu.classList.remove("invisible"), settClicked = true);
+                (
+                    disableAll(),
+                    sett.classList.add("regiClicked"),
+                    settLab.classList.add("regiClicked"),
+                    settMenu.classList.remove("invisible"),
+                    settClicked = true
+                );
         };
 
         info.onclick = function () {
             infoClicked ? (disableAll()) :
-                (disableAll(), info.classList.add("regiClicked"), infoLab.classList.add("regiClicked"),
-                    infoMenu.classList.remove("invisible"), infoClicked = true);
+                (
+                    disableAll(),
+                    info.classList.add("regiClicked"),
+                    infoLab.classList.add("regiClicked"),
+                    infoMenu.classList.remove("invisible"),
+                    infoClicked = true
+                );
         };
 
         cont.onclick = function () {

@@ -53,6 +53,7 @@ namespace DeliverNET.Controllers
             if (ModelState.IsValid)
             {
                 // TODO Change "lockout on failure" when implemented
+                // TODO Clarify username login
                 var result = await _signInManager.PasswordSignInAsync(model.Email.Split('@')[0], model.Password, false, false);
                 if (result.Succeeded)
                 {

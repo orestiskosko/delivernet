@@ -23,7 +23,7 @@ namespace DeliverNET.Data
         public string LastName { get; set; }
         public int FloorNo { get; set; }
         public string DoorName { get; set; }
-        public int PaymentTYpeId { get; set; }
+        public int PaymentTypeId { get; set; }
         public float Tariff { get; set; }
         public float Price { get; set; }
         public string Comments { get; set; }
