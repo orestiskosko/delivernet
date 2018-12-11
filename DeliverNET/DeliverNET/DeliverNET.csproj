@@ -11,6 +11,14 @@
     <EmbeddedResource Remove="Data\VMs\**" />
     <None Remove="Data\VMs\**" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

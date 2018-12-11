@@ -74,15 +74,26 @@
         var IsClicked = false;
         var btn = document.getElementById('btnReady');
         var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
-        var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> All Set</p >';
+        var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> Available</p >';
 
         btn.onclick = function () {
-            IsClicked ? (IsClicked = false, btn.classList.remove("btn-available"), btn.classList.add("btn-unavailable"),
-                btn.innerHTML = htmlON) :
-                (IsClicked = true, btn.classList.remove("btn-unavailable"), btn.classList.add("btn-available"),
-                    btn.innerHTML = htmlOFF);
+            IsClicked ?
+                (IsClicked = false,
+                    btn.classList.remove("btn-available"),
+                    btn.classList.add("btn-unavailable"),
+                    btn.innerHTML = htmlON,
+                    removeMeFromGroup()) :        //I call the function that removes this deliverer from the group of available deliverers
+                (IsClicked = true,
+                    btn.classList.remove("btn-unavailable"),
+                    btn.classList.add("btn-available"),
+                    btn.innerHTML = htmlOFF,
+                    addMeToGroup());              //I call the function that addes this deliverer from the group of available deliverers
         }
 
+  
 
     </script>
+
+    <script src="~/js/AvailabilityStatus.js"></script>
+    <script src="~/js/OrderReceiver.js"></script>
 }
