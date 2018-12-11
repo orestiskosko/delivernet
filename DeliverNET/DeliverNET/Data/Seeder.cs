@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DeliverNET.Infrastructure.Account;
+using DeliverNET.Managers.Interfaces;
 using DeliverNET.Models.AccountViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -18,31 +19,106 @@ namespace DeliverNET.Data
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<Seeder> _logger;
         private readonly DeliverNETClaimManager _claimManager;
+        private readonly IOrderManager _orderManager;
+        private readonly IDelivererManager _delivererManager;
+        private readonly IBusinessManager _businessManager;
+        private readonly IBusinessCashierManager _businessCashierManager;
 
         public Seeder(
             UserManager<DeliverNETUser> userManager,
             RoleManager<IdentityRole> roleManager,
             DeliverNETClaimManager claimManager,
-            ILogger<Seeder> logger)
+            ILogger<Seeder> logger,
+            IBusinessManager businessManager,
+            IOrderManager orderManager,
+            IDelivererManager delivererManager,
+            IBusinessCashierManager businessCashierManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _logger = logger;
             _claimManager = claimManager;
+            _orderManager = orderManager;
+            _delivererManager = delivererManager;
+            _businessManager = businessManager;
+            _businessCashierManager = businessCashierManager;
         }
 
 
         public async Task Seed()
         {
-            string[] Roles = { "admin", "user" };
+            // Empty database
+            _orderManager.DeleteAll();
+            _businessManager.DeleteAll();
+            _delivererManager.DeleteAll();
+            _businessCashierManager.DeleteAll();
 
+            //
+            // Seed businesses
+            //         
+            List<Business> testBusinesses = new List<Business>()
+            {
+                new Business()
+                {
+                    Title = "Ραβαίσι",
+                    Address = "Μιχαλακοπούλου 32, Ζωγράφου 15771",
+                    Geolocation = "37.979567,23.757354",
+                    Email = "rabaisi@hotmail.com",
+                    SignupDate = DateTime.Today,
+                    VerificationDate = DateTime.Today,
+                    IsVerified = true,
+                    Active = true
+                },
+                new Business()
+                {
+                    Title = "BigBadWolf",
+                    Address = "Λεωφ. Μεσογείων 202, Χολαργός 155 61",
+                    Geolocation = "38.001952,23.790455",
+                    Email = "bigbadwolf@hotmail.com",
+                    SignupDate = DateTime.Today,
+                    VerificationDate = DateTime.Today,
+                    IsVerified = true,
+                    Active = true
+                },
+                new Business()
+                {
+                    Title = "Σάββας Κεμπάπ",
+                    Address = "Ερμού 91, Αθήνα 105 55",
+                    Geolocation = "37.976828,23.725088",
+                    Email = "sabbaskebab@hotmail.com",
+                    SignupDate = DateTime.Today,
+                    VerificationDate = DateTime.Today,
+                    IsVerified = true,
+                    Active = true
+                },
+                new Business()
+                {
+                    Title = "Simple Burgers",
+                    Address = "Αντήνορος 38, Παγκράτι 116 34",
+                    Geolocation = "37.973545,23.750168",
+                    Email = "rabaisi@hotmail.com",
+                    SignupDate = DateTime.Today,
+                    VerificationDate = DateTime.Today,
+                    IsVerified = true,
+                    Active = true
+                }
+            };
+            foreach (Business testBusiness in testBusinesses)
+                _businessManager.Create(testBusiness);
+
+            //
+            // Seed Roles
+            //
+            string[] Roles = { "admin", "user" };
             foreach (var role in Roles)
             {
                 var res = await _roleManager.RoleExistsAsync(role);
                 if (!res) { await _roleManager.CreateAsync(new IdentityRole(role)); }
             }
 
-            // TODO Add claims to those seeded madafaqas
+            //
+            // Seed users
+            //
             List<DeliverNETUser> testUsers = new List<DeliverNETUser>
             {
                 new DeliverNETUser(){Email="admin@admins.com", UserName = "admin"},
@@ -54,7 +130,6 @@ namespace DeliverNET.Data
                 new DeliverNETUser(){Email="slave2@slaves.com", UserName = "slave2"},
                 new DeliverNETUser(){Email="slave3@slaves.com", UserName = "slave3"}
             };
-
             DeliverNETUser user;
             foreach (var tu in testUsers)
             {
@@ -77,9 +152,20 @@ namespace DeliverNET.Data
                     await _userManager.AddToRoleAsync(newUser, "user");
 
                     if (password.Contains("owner"))
+                    {
                         await _claimManager.AddClaim(newUser, JobTypes.Businessman);
+                        // TODO Add Business owner records for each one
+                    }
                     else if (password.Contains("slave"))
+                    {
                         await _claimManager.AddClaim(newUser, JobTypes.Individual);
+                        _delivererManager.Create(newUser);
+                    }
+                    else if (password.Contains("cashier"))
+                    {
+                        await _claimManager.AddClaim(newUser, JobTypes.Individual);
+                        _businessCashierManager.Create(newUser, testBusinesses[new Random().Next(0, testBusinesses.Count)]);
+                    }
                 }
                 else
                 {
@@ -87,6 +173,67 @@ namespace DeliverNET.Data
                 }
             }
 
+
+            //
+            // Seed Orders
+            //           
+            List<Order> testOrders = new List<Order>()
+            {
+                new Order()
+                {
+                    Business = _businessManager.Get("Ραβαίσι"),
+                    Deliverer = _delivererManager.Get(
+                       _userManager.FindByNameAsync("slave1").Result.Id
+                        ),
+                    Tstamp = DateTime.Now,
+                    Address = "Αρχιλόχου 7",
+                    Geolocation = "37.973217,23.773856",
+                    FirstName = "Orestis",
+                    LastName = "Koskoletos",
+                    FloorNo = 1,
+                    DoorName = "Koskoletas",
+                    PhoneNumber = "6970456845",
+                    PaymentTypeId = 0,
+                    Price = 6.30f,
+                    Comments = "Gamw to spitakis sou",
+                },
+                new Order(){
+                Business = _businessManager.Get("Simple Burgers"),
+                Deliverer = _delivererManager.Get(
+                    _userManager.FindByNameAsync("slave3").Result.Id
+                ),
+                Tstamp = DateTime.Now,
+                Address = "Λουλουδιών 33",
+                Geolocation = "37.973217,23.773856",
+                FirstName = "Μάριος",
+                LastName = "Ράδης",
+                FloorNo = 6,
+                DoorName = "Ραδής",
+                PhoneNumber = "6912345678",
+                PaymentTypeId = 0,
+                Price = 4.90f,
+                Comments = "μπεμπααααα"
+                },
+                new Order(){
+                    Business = _businessManager.Get("Σάββας Κεμπάπ"),
+                    Deliverer = _delivererManager.Get(
+                        _userManager.FindByNameAsync("slave2").Result.Id
+                    ),
+                    Tstamp = DateTime.Now,
+                    Address = "Μεσογείων 138",
+                    Geolocation = "37.977217,23.763856",
+                    FirstName = "Στάθης",
+                    LastName = "Πανταζής",
+                    FloorNo = 4,
+                    DoorName = "Ραδής",
+                    PhoneNumber = "6987654321",
+                    PaymentTypeId = 1,
+                    Price = 12.70f,
+                    Comments = "μουνοπανοοο"
+                }
+            };
+            foreach (Order testOrder in testOrders)
+                _orderManager.Create(testOrder);
         }
     }
 }

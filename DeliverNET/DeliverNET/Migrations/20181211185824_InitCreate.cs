@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DeliverNET.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,15 +54,15 @@ namespace DeliverNET.Migrations
                 name: "Businesses",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
-                    Long = table.Column<double>(nullable: false),
-                    Lat = table.Column<double>(nullable: false),
+                    Geolocation = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     SignupDate = table.Column<DateTime>(nullable: false),
-                    VerificationDate = table.Column<DateTime>(nullable: false),
+                    VerificationDate = table.Column<DateTime>(nullable: true),
                     IsVerified = table.Column<bool>(nullable: false),
                     Credentials = table.Column<string>(nullable: true),
                     Active = table.Column<bool>(nullable: false)
@@ -118,8 +118,8 @@ namespace DeliverNET.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -163,8 +163,8 @@ namespace DeliverNET.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -182,13 +182,11 @@ namespace DeliverNET.Migrations
                 name: "Deliverers",
                 columns: table => new
                 {
-                    IsValidated = table.Column<bool>(nullable: false),
                     Credentials = table.Column<string>(nullable: true),
                     IsWorking = table.Column<bool>(nullable: false),
                     IsDelivering = table.Column<bool>(nullable: false),
                     OperationalRegion = table.Column<string>(nullable: true),
-                    Long = table.Column<double>(nullable: false),
-                    Lat = table.Column<double>(nullable: false),
+                    Geolocation = table.Column<string>(nullable: true),
                     DeliverNetUserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -206,7 +204,8 @@ namespace DeliverNET.Migrations
                 name: "Ratings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Tstamp = table.Column<DateTime>(nullable: false),
                     Rater = table.Column<string>(nullable: true),
                     RateeId = table.Column<string>(nullable: true),
@@ -228,7 +227,7 @@ namespace DeliverNET.Migrations
                 columns: table => new
                 {
                     DeliverNetUserId = table.Column<string>(nullable: false),
-                    BusinessId = table.Column<Guid>(nullable: false)
+                    BusinessId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,7 +251,7 @@ namespace DeliverNET.Migrations
                 columns: table => new
                 {
                     DeliverNetUserId = table.Column<string>(nullable: false),
-                    BusinessId = table.Column<Guid>(nullable: false)
+                    BusinessId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -277,28 +276,24 @@ namespace DeliverNET.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BusinessId = table.Column<Guid>(nullable: true),
+                    BusinessId = table.Column<int>(nullable: true),
                     CashierDeliverNetUserId = table.Column<string>(nullable: true),
                     DelivererDeliverNetUserId = table.Column<string>(nullable: true),
                     Tstamp = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    StateProvince = table.Column<string>(nullable: true),
-                    PostalCode = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true),
-                    Long = table.Column<double>(nullable: false),
-                    Lat = table.Column<double>(nullable: false),
+                    Geolocation = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    FloorNo = table.Column<int>(nullable: false),
+                    FloorNo = table.Column<int>(nullable: true),
                     DoorName = table.Column<string>(nullable: true),
-                    PaymentTYpeId = table.Column<int>(nullable: false),
-                    Tariff = table.Column<float>(nullable: false),
-                    Price = table.Column<float>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PaymentTypeId = table.Column<int>(nullable: false),
+                    Tariff = table.Column<float>(nullable: true),
+                    Price = table.Column<float>(nullable: true),
                     Comments = table.Column<string>(nullable: true),
-                    AcceptedTime = table.Column<DateTime>(nullable: false),
-                    PickupTime = table.Column<DateTime>(nullable: false),
-                    DeliveredTime = table.Column<DateTime>(nullable: false),
+                    AcceptedTime = table.Column<DateTime>(nullable: true),
+                    PickupTime = table.Column<DateTime>(nullable: true),
+                    DeliveredTime = table.Column<DateTime>(nullable: true),
                     IsAccepted = table.Column<bool>(nullable: false),
                     IsPickedup = table.Column<bool>(nullable: false),
                     IsDelivered = table.Column<bool>(nullable: false)
