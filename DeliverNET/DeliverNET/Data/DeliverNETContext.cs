@@ -61,7 +61,8 @@ namespace DeliverNET.Models
                 .WithOne(bc => bc.Business)
                 .HasForeignKey<BusinessCashier>(bc => bc.BusinessId);
 
-        }
 
+
+        }
     }
 }

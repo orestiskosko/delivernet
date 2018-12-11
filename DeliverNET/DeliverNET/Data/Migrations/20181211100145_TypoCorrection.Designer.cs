@@ -4,14 +4,16 @@ using DeliverNET.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DeliverNET.Migrations
 {
     [DbContext(typeof(DeliverNETContext))]
-    partial class DeliverNETContextModelSnapshot : ModelSnapshot
+    [Migration("20181211100145_TypoCorrection")]
+    partial class TypoCorrection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,9 +199,9 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<double?>("Lat");
+                    b.Property<double>("Lat");
 
-                    b.Property<double?>("Long");
+                    b.Property<double>("Long");
 
                     b.Property<int>("PaymentTypeId");
 
