@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/js/AvailabilityStatus.min.js",
+    "inputFiles": [
+      "wwwroot/js/AvailabilityStatus.js"
+    ]
+  }
+]
