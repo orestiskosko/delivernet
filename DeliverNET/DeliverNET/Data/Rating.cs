@@ -10,7 +10,7 @@ namespace DeliverNET.Data
     public class Rating
     {
         
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime Tstamp { get; set; }

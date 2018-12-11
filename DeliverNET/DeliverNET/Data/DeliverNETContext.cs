@@ -16,12 +16,12 @@ namespace DeliverNET.Models
         {
         }
 
-        DbSet<Business> Businesses { get; set; }
-        DbSet<BusinessOwner> BusinessOwners { get; set; }
-        DbSet<BusinessCashier> BusinessCashiers { get; set; }
-        DbSet<Deliverer> Deliverers { get; set; }
-        DbSet<Order> Orders { get; set; }
-        DbSet<Rating> Ratings { get; set; }
+        public DbSet<Business> Businesses { get; set; }
+        public DbSet<BusinessOwner> BusinessOwners { get; set; }
+        public DbSet<BusinessCashier> BusinessCashiers { get; set; }
+        public DbSet<Deliverer> Deliverers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -13,7 +13,7 @@ namespace DeliverNET.Data
         public DeliverNETUser DeliverNETUser { get; set; }
 
         //one-to-one with business
-        public Guid BusinessId { get; set; }
+        public int BusinessId { get; set; }
         public Business Business { get; set; }
     }
 }

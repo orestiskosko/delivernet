@@ -4,16 +4,14 @@ using DeliverNET.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DeliverNET.Migrations
 {
     [DbContext(typeof(DeliverNETContext))]
-    [Migration("20181211100145_TypoCorrection")]
-    partial class TypoCorrection
+    partial class DeliverNETContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,8 +21,9 @@ namespace DeliverNET.Migrations
 
             modelBuilder.Entity("DeliverNET.Data.Business", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -34,11 +33,9 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("Geolocation");
+
                     b.Property<bool>("IsVerified");
-
-                    b.Property<double>("Lat");
-
-                    b.Property<double>("Long");
 
                     b.Property<string>("PhoneNumber");
 
@@ -46,7 +43,7 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<DateTime>("VerificationDate");
+                    b.Property<DateTime?>("VerificationDate");
 
                     b.HasKey("Id");
 
@@ -57,7 +54,7 @@ namespace DeliverNET.Migrations
                 {
                     b.Property<string>("DeliverNetUserId");
 
-                    b.Property<Guid>("BusinessId");
+                    b.Property<int>("BusinessId");
 
                     b.HasKey("DeliverNetUserId");
 
@@ -71,7 +68,7 @@ namespace DeliverNET.Migrations
                 {
                     b.Property<string>("DeliverNetUserId");
 
-                    b.Property<Guid>("BusinessId");
+                    b.Property<int>("BusinessId");
 
                     b.HasKey("DeliverNetUserId");
 
@@ -87,15 +84,11 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("Credentials");
 
+                    b.Property<string>("Geolocation");
+
                     b.Property<bool>("IsDelivering");
 
-                    b.Property<bool>("IsValidated");
-
                     b.Property<bool>("IsWorking");
-
-                    b.Property<double>("Lat");
-
-                    b.Property<double>("Long");
 
                     b.Property<string>("OperationalRegion");
 
@@ -167,21 +160,17 @@ namespace DeliverNET.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("AcceptedTime");
+                    b.Property<DateTime?>("AcceptedTime");
 
                     b.Property<string>("Address");
 
-                    b.Property<Guid?>("BusinessId");
+                    b.Property<int?>("BusinessId");
 
                     b.Property<string>("CashierDeliverNetUserId");
 
-                    b.Property<string>("City");
-
                     b.Property<string>("Comments");
 
-                    b.Property<string>("Country");
-
-                    b.Property<DateTime>("DeliveredTime");
+                    b.Property<DateTime?>("DeliveredTime");
 
                     b.Property<string>("DelivererDeliverNetUserId");
 
@@ -189,7 +178,9 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<int>("FloorNo");
+                    b.Property<int?>("FloorNo");
+
+                    b.Property<string>("Geolocation");
 
                     b.Property<bool>("IsAccepted");
 
@@ -199,21 +190,15 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<double>("Lat");
-
-                    b.Property<double>("Long");
-
                     b.Property<int>("PaymentTypeId");
 
-                    b.Property<DateTime>("PickupTime");
+                    b.Property<string>("PhoneNumber");
 
-                    b.Property<string>("PostalCode");
+                    b.Property<DateTime?>("PickupTime");
 
-                    b.Property<float>("Price");
+                    b.Property<float?>("Price");
 
-                    b.Property<string>("StateProvince");
-
-                    b.Property<float>("Tariff");
+                    b.Property<float?>("Tariff");
 
                     b.Property<DateTime>("Tstamp");
 
@@ -230,8 +215,9 @@ namespace DeliverNET.Migrations
 
             modelBuilder.Entity("DeliverNET.Data.Rating", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comment")
                         .IsRequired();
