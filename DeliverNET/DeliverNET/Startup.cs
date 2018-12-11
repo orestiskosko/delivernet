@@ -18,6 +18,7 @@ using DeliverNET.Services;
 using Microsoft.Extensions.Logging;
 using DeliverNET.Models;
 using Microsoft.AspNetCore.Authentication;
+using DeliverNET.Comms.Hubs;
 
 namespace DeliverNET
 {
@@ -68,6 +69,8 @@ namespace DeliverNET
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
 
+            services.AddSignalR();
+
             services.AddSingleton<IEmailSender, MailSender>();
         }
 
@@ -91,6 +94,10 @@ namespace DeliverNET
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSignalR(route =>
+                route.MapHub<MainHub>("/Comms/Hubs/MainHub")
+            );
 
             app.UseMvc(routes =>
             {
