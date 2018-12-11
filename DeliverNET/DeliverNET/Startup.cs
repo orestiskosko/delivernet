@@ -20,6 +20,8 @@ using DeliverNET.Models;
 using Microsoft.AspNetCore.Authentication;
 using DeliverNET.Comms.Hubs;
 using DeliverNET.Infrastructure.Account;
+using DeliverNET.Managers;
+using DeliverNET.Managers.Interfaces;
 
 namespace DeliverNET
 {
@@ -62,6 +64,12 @@ namespace DeliverNET
             .AddEntityFrameworkStores<DeliverNETContext>()
             .AddDefaultTokenProviders();
 
+            // Add managers as services
+            services.AddTransient<IOrderManager, OrderManager>();
+            services.AddTransient<IDelivererManager, DelivererManager>();
+            services.AddTransient<IBusinessManager, BusinessManager>();
+            services.AddTransient<IBusinessCashierManager, BusinessCashierManager>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
@@ -80,6 +88,7 @@ namespace DeliverNET
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seeder seeder)
         {
+            seeder.Seed().Wait();
 
             if (env.IsDevelopment())
             {
@@ -109,7 +118,7 @@ namespace DeliverNET
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            seeder.Seed().Wait();
+            
         }
     }
 }
