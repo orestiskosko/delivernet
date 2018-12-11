@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using DeliverNET.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using DeliverNET.Infrastructure.Account;
 
 namespace DeliverNET.Controllers
 {
@@ -18,17 +19,20 @@ namespace DeliverNET.Controllers
         private readonly UserManager<DeliverNETUser> _userManager;
         private readonly SignInManager<DeliverNETUser> _signInManager;
         private readonly ILogger _logger;
+        private readonly DeliverNETClaimManager _claimManager;
         private string ErrorMessage;
 
         public AccountController(
             UserManager<DeliverNETUser> userManager,
             SignInManager<DeliverNETUser> signInManager,
-            ILogger<AccountController> logger
+            ILogger<AccountController> logger,
+            DeliverNETClaimManager claimManager
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _claimManager = claimManager;
         }
 
         #region"Login/Logout"
@@ -57,9 +61,9 @@ namespace DeliverNET.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email.Split('@')[0], model.Password, false, false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User {0} logged in.", model.Email);                   
+                    _logger.LogInformation("User {0} logged in.", model.Email);
                     var user = await _userManager.FindByEmailAsync(model.Email);
-                    return RedirectOnJobType(user);
+                    return await RedirectOnJobType(user, "~/Account/Login");
                 }
                 if (result.IsLockedOut)
                 {
@@ -69,7 +73,7 @@ namespace DeliverNET.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Login failed.");
                     return View(model);
                 }
             }
@@ -77,7 +81,7 @@ namespace DeliverNET.Controllers
         }
 
 
-
+        #region "External Login Facebook"
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string returnUrl = null)
@@ -85,7 +89,6 @@ namespace DeliverNET.Controllers
             ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
             return View(nameof(AccountController.Login));
         }
-
 
         [HttpPost]
         [AllowAnonymous]
@@ -96,7 +99,6 @@ namespace DeliverNET.Controllers
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -170,16 +172,14 @@ namespace DeliverNET.Controllers
                         return LocalRedirect(returnUrl);
                     }
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                AddErrors(result);
             }
 
             ViewData["LoginProvider"] = info.LoginProvider;
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+        #endregion
 
         [HttpGet]
         [AllowAnonymous]
@@ -224,10 +224,10 @@ namespace DeliverNET.Controllers
                     switch (model.JobType)
                     {
                         case JobTypes.Individual:
-                            await _userManager.AddClaimAsync(user, new Claim("JobType", JobTypes.Individual.ToString(), ClaimValueTypes.String));
+                            await _claimManager.AddClaim(user, JobTypes.Individual);
                             break;
                         case JobTypes.Businessman:
-                            await _userManager.AddClaimAsync(user, new Claim("JobType", JobTypes.Businessman.ToString(), ClaimValueTypes.String));
+                            await _claimManager.AddClaim(user, JobTypes.Businessman);
                             break;
                         default:
                             break;
@@ -237,7 +237,7 @@ namespace DeliverNET.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User logged in.");
 
-                    return RedirectOnJobType(user);
+                    return await RedirectOnJobType(user, "~/Account/Register");
                 }
                 AddErrors(result);
             }
@@ -270,16 +270,16 @@ namespace DeliverNET.Controllers
             }
         }
 
-
-        private IActionResult RedirectOnJobType(DeliverNETUser user)
+        private async Task<IActionResult> RedirectOnJobType(DeliverNETUser user, string returnUrl)
         {
-            // Get claims
-            var claims = _userManager.GetClaimsAsync(user).Result;
+            // TODO Remove if you understand async!
+            if (user == null)
+                return RedirectToLocal(returnUrl);
 
             // Decide if deliverer or business and redirect acoordingly
-            if (claims.Where(c => c.Value == JobTypes.Individual.ToString()).FirstOrDefault() != null)
+            if (await _claimManager.HasClaim(user, JobTypes.Individual))
                 return RedirectToAction("IndexIndi", "ProfileIndi");
-            else if (claims.Where(c => c.Value == JobTypes.Businessman.ToString()).FirstOrDefault() != null)
+            else if (await _claimManager.HasClaim(user, JobTypes.Businessman))
                 return RedirectToAction("IndexBusi", "ProfileBusi");
             else
                 return RedirectToAction("Index", "Home");
