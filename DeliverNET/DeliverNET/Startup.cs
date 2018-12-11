@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using DeliverNET.Models;
 using Microsoft.AspNetCore.Authentication;
 using DeliverNET.Comms.Hubs;
+using DeliverNET.Infrastructure.Account;
 
 namespace DeliverNET
 {
@@ -72,10 +73,12 @@ namespace DeliverNET
             services.AddSignalR();
 
             services.AddSingleton<IEmailSender, MailSender>();
+            services.AddTransient<DeliverNETClaimManager>();
+            services.AddTransient<Seeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seeder seeder)
         {
 
             if (env.IsDevelopment())
@@ -106,7 +109,7 @@ namespace DeliverNET
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            new Seeder().Seed(serviceProvider).Wait();
+            seeder.Seed().Wait();
         }
     }
 }

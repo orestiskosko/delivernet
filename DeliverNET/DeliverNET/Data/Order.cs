@@ -17,8 +17,8 @@ namespace DeliverNET.Data
         public string StateProvince { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public double Long { get; set; }
-        public double Lat { get; set; }
+        public double? Long { get; set; }
+        public double? Lat { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int FloorNo { get; set; }
