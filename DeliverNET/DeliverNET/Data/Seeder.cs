@@ -204,29 +204,31 @@ namespace DeliverNET.Data
                     PaymentTypeId = 0,
                     Price = 6.30f,
                     Comments = "Gamw to spitakis sou",
+                    IsTimedOut = false
                 },
                 new Order(){
                 Business = _businessManager.Get("Simple Burgers"),
                 Deliverer = _delivererManager.Get(
                     _userManager.FindByNameAsync("slave3").Result.Id
                 ),
-                Tstamp = DateTime.Now,
-                Address = "Λουλουδιών 33",
-                Geolocation = "37.973217,23.773856",
-                FirstName = "Μάριος",
-                LastName = "Ράδης",
-                FloorNo = 6,
-                DoorName = "Ραδής",
-                PhoneNumber = "6912345678",
-                PaymentTypeId = 0,
-                Price = 4.90f,
-                Comments = "μπεμπααααα"
+                    Tstamp = DateTime.Now,
+                    Address = "Λουλουδιών 33",
+                    Geolocation = "37.973217,23.773856",
+                    FirstName = "Μάριος",
+                    LastName = "Ράδης",
+                    FloorNo = 6,
+                    DoorName = "Ραδής",
+                    PhoneNumber = "6912345678",
+                    PaymentTypeId = 0,
+                    Price = 4.90f,
+                    Comments = "μπεμπααααα",
+                    IsTimedOut = false
                 },
                 new Order(){
                     Business = _businessManager.Get("Σάββας Κεμπάπ"),
                     Deliverer = _delivererManager.Get(
                         _userManager.FindByNameAsync("slave2").Result.Id
-                    ),
+                        ),
                     Tstamp = DateTime.Now,
                     Address = "Μεσογείων 138",
                     Geolocation = "37.977217,23.763856",
@@ -237,7 +239,8 @@ namespace DeliverNET.Data
                     PhoneNumber = "6987654321",
                     PaymentTypeId = 1,
                     Price = 12.70f,
-                    Comments = "μουνοπανοοο"
+                    Comments = "μουνοπανοοο",
+                    IsTimedOut = false
                 }
             };
             foreach (Order testOrder in testOrders)

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliverNET.Migrations
 {
     [DbContext(typeof(DeliverNETContext))]
-    [Migration("20181211185824_InitCreate")]
-    partial class InitCreate
+    [Migration("20181212180846_ChangeInOrder")]
+    partial class ChangeInOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,6 +189,8 @@ namespace DeliverNET.Migrations
                     b.Property<bool>("IsDelivered");
 
                     b.Property<bool>("IsPickedup");
+
+                    b.Property<bool>("IsTimedOut");
 
                     b.Property<string>("LastName");
 
