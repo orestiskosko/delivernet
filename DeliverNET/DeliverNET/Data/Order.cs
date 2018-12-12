@@ -23,6 +23,7 @@ namespace DeliverNET.Data
         public int? FloorNo { get; set; }
         public string DoorName { get; set; }
         public string PhoneNumber { get; set; }
+
         public int PaymentTypeId { get; set; }
         public float? Tariff { get; set; }
         public float? Price { get; set; }
@@ -33,6 +34,8 @@ namespace DeliverNET.Data
         public bool IsAccepted { get; set; }
         public bool IsPickedup { get; set; }
         public bool IsDelivered { get; set; }
+
+        public bool IsTimedOut { get; set; }
     }
 
 

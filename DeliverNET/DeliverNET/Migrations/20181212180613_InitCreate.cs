@@ -296,7 +296,8 @@ namespace DeliverNET.Migrations
                     DeliveredTime = table.Column<DateTime>(nullable: true),
                     IsAccepted = table.Column<bool>(nullable: false),
                     IsPickedup = table.Column<bool>(nullable: false),
-                    IsDelivered = table.Column<bool>(nullable: false)
+                    IsDelivered = table.Column<bool>(nullable: false),
+                    IsRejected = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
