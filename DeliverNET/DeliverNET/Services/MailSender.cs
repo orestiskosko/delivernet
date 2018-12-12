@@ -4,28 +4,30 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace DeliverNET.Services
 {
     public class MailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             // TODO Implement email API ("SendGrid")
-            return Task.CompletedTask;
+            await Execute(email, htmlMessage);
         }
 
-
-        public async Task Execute()
+        [AllowAnonymous]
+        public async Task Execute(string fromEmail, string htmlMessage)
         {
-            var apiKey = Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
-            var client = new SendGridClient("7zsZQfYvSw6morAmg0l8cg");
-            var from = new EmailAddress("test@example.com", "Example User");
-            var subject = "Sending with SendGrid is Fun";
-            var to = new EmailAddress("test@example.com", "Example User");
+            // TODO EMail sender is not working
+            var apiKey = Environment.GetEnvironmentVariable("SendGrid_ApiKey");
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(fromEmail, "Example User");
+            var subject = "DeliverNET - Contact Us Message";
+            var to = new EmailAddress("orestiskosko@hotmail.com", "Orestis Koskoletos");
             var plainTextContent = "and easy to do anywhere, even with C#";
-            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+            var htmlContent = htmlMessage;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
         }
