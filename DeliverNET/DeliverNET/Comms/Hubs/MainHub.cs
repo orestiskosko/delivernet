@@ -6,6 +6,7 @@ using DeliverNET.Data;
 using DeliverNET.Managers;
 using DeliverNET.Managers.Interfaces;
 using DeliverNET.Models;
+using DeliverNET.Models.ProfileBusiViewModels;
 using Microsoft.AspNetCore.SignalR;
 
 namespace DeliverNET.Comms.Hubs
@@ -36,11 +37,8 @@ namespace DeliverNET.Comms.Hubs
 
         //Invoke from Client busi in order to send a new order
 
-        public void PlaceNewOrder(OrderModel order)
+        public void PlaceNewOrder(OrderBusiViewModel order)
         {
-
-
-
             Order NewOrder = new Order();
             order.Address = NewOrder.Address;
             order.DoorName = NewOrder.DoorName;
