@@ -22,6 +22,7 @@ using DeliverNET.Comms.Hubs;
 using DeliverNET.Infrastructure.Account;
 using DeliverNET.Managers;
 using DeliverNET.Managers.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DeliverNET
 {
@@ -69,6 +70,7 @@ namespace DeliverNET
             services.AddTransient<IDelivererManager, DelivererManager>();
             services.AddTransient<IBusinessManager, BusinessManager>();
             services.AddTransient<IBusinessCashierManager, BusinessCashierManager>();
+            services.AddTransient<IMasterManager, MasterManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

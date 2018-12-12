@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace DeliverNET.Data
 {
@@ -15,7 +16,7 @@ namespace DeliverNET.Data
         public Deliverer Deliverer { get; set; }
         public DateTime Tstamp { get; set; }
 
-        public string Address {get;set;}
+        public string Address { get; set; }
         public string Geolocation { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -33,4 +34,6 @@ namespace DeliverNET.Data
         public bool IsPickedup { get; set; }
         public bool IsDelivered { get; set; }
     }
+
+
 }
