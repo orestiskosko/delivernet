@@ -10,20 +10,24 @@ namespace DeliverNET.Controllers
 {
     public class ProfileBusiController : Controller
     {
+        // TODO Authorize only business cashiers
         public IActionResult IndexBusi()
         {
             return View();
         }
 
+        // TODO Authorize only business owners
         public IActionResult DashboardBusi()
         {
             return View();
         }
 
+
         public IActionResult SettingsBusi()
         {
             return View();
         }
+
 
         public IActionResult AppFormBusi()
         {
