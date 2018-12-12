@@ -64,7 +64,7 @@
 
         </div>
     </nav>
-    
+
     <partial name="_CookieConsentPartial" />
 
 
@@ -150,6 +150,7 @@
                 });
             }
         </script>
+
     </environment>
     <environment exclude="Development">
         <script src="~/vendor/jquery/jquery.min.js"
@@ -167,9 +168,13 @@
         <script src="~/js/agency.min.js" asp-append-version="true"></script>
     </environment>
 
+
+
+    <!--Client side validation libraries-->
+    @*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.js"></script>*@
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.js"></script>
     @RenderSection("Scripts", required: false)
-
-
 
 </body>
 </html>

@@ -13,6 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "Authentication:Facebook:AppId": "576222069485398",
+        "SendGrid_ApiKey": "7zsZQfYvSw6morAmg0l8cg",
         "Authentication:Facebook:AppSecret": "7fe291c5a4b36035cc00da2124c67d3d",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
