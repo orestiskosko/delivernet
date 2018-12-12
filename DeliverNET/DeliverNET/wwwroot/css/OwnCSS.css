@@ -112,16 +112,16 @@
 }
 
 .circle {
-    width: 175px;
-    height: 175px;
+    width: 145px;
+    height: 145px;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
     border-radius: 225px;
 }
 
 .regiClicked {
-    border-color: #2F332E;
-    border-width: 5px;
+    border-color: #E0DDC3;
+    border-width: thin;
 }
 
 .btn-shadow-none:focus {
@@ -156,15 +156,12 @@
     color: #E0DDC3;
     border: solid;
     border-collapse: separate;
-    border-width: 10px;
-    border-radius: 15px 40px;
-    outline-color: maroon;
     box-shadow: 0 0 0 1px hsl(0, 0%, 80%), 0 0 0 1px hsl(0, 0%, 90%);
 }
 
 .table-inputs {
     display: block;
-    border-bottom: 3px dotted #2F332E;
+    border-bottom: 1px solid #2F332E;
     display: inline-table;
     margin-left: 20px;
     margin-right: 20px;
@@ -275,7 +272,7 @@
 .settings-menu {
     color: #E0DDC3;
     border: solid;
-    border-width: 10px;
-    border-radius: 15px 80px;
-    box-shadow: 0 0 0 1px hsl(0, 0%, 80%), 0 0 0 1px hsl(0, 0%, 90%);
+    border-width: 1px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px hsl(0, 0%, 80%);
 }

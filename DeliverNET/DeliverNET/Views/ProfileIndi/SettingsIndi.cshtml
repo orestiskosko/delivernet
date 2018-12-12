@@ -9,67 +9,73 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
+    html {
+        height:100%;
+    }
 </style>
 
-<div class="row">
-    <div class="nav-padding col-md-3 px-5 align-items-center" style="text-align:center">
+<body>
+    <div class="row nav-padding" style="height:100%">
+        <div class="col-md-3 px-5" style="text-align:center;height:100%">
 
-        <!--Profile Settings-->
-        <div>
-            <button class="btn bg-carmine-3d hov-carmine-3d circle btn-shadow-none text-bone p-0" id="btnSett">
-                <i class="fas fa-user-edit" style="font-size: 80px"></i>
-            </button>
-            <button class="btn btn-dead btn-shadow-none bg-carmine-3d text-bone py-0"
-                    style="border-radius:20px;font-size:25px;width:100%" id="labSett">
-                Profile Settings
-            </button>
+            <!--Profile Settings-->
+            <div style="height:40%">
+                <button class="btn bg-carmine-3d hov-carmine-3d circle btn-shadow-none text-bone p-0" id="btnSett">
+                    <i class="fas fa-user-edit" style="font-size: 65px"></i>
+                </button>
+                <button class="btn btn-dead btn-shadow-none bg-carmine-3d text-bone py-0"
+                        style="border-radius:20px;font-size:22px;width:70%" id="labSett">
+                    Profile Settings
+                </button>
+            </div>
+
+            <!--Contact-->
+            <div>
+                <button class="btn bg-carmine-3d hov-carmine-3d circle btn-shadow-none text-bone p-0" id="btnCont">
+                    <i class="fas fa-at" style="font-size: 65px"></i>
+                </button>
+                <button class="btn btn-dead btn-shadow-none bg-carmine-3d text-bone py-0"
+                        style="border-radius:20px;font-size:22px;width:70%" id="labCont">
+                    Contact
+                </button>
+            </div>
+
         </div>
 
-        <!--Contact-->
-        <div class="mt-5">
-            <button class="btn bg-carmine-3d hov-carmine-3d circle btn-shadow-none text-bone p-0" id="btnCont">
-                <i class="fas fa-at" style="font-size: 80px"></i>
-            </button>
-            <button class="btn btn-dead btn-shadow-none bg-carmine-3d text-bone py-0"
-                    style="border-radius:20px;font-size:25px;width:100%" id="labCont">
-                Contact
-            </button>
+        <div class="col-md-3 px-5" style="text-align:center;height:100%;margin-top:60px">
+
+            <!--Edit Information-->
+            <div style="height:35%">
+                <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnInfo">
+                    <i class="fas fa-unlock-alt" style="font-size: 65px"></i>
+                </button>
+                <button class="btn btn-dead btn-shadow-none bg-winter-3d text-bone py-0"
+                        style="border-radius:20px;font-size:22px;width:70%" id="labInfo">
+                    Edit
+                </button>
+            </div>
+
+            <!--Help-->
+            <div class="mt-5">
+                <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnHelp">
+                    <i class="fas fa-question" style="font-size: 65px"></i>
+                </button>
+                <button class="btn btn-dead btn-shadow-none bg-winter-3d text-bone p-0"
+                        style="border-radius:20px;font-size:22px;width:70%" id="labHelp">
+                    Help
+                </button>
+            </div>
+
         </div>
+
+        <!-- All the different Menus inside this partial -->
+        <partial name="_SettingsIndiPartial" />
+
+
 
     </div>
+</body>
 
-    <div class="nav-padding col-md-3 px-5" style="text-align:center;margin-top:60px">
-
-        <!--Edit Information-->
-        <div>
-            <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnInfo">
-                <i class="fas fa-unlock-alt" style="font-size: 80px"></i>
-            </button>
-            <button class="btn btn-dead btn-shadow-none bg-winter-3d text-bone py-0"
-                    style="border-radius:20px;font-size:25px;width:100%" id="labInfo">
-                Edit
-            </button>
-        </div>
-
-        <!--Help-->
-        <div class="mt-5">
-            <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnHelp">
-                <i class="fas fa-question" style="font-size: 80px"></i>
-            </button>
-            <button class="btn btn-dead btn-shadow-none bg-winter-3d text-bone p-0"
-                    style="border-radius:20px;font-size:25px;width:100%" id="labHelp">
-                Help
-            </button>
-        </div>
-
-    </div>
-
-    <!-- All the different Menus inside this partial -->
-    <partial name="SettingsIndiPartial" />
-
-
-
-</div>
 
 @section Scripts {
 

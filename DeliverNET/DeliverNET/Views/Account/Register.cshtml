@@ -81,14 +81,23 @@
         var busi = document.getElementById('btnBusi');
         var input = document.getElementById('jobInput');
 
+        function disableAll() {
+            if (indiClicked) {
+                indi.classList.remove("bg-carmine-3d"), indiClicked = false, input.value = ""
+            };
+            if (busiClicked) {
+                busi.classList.remove("bg-winter-3d"), busiClicked = false, input.value = ""
+            };
+        };
+
         indi.onclick = function () {
-            indiClicked ? (busi.disabled = false, indi.classList.remove("regiClicked"), indiClicked = false, input.value="") :
-                (busi.disabled = true, indi.classList.add("regiClicked"), indiClicked = true, input.value = "@JobTypes.Individual.ToString()");
+            indiClicked ? disableAll() :
+                (disableAll(), indi.classList.add("bg-carmine-3d"), indiClicked = true, input.value = "@JobTypes.Individual.ToString()");
         };
 
         busi.onclick = function () {
-            busiClicked ? (indi.disabled = false, busi.classList.remove("regiClicked"), busiClicked = false, input.value = "") :
-                (indi.disabled = true, busi.classList.add("regiClicked"), busiClicked = true, input.value = "@JobTypes.Businessman.ToString()");
+            busiClicked ? disableAll() :
+                (disableAll(), busi.classList.add("bg-winter-3d"), busiClicked = true, input.value = "@JobTypes.Businessman.ToString()");
         };
     </script>
 }
