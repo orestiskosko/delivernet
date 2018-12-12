@@ -14,6 +14,7 @@ namespace DeliverNET.Managers.Interfaces
         // Read
         Business Get(int id);
         Business Get(string title);
+        List<Business> GetAll();
 
         // Delete
         bool DeleteAll();

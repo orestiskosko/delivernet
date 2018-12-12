@@ -51,5 +51,10 @@ namespace DeliverNET.Managers
             // TODO try/catch
             return _db.Businesses.Where(b=>b.Title == title).FirstOrDefault();
         }
+
+        public List<Business> GetAll()
+        {
+            return _db.Businesses.ToList();
+        }
     }
 }
