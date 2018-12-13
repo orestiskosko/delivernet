@@ -16,6 +16,7 @@ namespace DeliverNET.Managers.Interfaces
         string GetGeolocation(string id);
         bool GetDeliveringStatus(string id);
         bool GetWorkingStatus(string id);
+        string GetCredentials(string id);
 
         // Update
         bool SetWorkingStatus(string id, bool isWorking);

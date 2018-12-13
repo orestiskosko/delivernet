@@ -16,6 +16,12 @@ namespace DeliverNET.Managers.Interfaces
         Business Get(string title);
         List<Business> GetAll();
 
+        // Update
+        bool SetTitle(int id, string title);
+        bool SetAddress(int id, string address);
+        bool SetPhoneNumber(int id, string phoneNumber);
+        bool SetCredentials(int id, string credentials);
+
         // Delete
         bool DeleteAll();
     }

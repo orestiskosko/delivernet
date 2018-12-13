@@ -98,6 +98,20 @@ namespace DeliverNET.Managers
             return isWorking;
         }
 
+        public string GetCredentials(string id)
+        {
+            string result;
+            try
+            {
+                result = _db.Deliverers.Where(d => d.DeliverNetUserId == id).FirstOrDefault().Credentials;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return result;
+        }
+
         public bool SetWorkingStatus(string id, bool isWorking)
         {
             Deliverer deliverer;
@@ -151,8 +165,18 @@ namespace DeliverNET.Managers
 
         public bool SetCredentials(string id, string credentials)
         {
-            // TODO Implement credentials in db context
-            throw new NotImplementedException();
+            Deliverer user;
+            try
+            {
+                user = _db.Deliverers.Where(d => d.DeliverNetUserId == id).FirstOrDefault();
+                user.Credentials = credentials;
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
         }
 
         public bool SetOperatingRegion(string id, string operatingRegion)
