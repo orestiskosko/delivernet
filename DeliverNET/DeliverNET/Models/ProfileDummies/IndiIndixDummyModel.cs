@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DeliverNET.Models.ProfileIndividual
+namespace DeliverNET.Models.ProfileDummies
 {
-    public class IndividualIndexModel
+    public class IndiIndixDummyModel
     {
         // TODO :: Ορέστη, εδώ είναι όλα τα dummies που χρησιμοποιεί το Front του IndiIndex μόνο, μαζεμένα όσα
         //         χρειάζονται. Έχω πάρει copy-paste τα props από το model των Orders, επειδή στο view δεν μπορώ

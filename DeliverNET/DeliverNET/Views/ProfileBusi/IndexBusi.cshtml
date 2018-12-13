@@ -1,60 +1,4 @@
-﻿
-@{
-    ViewData["Title"] = "DeliverNET | WorkSpace";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>ProfileBusi</h2>
-
-
-
-<form id="newOrderSubmit">
-    First Name:<br>
-    <input type="text" name="firstName" id="firstName">
-    <br>
-    Last Name:<br>
-    <input type="text" name="lastName" id="lastName">
-    <br>
-    Address:<br>
-    <input type="text" id="address">
-    <br><br>
-    Floor No:<br>
-    <input type="text" id="floor">
-    <br>
-    Door Name:<br>
-    <input type="text" id="doorName">
-    <br>
-    Payment type:<br>
-    <input type="text" id="paymentType">
-    <br>
-    Phone number:<br>
-    <input type="text" id="phoneNumber">
-    <br>
-    Price:<br>
-    <input type="text" id="price">
-    <br>
-    Comments:<br>
-    <input type="text" id="comments">
-    <br>
-
-
-    <input type="submit" value="Submit">
-</form>
-
-@section Scripts {
-    <script src="~/js/PlaceNewOrder.js"></script>
-}
-
-
-
-
-
-
-
-
-@model DeliverNET.Models.ProfileIndividual.IndividualIndexModel
-<!-- This invisible checkbox is set by the availability button, upon click -->
-@Html.CheckBoxFor(x => x.IsWorking)
+﻿@model DeliverNET.Models.ProfileDummies.BusiIndixDummyModel
 
 @{
     ViewData["Title"] = "DeliverNET | WorkSpace";
@@ -73,10 +17,6 @@
         background-repeat: no-repeat;
     }
 
-    ::placeholder {
-        color: #529ad1;
-    }
-
     tbody {
         overflow: auto;
         line-height: 3;
@@ -85,23 +25,39 @@
     thead > tr, tbody {
         display: block;
     }
+
+    row {
+        display: inherit;
+    }
 </style>
 
 <body style="height:100%">
-    <div class="row nav-padding px-5 pb-5 m-auto d-block" style="height:100%">
+    <div class="row nav-padding m-auto d-block" style="height:100%">
         <div class="container" style="height:100%">
-            <div class="row" style="height:100%">
+            <div class="row" style="height:100%;width:100%">
 
                 <!-- Order List for Deliverer -->
-                <div class="col-md-6 my-3 d-block p-0" style="height:80%">
-                    <h3 class="text-center text-bone table-standard bg-carmine-3d-square m-0 p-2" style="overflow-y:hidden;max-height:60px">Order List</h3>
-                    <table class="table-standard bg-carmine-3d-square" style="height:100%">
-                        <tbody style="height:100%">
-                            <!-- This loop is only for scroll testing. However, we this inside the loop is the setup for each order input -->
-                            @for (int i = 0; i < Model.ActiveOrders; i++)
+                <div class="col-md-6 d-block" style="height:80%">
+                    <h3 class="text-center text-bone table-standard bg-winter-3d-square m-0 p-2" style="overflow-y:hidden;max-height:60px">Order List</h3>
+                    <table class="table-standard bg-winter-3d-square" style="height:100%">
+                        <tbody class="container collapsible" style="max-height:100%">
+
+                            <tr class="text-bone text-center" style="border-bottom:solid 2px #2F332E">
+                                <th>&ensp;</th>
+                                <th colspan="2"></th>
+                                <th style="font-size:large;width:50%">Address</th>
+                                <th style="font-size:large">Timer</th>
+                                <th style="font-size:large">Status</th>
+                            </tr>
+
+                            @for (int i = 0; i < Model.NumberOfOrders; i++)
                             {
-                                <tr class="table-inputs">
-                                    <th class="col-md-2" style="font-size:large">@Model.RestaurantName</th>
+
+                                <tr class="text-bone text-center" style="border-bottom:solid 1px #2F332E">
+                                    <th style="text-align:start;font-weight:400">@(i + 1).</th>
+                                    <th>&ensp;</th>
+                                    <th colspan="2" class="text-nowrap" style="font-size:large;font-weight:300">@Model.Address</th>
+                                    <th style="font-size:large;width:50%;font-weight:300">@Model.CountWatch m</th>
                                     <th>
                                         <p class="bg-my-dark text-center m-auto px-4 py-2" style="border-radius:7px 55px;font-weight:400"
                                            id="status">@Model.State</p>
@@ -113,65 +69,122 @@
                     </table>
                 </div>
 
-                <!-- Search for -->
-                <div class="col-md-6 m-auto pb-5 pl-5" style="text-align:-webkit-center">
-                    <!-- Ignore error here, all good -->
-                    <button class="btn btn-unavailable btn-shadow-none text-bone" id="btnReady">
-                        <i class="fas fa-signal" style="font-size: 70px"></i>
-                        <p>Not Available</p>
-                    </button>
+                <!-- Acquire Delivery -->
+                <div class="col-md-5 ml-5" style="text-align:center;height:90%;width:100%">
+                    <!-- Input Order Button -->
+                    <div class="position-absolute">
+                        <button class="btn square btn-shadow-none text-bone" id="btnReady">
+                            <i class="fas fa-plus" style="font-size: 120px"></i>
+                        </button>
+                    </div>
+
+
+                    <!-- Change Password Menu -->
+                    <div class="div-image-parch container settings-menu position-absolute invisible" style="height:100%;width:100%" id="newForm">
+                        <h3 class="p-2" style="color:#2F332E">New Order</h3>
+                        <hr />
+                        <form class="text-my-dark collapsible" style="height:80%; overflow-y:auto">
+
+                            <input class="form-control" id="firstName" placeholder="First Name" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="lastName" placeholder="Last Name" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="address" placeholder="Address" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="floor" placeholder="Floor" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="doorName" placeholder="Door Name" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="playmentType" placeholder="Payment Type" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="phoneNumber" placeholder="Phone Number" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <input class="form-control" id="price" placeholder="Price" />
+                            <span class="text-danger"></span>
+                            <hr />
+
+                            <textarea rows="7" name="message" form="usrform" placeholder="Comment" style="width:100%"></textarea>
+                            <span class="text-danger"></span>
+                            <hr />
+                            <button type="submit" class="btn btn-my-dark mx-auto d-block">Submit</button>
+                        </form>
+                    </div>
+
+
                 </div>
 
             </div>
+
+
+
         </div>
+    </div>
     </div>
 </body>
 
 
 @section Scripts {
 
-    <!-- If Button Pressed -->
-    <script>
-
-        var IsClicked = false;
-        var btn = document.getElementById('btnReady');
-        var IsWorking = document.getElementById('IsWorking');
-        var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
-        var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> Available</p >';
-
-        btn.onclick = function () {
-            IsClicked ?
-                (IsClicked = false,
-                    btn.classList.remove("btn-available"),
-                    btn.classList.add("btn-unavailable"),
-                    IsWorking.value = 'false',
-                    btn.innerHTML = htmlON) :
-
-                //removeMeFromGroup()        // Remove from group of available deliverers
-                (IsClicked = true,
-                    btn.classList.remove("btn-unavailable"),
-                    btn.classList.add("btn-available"),
-                    IsWorking.value = 'true',
-                    btn.innerHTML = htmlOFF);
-            //addMeToGroup());              // Add to group  -- bugs everything fuck off gamw tin panagia
-        }
-
-    </script>
-
-    <!-- Make checkbox for (IsWorking) field disappear -->
-    <script>
-        var IsWorking = document.getElementById('IsWorking');
-        IsWorking.style.display = 'none';
-    </script>
-
     <!-- Status UI -->
     <script>
 
-        var status = document.getElementById('status');
+        var list = document.getElementsByTagName('p');
 
-        status.style.display = 'none';
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].innerHTML == 'Pending') {
+                list[i].style.backgroundColor = "#C2B638"
+            }
+            else if (list[i].innerHTML == 'Accepted') {
+                list[i].style.backgroundColor = "#659B81"
+            }
+            else if (list[i].innerHTML == 'Picked') {
+                list[i].style.backgroundColor = "#794F7E"
+            }
+            else if (list[i].innerHTML == 'Delivered') {
+                list[i].style.backgroundColor = "#3A9C27"
+            }
+            else {
+                list[i].style.backgroundColor = "#953030"
+            }
+        };
     </script>
 
-    <script src="~/js/AvailabilityStatus.js"></script>
-    <script src="~/js/OrderReceiver.js"></script>
+    <!-- Order Button -->
+    <script>
+
+        var btnClicked = false;
+        var button = document.getElementById('btnReady');
+        var newForm = document.getElementById('newForm');
+
+        button.onclick = function () {
+            btnClicked ? button.classList.add("bg-carmine") : button.classList.add("bg-winter");
+            btnClicked ? (
+                newForm.classList.add("invisible"),
+                button.classList.remove("invisible"),
+                btnClicked = false) :
+                (newForm.classList.remove("invisible"),
+                    button.classList.add("invisible"),
+                    btnClicked = true);
+        };
+
+
+
+
+    </script>
+
+    <script src="~/js/PlaceNewOrder.js"></script>
 }

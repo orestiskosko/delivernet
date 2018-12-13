@@ -1,4 +1,5 @@
-﻿
+﻿@model DeliverNET.Models.ProfileIndiViewModels.VerifyFormIndiViewModel
+@using DeliverNET.Models.ProfileIndiViewModels
 @{
     ViewData["Title"] = "Verify Account";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,79 +20,21 @@
                 <h3>Verification Form</h3>
                 <br />
                 <!-- TODO :: Connect the inputs of this form with Db -->
-                <form class="text-my-dark">
-
+                <form class="text-my-dark" method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
                     <div class="form-group">
-                        <label><strong>City</strong></label>
-                        <span class="text-danger"></span> <!-- Here we enter the asp-validation-for -->
-                        <input class="form-control" placeholder="Choose A City" list="cities" />
-                        <datalist id="cities">
-                            <option>Athens</option>
-                            <option>Patra</option>
-                            <option>Korinthos</option>
-                            <option>Xalkida</option>
-                            <option>Giannena</option>
-                            <option>Thessaloniki</option>
-                            <option>H Poutana H Mana tou Oresti</option>
-                        </datalist>
+                        <label asp-for="OperationalCity">City</label>
+                        <select asp-for="OperationalCity" asp-items="Html.GetEnumSelectList<OperationalCities>()" class="form-control"></select>
                     </div>
 
                     <hr />
                     <div class="form-group">
-                        <label><strong>Area</strong></label>
-                        <span class="text-danger"></span>
-                        <input class="form-control" placeholder="Preffered Area of Work" list="region" />
-                        <datalist id="region">
-                            <!-- Connect here IF Statement list depending on City (we need the input above first) -->
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                            <option>Sto mouni tis manas tou Oresti</option>
-                        </datalist>
+                        <label asp-for="OperationalRegion">Region</label>
+                        <select asp-for="OperationalRegion" asp-items="Html.GetEnumSelectList<OperationRegions>()" class="form-control"></select>
                     </div>
                     <hr />
 
-                    <div class="form-group">
-                        <label><strong>First Name</strong></label>
-                        <input class="form-control" placeholder="e.g. David" />
-                        <span class="text-danger"></span>
-                    </div>
-                    <hr />
-
-                    <div class="form-group">
-                        <label><strong>Last Name</strong></label>
-                        <input class="form-control" placeholder="e.g. Smith" />
-                        <span class="text-danger"></span>
-                    </div>
-                    <hr />
-
-                    <div class="form-group">
-                        <label><strong>Date of Birth</strong></label>
-                        <input class="form-control" placeholder="dd/MM/YY" />
-                        <span class="text-danger"></span>
-                    </div>
-                    <hr />
-
-                    <div class="form-group position-relative">
-                        <label><strong>Mobile Phone</strong></label>
-                        <input class="form-control input-with-place" />
-                        <span class="unit" style="color:#808080">+30&ensp;</span>
-                        <span class="text-danger"></span>
-                    </div>
-                    <hr />
-
-                    <div class="form-group">
-                        <label><strong>Email</strong></label>
-                        <input class="form-control" placeholder="Email Address" />
-                        <span class="text-danger"></span>
-                    </div>
-
-                    <button type="submit" class="btn btn-my-dark">Apply</button>
+                    <button asp-controller="ProfileIndi" asp-action="VerifyFormIndi" type="submit" class="btn btn-my-dark">Apply</button>
                 </form>
             </div>
 
