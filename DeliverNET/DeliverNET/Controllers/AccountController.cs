@@ -216,7 +216,14 @@ namespace DeliverNET.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new DeliverNETUser { UserName = model.Email.Split('@')[0], Email = model.Email };
+                var user = new DeliverNETUser
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    DOB = model.DOB,
+                    UserName = model.Email.Split('@')[0],
+                    Email = model.Email
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

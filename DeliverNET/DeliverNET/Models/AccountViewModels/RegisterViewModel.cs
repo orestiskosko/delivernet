@@ -9,6 +9,22 @@ namespace DeliverNET.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
+        [DataType(DataType.Text)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DOB { get; set; }
+
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
