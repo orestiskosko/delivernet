@@ -70,6 +70,7 @@ namespace DeliverNET
             services.AddTransient<IDelivererManager, DelivererManager>();
             services.AddTransient<IBusinessManager, BusinessManager>();
             services.AddTransient<IBusinessCashierManager, BusinessCashierManager>();
+            services.AddTransient<IBusinessOwnerManager, BusinessOwnerManager>();
             services.AddTransient<IMasterManager, MasterManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

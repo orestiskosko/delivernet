@@ -26,13 +26,15 @@
                         <label asp-for="OperationalCity">City</label>
                         <select asp-for="OperationalCity" asp-items="Html.GetEnumSelectList<OperationalCities>()" class="form-control"></select>
                     </div>
-
-                    <hr />
                     <div class="form-group">
                         <label asp-for="OperationalRegion">Region</label>
                         <select asp-for="OperationalRegion" asp-items="Html.GetEnumSelectList<OperationRegions>()" class="form-control"></select>
                     </div>
-                    <hr />
+                    <div class="form-group">
+                        <label asp-for="Credentials"></label>
+                        <input asp-for="Credentials" type="text" class="form-control"/>
+                        <span asp-validation-for="Credentials" class="text-danger"></span>
+                    </div>
 
                     <button asp-controller="ProfileIndi" asp-action="VerifyFormIndi" type="submit" class="btn btn-my-dark">Apply</button>
                 </form>

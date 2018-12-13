@@ -15,6 +15,8 @@ namespace DeliverNET.Models.ProfileIndiViewModels
         [Required]
         public OperationRegions OperationalRegion { get; set; }
 
+        [Required]
+        public string Credentials { get; set; }
     }
 
     public enum OperationalCities
