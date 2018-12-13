@@ -119,6 +119,21 @@
     border-radius: 225px;
 }
 
+.square {
+    color: #E0DDC3;
+    display: block;
+    border-radius: 10px;
+    height: 130px;
+    width: 130px;
+    margin: 0;
+    background: radial-gradient(circle at 70px 70px, #3f7544, #2b3d29);
+}
+
+    .square:active {
+        background: radial-gradient(circle at 70px 70px, #327439, #224d21);
+    }
+
+
 .regiClicked {
     border-color: #E0DDC3;
     border-width: thin;
@@ -244,6 +259,10 @@
     background: radial-gradient(circle at 100px 100px, #629696, #2c3c3c);
 }
 
+.bg-winter-3d-square {
+    background: radial-gradient(circle at 250px 300px, #79a9a9, #4b5d5d);
+}
+
 .bg-winter-3d-hover {
     background: radial-gradient(circle at 100px 100px, #79a9a9, #384646);
 }
@@ -257,7 +276,7 @@
 }
 
 .complete-center {
-    column-fill:balance;
+    column-fill: balance;
     transform: translateY(-50%);
 }
 

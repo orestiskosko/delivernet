@@ -9,12 +9,12 @@ namespace DeliverNET.Controllers
 {
     public class ProfileIndiController : Controller
     {
-        private static Models.ProfileIndividual.IndividualIndexModel Order_Dummy = new Models.ProfileIndividual.IndividualIndexModel
+        private static Models.ProfileDummies.IndiIndixDummyModel Order_Dummy = new Models.ProfileDummies.IndiIndixDummyModel
         {
             IsWorking = false,
             Username = "Pantazakos",
             ActiveOrders = 3,
-            RestaurantName = "Savvas",
+            RestaurantName = "Ravaisis",
             RestaurantAddress = "Arxiloxou 0",
             OrderID = 1234,
             FirstName = "Dimosthenis",
@@ -22,7 +22,7 @@ namespace DeliverNET.Controllers
             Address = "Kapou 32",
             FloorNo = 2,
             DoorName = "AFDEmp",
-            PaymentTypeId = 1,
+            PaymentTypeId = 0,
             State = "Picked",
             DistanceToShop = 1.5F,
             ETA = 7,
@@ -46,7 +46,7 @@ namespace DeliverNET.Controllers
             return View();
         }
 
-        public IActionResult AppFormIndi()
+        public IActionResult VerifyFormIndi()
         {
             return View();
         }
