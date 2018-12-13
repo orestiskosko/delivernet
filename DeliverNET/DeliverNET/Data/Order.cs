@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace DeliverNET.Data
 {
@@ -15,13 +16,14 @@ namespace DeliverNET.Data
         public Deliverer Deliverer { get; set; }
         public DateTime Tstamp { get; set; }
 
-        public string Address {get;set;}
+        public string Address { get; set; }
         public string Geolocation { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int? FloorNo { get; set; }
         public string DoorName { get; set; }
         public string PhoneNumber { get; set; }
+
         public int PaymentTypeId { get; set; }
         public float? Tariff { get; set; }
         public float? Price { get; set; }
@@ -32,5 +34,9 @@ namespace DeliverNET.Data
         public bool IsAccepted { get; set; }
         public bool IsPickedup { get; set; }
         public bool IsDelivered { get; set; }
+
+        public bool IsTimedOut { get; set; }
     }
+
+
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD:DeliverNET/DeliverNET/Models/OrderModel.cs
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,3 +24,23 @@ namespace DeliverNET.Models
         public float Price { get; set; }
     }
 }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace DeliverNET.Models.ProfileBusiViewModels
+{
+    public class OrderBusiViewModel
+    {
+        // [JsonProperty("FirstName")]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public int? FloorNo { get; set; }
+        public string DoorName { get; set; }
+        public int PaymentTypeId { get; set; }      
+    }
+}
+>>>>>>> develop:DeliverNET/DeliverNET/Models/ProfileBusiViewModels/OrderBusiViewModel.cs

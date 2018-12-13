@@ -10,6 +10,7 @@ using DeliverNET.Infrastructure.Account;
 using DeliverNET.Managers.Interfaces;
 using DeliverNET.Models.AccountViewModels;
 using Microsoft.Extensions.Logging;
+using DeliverNET.Managers;
 
 namespace DeliverNET.Data
 {
@@ -19,39 +20,38 @@ namespace DeliverNET.Data
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<Seeder> _logger;
         private readonly DeliverNETClaimManager _claimManager;
-        private readonly IOrderManager _orderManager;
-        private readonly IDelivererManager _delivererManager;
-        private readonly IBusinessManager _businessManager;
-        private readonly IBusinessCashierManager _businessCashierManager;
+        private readonly IMasterManager _masterManager;
+
+        private IOrderManager _orderManager;
+        private IDelivererManager _delivererManager;
+        private IBusinessManager _businessManager;
+        private IBusinessCashierManager _businessCashierManager;
 
         public Seeder(
             UserManager<DeliverNETUser> userManager,
             RoleManager<IdentityRole> roleManager,
             DeliverNETClaimManager claimManager,
             ILogger<Seeder> logger,
-            IBusinessManager businessManager,
-            IOrderManager orderManager,
-            IDelivererManager delivererManager,
-            IBusinessCashierManager businessCashierManager)
+            IMasterManager masterManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _logger = logger;
             _claimManager = claimManager;
-            _orderManager = orderManager;
-            _delivererManager = delivererManager;
-            _businessManager = businessManager;
-            _businessCashierManager = businessCashierManager;
+            _masterManager = masterManager;
         }
 
 
         public async Task Seed()
         {
-            // Empty database
+            // Initialize each manager
+            _orderManager = _masterManager.GetOrderManager();
+            _delivererManager = _masterManager.GetDelivererManager();
+            _businessManager = _masterManager.GetBusinessManager();
+            _businessCashierManager = _masterManager.GetBusinessCashierManager();
+
+            // Clear some data from db
             _orderManager.DeleteAll();
-            _businessManager.DeleteAll();
-            _delivererManager.DeleteAll();
-            _businessCashierManager.DeleteAll();
 
             //
             // Seed businesses
@@ -103,8 +103,13 @@ namespace DeliverNET.Data
                     Active = true
                 }
             };
+            Business tempBusiness;
             foreach (Business testBusiness in testBusinesses)
-                _businessManager.Create(testBusiness);
+            {
+                tempBusiness = _businessManager.Get(testBusiness.Title);
+                if (tempBusiness == null)
+                    _businessManager.Create(testBusiness);
+            }
 
             //
             // Seed Roles
@@ -135,7 +140,7 @@ namespace DeliverNET.Data
             {
                 user = await _userManager.FindByEmailAsync(tu.Email);
                 if (user != null)
-                    await _userManager.DeleteAsync(user);
+                    continue;
 
                 string password = tu.UserName;
                 var result = await _userManager.CreateAsync(tu, password);
@@ -164,7 +169,10 @@ namespace DeliverNET.Data
                     else if (password.Contains("cashier"))
                     {
                         await _claimManager.AddClaim(newUser, JobTypes.Individual);
-                        _businessCashierManager.Create(newUser, testBusinesses[new Random().Next(0, testBusinesses.Count)]);
+                        int firstId = _businessManager.GetAll().First().Id;
+                        int lastId = _businessManager.GetAll().Last().Id;
+                        Business randomBusiness = _businessManager.Get(new Random().Next(firstId, lastId));
+                        _businessCashierManager.Create(newUser, randomBusiness);
                     }
                 }
                 else
@@ -196,29 +204,31 @@ namespace DeliverNET.Data
                     PaymentTypeId = 0,
                     Price = 6.30f,
                     Comments = "Gamw to spitakis sou",
+                    IsTimedOut = false
                 },
                 new Order(){
                 Business = _businessManager.Get("Simple Burgers"),
                 Deliverer = _delivererManager.Get(
                     _userManager.FindByNameAsync("slave3").Result.Id
                 ),
-                Tstamp = DateTime.Now,
-                Address = "Λουλουδιών 33",
-                Geolocation = "37.973217,23.773856",
-                FirstName = "Μάριος",
-                LastName = "Ράδης",
-                FloorNo = 6,
-                DoorName = "Ραδής",
-                PhoneNumber = "6912345678",
-                PaymentTypeId = 0,
-                Price = 4.90f,
-                Comments = "μπεμπααααα"
+                    Tstamp = DateTime.Now,
+                    Address = "Λουλουδιών 33",
+                    Geolocation = "37.973217,23.773856",
+                    FirstName = "Μάριος",
+                    LastName = "Ράδης",
+                    FloorNo = 6,
+                    DoorName = "Ραδής",
+                    PhoneNumber = "6912345678",
+                    PaymentTypeId = 0,
+                    Price = 4.90f,
+                    Comments = "μπεμπααααα",
+                    IsTimedOut = false
                 },
                 new Order(){
                     Business = _businessManager.Get("Σάββας Κεμπάπ"),
                     Deliverer = _delivererManager.Get(
                         _userManager.FindByNameAsync("slave2").Result.Id
-                    ),
+                        ),
                     Tstamp = DateTime.Now,
                     Address = "Μεσογείων 138",
                     Geolocation = "37.977217,23.763856",
@@ -229,7 +239,8 @@ namespace DeliverNET.Data
                     PhoneNumber = "6987654321",
                     PaymentTypeId = 1,
                     Price = 12.70f,
-                    Comments = "μουνοπανοοο"
+                    Comments = "μουνοπανοοο",
+                    IsTimedOut = false
                 }
             };
             foreach (Order testOrder in testOrders)
