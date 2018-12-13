@@ -1,10 +1,9 @@
-﻿@using Microsoft.AspNetCore.Identity
-
-@{
+﻿@{
     ViewData["Title"] = "DeliverNET | Delivery Source";
 }
 @inject SignInManager<DeliverNETUser> SignInManager
 @inject UserManager<DeliverNETUser> UserManager
+@inject DeliverNETClaimManager ClaimManager
 
 <!DOCTYPE html>
 <html>
@@ -34,30 +33,35 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top p-1" id="mainNav" style="background-color: #2F332E;max-height:50px">
         <div class="container">
-            @if (SignInManager.IsSignedIn(User))
+            @{
+                bool userIsSignedIn = SignInManager.IsSignedIn(User);
+            }
+            @if (userIsSignedIn && ClaimManager.HasClaim(User, JobTypes.Individual).Result)
             {
                 <a class="navbar text-bone js-scroll-trigger hov-not-bone font-pacifico js-scroll-trigger bg-#E0DDC3 col-sm-3"
-                   asp-area="" asp-controller="ProfileBusi" asp-action="IndexBusi">DeliverNET</a>
+                   asp-controller="ProfileIndi" asp-action="IndexIndi">Delivernet</a>
+            }
+            else if (userIsSignedIn)
+            {
+                <a class="navbar text-bone js-scroll-trigger hov-not-bone font-pacifico js-scroll-trigger bg-#E0DDC3 col-sm-3"
+                   asp-controller="ProfileBusi" asp-action="IndexBusi">Delivernet</a>
             }
             else
             {
                 <!-- TODO :: Set Rediridection Route according to User Role for account Manage -->
                 <a class="navbar text-bone js-scroll-trigger hov-not-bone font-pacifico js-scroll-trigger bg-#E0DDC3 col-sm-7"
-                   asp-area="" asp-controller="Home" asp-action="Index">DeliverNET</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
-                        style="background-color: transparent; color: #E0DDC3">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
+                   asp-area="" asp-controller="Home" asp-action="Index">Delivernet</a>
             }
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                    style="background-color: transparent; color: #E0DDC3">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
             <partial name="_LoginPartial" />
 
         </div>
     </nav>
-
-    <partial name="_CookieConsentPartial" />
-
 
     <div class="body-content" style="height:100%">
         @RenderBody()

@@ -58,7 +58,7 @@ namespace DeliverNET
 
             services.AddDbContext<DeliverNETContext>(options =>
                     options.UseSqlServer(
-                        Configuration.GetConnectionString("DeliverNETConnection")));
+                        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<DeliverNETUser, IdentityRole>()
             .AddRoles<IdentityRole>()
