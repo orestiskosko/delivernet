@@ -136,45 +136,65 @@
 
         function disableAll() {
             if (settClicked) {
-                sett.classList.remove("regiClicked"), settLab.classList.remove("regiClicked"),
-                    settMenu.classList.add("invisible"), settClicked = false
+                sett.classList.remove("regiClicked"),
+                    settLab.classList.remove("regiClicked"),
+                    settMenu.classList.add("invisible"),
+                    settClicked = false
             };
             if (infoClicked) {
-                info.classList.remove("regiClicked"), infoLab.classList.remove("regiClicked"),
-                    infoMenu.classList.add("invisible"), infoClicked = false
+                info.classList.remove("regiClicked"),
+                    infoLab.classList.remove("regiClicked"),
+                    infoMenu.classList.add("invisible"),
+                    infoClicked = false
             };
             if (contClicked) {
-                cont.classList.remove("regiClicked"), contLab.classList.remove("regiClicked"),
-                    contMenu.classList.add("invisible"), contClicked = false
+                cont.classList.remove("regiClicked"),
+                    contLab.classList.remove("regiClicked"),
+                    contMenu.classList.add("invisible"),
+                    contClicked = false
             };
             if (helpClicked) {
-                help.classList.remove("regiClicked"), helpLab.classList.remove("regiClicked"),
-                    helpMenu.classList.add("invisible"), helpClicked = false
+                help.classList.remove("regiClicked"),
+                    helpLab.classList.remove("regiClicked"),
+                    helpMenu.classList.add("invisible"),
+                    helpClicked = false
             };
         };
 
         sett.onclick = function () {
-            settClicked ? (disableAll()) :
-                (disableAll(), sett.classList.add("regiClicked"), settLab.classList.add("regiClicked"),
-                    settMenu.classList.remove("invisible"), settClicked = true);
+            settClicked ? disableAll() :
+                (disableAll(),
+                    sett.classList.add("regiClicked"),
+                    settLab.classList.add("regiClicked"),
+                    settMenu.classList.remove("invisible"),
+                    settClicked = true);
         };
 
         info.onclick = function () {
-            infoClicked ? (disableAll()) :
-                (disableAll(), info.classList.add("regiClicked"), infoLab.classList.add("regiClicked"),
-                    infoMenu.classList.remove("invisible"), infoClicked = true);
+            infoClicked ? disableAll() :
+                (disableAll(),
+                    info.classList.add("regiClicked"),
+                    infoLab.classList.add("regiClicked"),
+                    infoMenu.classList.remove("invisible"),
+                    infoClicked = true);
         };
 
         cont.onclick = function () {
-            contClicked ? (disableAll()) :
-                (disableAll(), cont.classList.add("regiClicked"), contLab.classList.add("regiClicked"),
-                    contMenu.classList.remove("invisible"), contClicked = true);
+            contClicked ? disableAll() :
+                (disableAll(),
+                    cont.classList.add("regiClicked"),
+                    contLab.classList.add("regiClicked"),
+                    contMenu.classList.remove("invisible"),
+                    contClicked = true);
         };
 
         help.onclick = function () {
-            helpClicked ? (disableAll()) :
-                (disableAll(), help.classList.add("regiClicked"), helpLab.classList.add("regiClicked"),
-                    helpMenu.classList.remove("invisible"), helpClicked = true);
+            helpClicked ? disableAll() :
+                (disableAll(),
+                    help.classList.add("regiClicked"),
+                    helpLab.classList.add("regiClicked"),
+                    helpMenu.classList.remove("invisible"),
+                    helpClicked = true);
         };
 
     </script>

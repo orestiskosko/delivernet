@@ -9,7 +9,7 @@
         background-repeat: no-repeat;
     }
 </style>
-<div class="row nav-padding px-5 pb-5">
+<div class="row px-5 pb-5">
     <div class="container align-items-center">
         <div class="row align-items-center">
             <div class="col-md-4">
@@ -26,7 +26,7 @@
                     <hr/>
                     <div class="form-group">
                         <label asp-for="Password"><strong>Password</strong></label>
-                        <input asp-for="Password" class="form-control"/>
+                        <input asp-for="Password" class="form-control"  />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <hr/>
@@ -49,7 +49,7 @@
             <div class="col-md-4" style="text-align: center">
                 <h2 class="text-my-dark">Deliverer</h2>
                 <br />
-                <button class="btn bg-carmine hov-carmine circle btn-shadow-none text-bone" id="btnIndi" value="no">
+                <button class="btn bg-carmine hov-carmine circle btn-shadow-none text-bone" id="btnIndi">
                     <i class="fas fa-motorcycle" style="font-size: 80px"></i>
                 </button>
             </div>
@@ -58,7 +58,7 @@
             <div class="col-md-4" style="text-align: center">
                 <h2 class="text-my-dark">Businessman</h2>
                 <br />
-                <button name="btnBusi" class="btn bg-winter hov-winter circle btn-shadow-none text-bone" id="btnBusi" value="no">
+                <button name="btnBusi" class="btn bg-winter hov-winter circle btn-shadow-none text-bone" id="btnBusi">
                     <i class="fas fa-briefcase" style="font-size: 80px"></i>
                 </button>
             </div>
@@ -83,21 +83,29 @@
 
         function disableAll() {
             if (indiClicked) {
-                indi.classList.remove("bg-carmine-3d"), indiClicked = false, input.value = ""
+                indi.classList.remove("bg-carmine-3d"),
+                    indiClicked = false, input.value = ""
             };
             if (busiClicked) {
-                busi.classList.remove("bg-winter-3d"), busiClicked = false, input.value = ""
+                busi.classList.remove("bg-winter-3d"),
+                    busiClicked = false, input.value = ""
             };
         };
 
         indi.onclick = function () {
             indiClicked ? disableAll() :
-                (disableAll(), indi.classList.add("bg-carmine-3d"), indiClicked = true, input.value = "@JobTypes.Individual.ToString()");
+                (disableAll(),
+                    indi.classList.add("bg-carmine-3d"),
+                    indiClicked = true,
+                    input.value = "@JobTypes.Individual.ToString()");
         };
 
         busi.onclick = function () {
             busiClicked ? disableAll() :
-                (disableAll(), busi.classList.add("bg-winter-3d"), busiClicked = true, input.value = "@JobTypes.Businessman.ToString()");
+                (disableAll(),
+                    busi.classList.add("bg-winter-3d"),
+                    busiClicked = true,
+                    input.value = "@JobTypes.Businessman.ToString()");
         };
     </script>
 }

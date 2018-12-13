@@ -31,10 +31,17 @@
     button:hover {
         cursor: pointer
     }
+    header {
+        background: url(~/img/header-bg.jpg);
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
 </style>
 
 <!-- Header -->
-<header class="masthead">
+<header class="masthead" style="height:50%">
     <div class="separator-big"></div>
     <a style="text-decoration: none" asp-area="" asp-controller="Home" asp-action="AboutIndi">
         <div class="bg-carmine hov-carmine">
