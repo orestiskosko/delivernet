@@ -168,7 +168,7 @@ namespace DeliverNET.Data
                     }
                     else if (password.Contains("cashier"))
                     {
-                        await _claimManager.AddClaim(newUser, JobTypes.Individual);
+                        await _claimManager.AddClaim(newUser, JobTypes.Cashier);
                         int firstId = _businessManager.GetAll().First().Id;
                         int lastId = _businessManager.GetAll().Last().Id;
                         Business randomBusiness = _businessManager.Get(new Random().Next(firstId, lastId));

@@ -28,9 +28,4 @@ namespace DeliverNET.Models.AccountViewModels
         public JobTypes JobType { get; set; }
     }
 
-    public enum JobTypes
-    {
-        Individual,
-        Businessman
-    }
 }

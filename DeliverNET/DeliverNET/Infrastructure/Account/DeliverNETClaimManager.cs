@@ -41,5 +41,17 @@ namespace DeliverNET.Infrastructure.Account
             return hasClaim;
         }
 
+        public async Task<bool> HasClaim(ClaimsPrincipal user, JobTypes jobType)
+        {
+            bool hasClaim = false;
+            // Get claims
+            var deliverNetUser = await _userManager.FindByNameAsync(user.Identity.Name);
+            var claims = await _userManager.GetClaimsAsync(deliverNetUser);
+            var requestedClaim = claims.Where(c => c.Value == jobType.ToString()).FirstOrDefault();
+            if (requestedClaim != null)
+                hasClaim = true;
+            return hasClaim;
+        }
+
     }
 }

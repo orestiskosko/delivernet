@@ -80,7 +80,7 @@ namespace DeliverNET.Controllers
             return View(model);
         }
 
-
+        // TODO Facebook login is not fully implemented
         #region "External Login Facebook"
         [HttpGet]
         [AllowAnonymous]
@@ -229,6 +229,9 @@ namespace DeliverNET.Controllers
                         case JobTypes.Businessman:
                             await _claimManager.AddClaim(user, JobTypes.Businessman);
                             break;
+                        case JobTypes.Cashier:
+                            await _claimManager.AddClaim(user, JobTypes.Cashier);
+                            break;
                         default:
                             break;
                     }
@@ -277,9 +280,14 @@ namespace DeliverNET.Controllers
                 return RedirectToLocal(returnUrl);
 
             // Decide if deliverer or business and redirect acoordingly
-            if (await _claimManager.HasClaim(user, JobTypes.Individual))
+            if (
+                await _claimManager.HasClaim(user, JobTypes.Individual)
+                )
                 return RedirectToAction("IndexIndi", "ProfileIndi");
-            else if (await _claimManager.HasClaim(user, JobTypes.Businessman))
+            else if (
+                await _claimManager.HasClaim(user, JobTypes.Businessman) ||
+                await _claimManager.HasClaim(user, JobTypes.Cashier)
+                )
                 return RedirectToAction("IndexBusi", "ProfileBusi");
             else
                 return RedirectToAction("Index", "Home");
