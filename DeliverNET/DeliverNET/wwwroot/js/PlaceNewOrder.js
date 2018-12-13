@@ -28,7 +28,11 @@ window.addEventListener("load", () => {
             Address: document.getElementById("address").value,
             FloorNo: document.getElementById("floor").value,
             DoorName: document.getElementById("doorName").value,
-            PaymentType: document.getElementById("paymentType").value
+            PaymentTypeId: document.getElementById("paymentType").value,
+            PhoneNumber: document.getElementById("phoneNumber").value,
+            Price: document.getElementById("price").value,
+            Comments: document.getElementById("comments").value
+
         }
         console.log(order);
         console.log("order submitted")
@@ -37,7 +41,7 @@ window.addEventListener("load", () => {
 
     })
 
-    // sendes the order back to the server
+    // sends the order back to the server
     function placeANewOrder(order) {
         console.log('order goes to server')
         connection.invoke("PlaceNewOrder", order).catch(function (err) {

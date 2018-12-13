@@ -13,6 +13,9 @@ namespace DeliverNET.Models.ProfileBusiViewModels
         public string Address { get; set; }
         public int? FloorNo { get; set; }
         public string DoorName { get; set; }
-        public int PaymentTypeId { get; set; }      
+        public int PaymentTypeId { get; set; }
+        public string PhoneNumber { get; set; }
+        public float Price { get; set; }
+        public string Comments { get; set; }
     }
 }

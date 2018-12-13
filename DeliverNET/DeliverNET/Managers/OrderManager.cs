@@ -53,6 +53,20 @@ namespace DeliverNET.Managers
             return order;
         }
 
+        public Order Get(DateTime tStamp)
+        {
+            Order order;
+            try
+            {
+                order = _db.Orders.Where(x => x.Tstamp == tStamp).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return order;
+        }
+
         public List<Order> Get(Business business)
         {
             List<Order> orders;
