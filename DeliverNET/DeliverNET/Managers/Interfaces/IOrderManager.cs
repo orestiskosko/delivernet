@@ -13,6 +13,7 @@ namespace DeliverNET.Managers.Interfaces
         // Read
         List<Order> GetAll();
         Order Get(int id);
+        Order Get(DateTime tStamp);
         List<Order> Get(Business business);
         List<Order> Get(Deliverer deliverer);
         
