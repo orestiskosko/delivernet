@@ -108,7 +108,7 @@
 }
 
 .nav-padding {
-    padding-top: 80px;
+    padding-top: 50px;
 }
 
 .circle {
@@ -155,20 +155,12 @@
     width: 100%;
     color: #E0DDC3;
     border: solid;
-    border-collapse: separate;
     box-shadow: 0 0 0 1px hsl(0, 0%, 80%), 0 0 0 1px hsl(0, 0%, 90%);
 }
 
 .table-inputs {
-    display: block;
     border-bottom: 1px solid #2F332E;
-    display: inline-table;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-left: 0px;
     height: 10%;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .btn-unavailable {

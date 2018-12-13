@@ -1,4 +1,6 @@
-﻿<!-- TODO :: In order to link to this URL, you MUST be logged in AND a Deliverer -->
+﻿@model DeliverNET.Models.ProfileIndividual.IndividualIndexModel
+<!-- This invisible checkbox is set by the availability button, upon click -->
+@Html.CheckBoxFor(x => x.IsWorking)
 
 @{
     ViewData["Title"] = "DeliverNET | WorkSpace";
@@ -7,6 +9,10 @@
 
 <!-- ::placeholder is valid, don't change -->
 <style>
+    html {
+        height: 100%;
+    }
+
     body {
         background-image: url("/img/background-wood.jpg");
         background-size: cover;
@@ -27,24 +33,109 @@
     }
 </style>
 
-<body>
-    <div class="row nav-padding px-5 pb-5" style="height:100%">
-        <div class="container align-items-center" style="height:100%">
-            <div class="row align-items-center" style="height:100%">
+
+<!-- Order Info Modal -->
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content p-0" style="background-color: transparent; border: none">
+            <div class="modal-body bg-my-dark" style="border-radius: 5px">
+                <form>
+                    <table class="mb-5" style="width:100%">
+                        <tbody class="container" style="width:100%">
+
+                            <tr>
+                                <th style="width:50%"></th>
+                                <th></th>
+                                <th style="width:50%"></th>
+                            </tr>
+
+                            <tr class="text-bone text-center" style="border-bottom: solid #86392b;width:100%">
+                                <th colspan="3" class="pb-3" style="font-size:x-large;width:100%"><i class="fas fa-utensils"></i>&ensp;@Model.RestaurantName</th>
+                            </tr>
+
+                            <tr class="text-bone text-center" style="width:100%">
+                                <th class="text-nowrap" style="width:50%;font-weight:300"><i class="fas fa-utensils"></i>&ensp;Restaurant Address:</th>
+                                <th class="text-nowrap" style="width:50%;font-weight:400">@Model.RestaurantAddress</th>
+                            </tr>
+
+                            <tr class="text-bone text-center" style="width:100%">
+                                <th class="text-nowrap" style="width:50%;font-weight:300"><i class="fas fa-motorcycle"></i>&ensp;Address:</th>
+                                <th class="text-nowrap" style="width:50%;font-weight:400">@Model.Address</th>
+                            </tr>
+
+                            <tr class="text-bone text-center" style="width:100%">
+                                <th class="text-nowrap" style="width:50%;font-weight:300">Payment Type:</th>
+                                <!-- TODO :: make sure 0 is for Credit and 1 for cash -->
+                                @if (Model.PaymentTypeId == 0)
+                                {
+                                    <th style="width:50%;font-weight:400">Credit</th>
+                                }
+                                else
+                                {
+                                    <th style="width:50%;font-weight:400">Cash</th>
+                                }
+                            </tr>
+
+                            <tr class="text-bone text-center" style="width:100%">
+                                <th class="text-nowrap" style="width:50%;font-weight:300">Price:</th>
+                                @if (Model.PaymentTypeId == 0)
+                                {
+                                    <th style="width:50%;font-weight:400">-</th>
+                                }
+                                else
+                                {
+                                    <th style="width:50%;font-weight:400">@Model.Price €</th>
+                                }
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="row">
+                        <button type="submit" class="btn text-bone m-auto d-block" style="background-color:#7b2929">Decline</button>
+
+                        <button type="submit" class="btn text-bone m-auto d-block" style="background-color:#236b2d">Accept</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<body style="height:100%">
+    <div class="row nav-padding px-5 pb-5 m-auto d-block" style="height:100%">
+        <div class="container" style="height:100%">
+            <div class="row" style="height:100%">
 
                 <!-- Order List for Deliverer -->
                 <div class="col-md-6 my-3 d-block p-0" style="height:80%">
                     <h3 class="text-center text-bone table-standard bg-carmine-3d-square m-0 p-2" style="overflow-y:hidden;max-height:60px">Order List</h3>
                     <table class="table-standard bg-carmine-3d-square" style="height:100%">
-                        <tbody style="height:100%">
+                        <tbody class="container">
                             <!-- This loop is only for scroll testing. However, we this inside the loop is the setup for each order input -->
-                            @for (int i = 0; i < 10; i++)
+                            <tr class="text-bone text-center" style="border-bottom:solid 2px #2F332E">
+                                <th>&ensp;</th>
+                                <th style="font-size:large;width:50%">Distance</th>
+                                <th style="font-size:large">ETA</th>
+                                <th style="font-size:large;width:50%">Timer</th>
+                                <th>&ensp;</th>
+                            </tr>
+                            @for (int i = 0; i < Model.ActiveOrders; i++)
                             {
-                                <tr class="table-inputs">
-                                    <th class="col-md-2" style="font-size:large">Restaurant Name</th>
+                                <tr class="container text-bone text-center table-inputs">
+                                    <th style="text-align:start;font-weight:400">@(i + 1).</th>
+                                    <th style="font-size:large;width:50%;font-weight:300">@Model.DistanceToShop km</th>
+                                    <th style="font-size:large;font-weight:300">@Model.ETA m</th>
+                                    <th style="font-size:large;width:50%;font-weight:400">@Model.Stopwatch m</th>
                                     <th>
-                                        <input class="bg-my-dark text-center p-0" style="border-radius:7px 55px;border-style:none" placeholder="Order Status" disabled />
+                                        <a class="btn" id="btnclick"><i class="fas fa-arrow-alt-circle-down" style="font-size:large"></i></a>
                                     </th>
+
                                 </tr>
                             }
 
@@ -53,7 +144,7 @@
                 </div>
 
                 <!-- Search for -->
-                <div class="col-md-6" style="text-align:-webkit-center">
+                <div class="col-md-6 m-auto pb-5 pl-5" style="text-align:-webkit-center">
                     <!-- Ignore error here, all good -->
                     <button class="btn btn-unavailable btn-shadow-none text-bone" id="btnReady">
                         <i class="fas fa-signal" style="font-size: 70px"></i>
@@ -66,12 +157,15 @@
     </div>
 </body>
 
+
 @section Scripts {
 
     <!-- If Button Pressed -->
     <script>
+
         var IsClicked = false;
         var btn = document.getElementById('btnReady');
+        var IsWorking = document.getElementById('IsWorking');
         var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
         var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> Available</p >';
 
@@ -80,17 +174,40 @@
                 (IsClicked = false,
                     btn.classList.remove("btn-available"),
                     btn.classList.add("btn-unavailable"),
-                    btn.innerHTML = htmlON,
-                    removeMeFromGroup()) :        //I call the function that removes this deliverer from the group of available deliverers
+                    IsWorking.value = 'false',
+                    btn.innerHTML = htmlON) :
+
+                //removeMeFromGroup()        // Remove from group of available deliverers
                 (IsClicked = true,
                     btn.classList.remove("btn-unavailable"),
                     btn.classList.add("btn-available"),
-                    btn.innerHTML = htmlOFF,
-                    addMeToGroup());              //I call the function that addes this deliverer from the group of available deliverers
+                    IsWorking.value = 'true',
+                    btn.innerHTML = htmlOFF);
+            //addMeToGroup());              // Add to group  -- bugs everything fuck off gamw tin panagia
         }
 
-  
+    </script>
 
+    <!-- Make checkbox for (IsWorking) field disappear -->
+    <script>
+        var IsWorking = document.getElementById('IsWorking');
+        IsWorking.style.display = 'none';
+    </script>
+
+    <!-- Order Modal -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnclick").click(function () {
+                $("#orderModal").modal({
+                    show: true,
+                    focus: true
+                })
+            });
+
+            $("#HidebtnModal").click(function () {
+                $("#orderModal").modal("hide");
+            });
+        });
     </script>
 
     <script src="~/js/AvailabilityStatus.js"></script>
