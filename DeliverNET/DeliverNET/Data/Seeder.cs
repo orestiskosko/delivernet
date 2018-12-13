@@ -26,6 +26,7 @@ namespace DeliverNET.Data
         private IDelivererManager _delivererManager;
         private IBusinessManager _businessManager;
         private IBusinessCashierManager _businessCashierManager;
+        private IBusinessOwnerManager _businessOwnerManager;
 
         public Seeder(
             UserManager<DeliverNETUser> userManager,
@@ -49,9 +50,12 @@ namespace DeliverNET.Data
             _delivererManager = _masterManager.GetDelivererManager();
             _businessManager = _masterManager.GetBusinessManager();
             _businessCashierManager = _masterManager.GetBusinessCashierManager();
+            _businessOwnerManager = _masterManager.GetBusinessOwnerManager();
 
             // Clear some data from db
             _orderManager.DeleteAll();
+
+
 
             //
             // Seed businesses
@@ -90,17 +94,6 @@ namespace DeliverNET.Data
                     VerificationDate = DateTime.Today,
                     IsVerified = true,
                     Active = true
-                },
-                new Business()
-                {
-                    Title = "Simple Burgers",
-                    Address = "Αντήνορος 38, Παγκράτι 116 34",
-                    Geolocation = "37.973545,23.750168",
-                    Email = "rabaisi@hotmail.com",
-                    SignupDate = DateTime.Today,
-                    VerificationDate = DateTime.Today,
-                    IsVerified = true,
-                    Active = true
                 }
             };
             Business tempBusiness;
@@ -110,6 +103,7 @@ namespace DeliverNET.Data
                 if (tempBusiness == null)
                     _businessManager.Create(testBusiness);
             }
+
 
             //
             // Seed Roles
@@ -129,6 +123,7 @@ namespace DeliverNET.Data
                 new DeliverNETUser(){Email="admin@admins.com", UserName = "admin"},
                 new DeliverNETUser(){Email="owner1@owners.com", UserName = "owner1"},
                 new DeliverNETUser(){Email="owner2@owners.com", UserName = "owner2"},
+                new DeliverNETUser(){Email="owner3@owners.com", UserName = "owner3"},
                 new DeliverNETUser(){Email="cashier1@cashiers.com", UserName = "cashier1"},
                 new DeliverNETUser(){Email="cashier2@cashiers.com", UserName = "cashier2"},
                 new DeliverNETUser(){Email="slave1@slaves.com", UserName = "slave1"},
@@ -159,6 +154,18 @@ namespace DeliverNET.Data
                     if (password.Contains("owner"))
                     {
                         await _claimManager.AddClaim(newUser, JobTypes.Businessman);
+                        switch (password)
+                        {
+                            case "owner1":
+                                _businessOwnerManager.Create(newUser.Id, _businessManager.Get("Ραβαίσι").Id);
+                                break;
+                            case "owner2":
+                                _businessOwnerManager.Create(newUser.Id, _businessManager.Get("BigBadWolf").Id);
+                                break;
+                            case "owner3":
+                                _businessOwnerManager.Create(newUser.Id, _businessManager.Get("Σάββας Κεμπάπ").Id);
+                                break;
+                        }
                         // TODO Add Business owner records for each one
                     }
                     else if (password.Contains("slave"))
@@ -180,7 +187,6 @@ namespace DeliverNET.Data
                     _logger.LogInformation($"User {tu.UserName} was not created.");
                 }
             }
-
 
             //
             // Seed Orders
