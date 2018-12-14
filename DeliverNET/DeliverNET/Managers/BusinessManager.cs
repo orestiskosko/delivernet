@@ -56,5 +56,65 @@ namespace DeliverNET.Managers
         {
             return _db.Businesses.ToList();
         }
+
+        public bool SetAddress(int id, string address)
+        {
+            try
+            {
+                Business business = _db.Businesses.Find(id);
+                business.Address = address;
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
+
+        public bool SetCredentials(int id, string credentials)
+        {
+            try
+            {
+                Business business = _db.Businesses.Find(id);
+                business.Credentials = credentials;
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
+
+        public bool SetPhoneNumber(int id, string phoneNumber)
+        {
+            try
+            {
+                Business business = _db.Businesses.Find(id);
+                business.PhoneNumber = phoneNumber;
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
+
+        public bool SetTitle(int id, string title)
+        {
+            try
+            {
+                Business business = _db.Businesses.Find(id);
+                business.Title = title;
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
     }
 }

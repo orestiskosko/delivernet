@@ -6,5 +6,6 @@
         IDelivererManager GetDelivererManager();
         IBusinessManager GetBusinessManager();
         IBusinessCashierManager GetBusinessCashierManager();
+        IBusinessOwnerManager GetBusinessOwnerManager();
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DeliverNET.Controllers
 {
+    [Authorize]
     public class ProfileIndiController : Controller
     {
         // Dummy order data
@@ -74,15 +75,17 @@ namespace DeliverNET.Controllers
         {
             return View();
         }
-
-        public async Task<IActionResult> VerifyIdiForm(VerifyFormIndiViewModel model)
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyFormIndi(VerifyFormIndiViewModel model)
         {
             if (ModelState.IsValid)
             {
                 DeliverNETUser user =  await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
                 _delivererManager.SetOperatingRegion(user.Id, $"{model.OperationalCity} / {model.OperationalRegion}");
-                
-
+                _delivererManager.SetCredentials(user.Id, model.Credentials);
+                return RedirectToAction("IndexIndi");
             }
             return View(model);
         }

@@ -7,7 +7,7 @@ namespace DeliverNET.Models.ProfileDummies
 {
     public class IndiIndixDummyModel
     {
-        // TODO :: Ορέστη, εδώ είναι όλα τα dummies που χρησιμοποιεί το Front του IndiIndex μόνο, μαζεμένα όσα
+        // TODO :: Εδώ είναι όλα τα dummies που χρησιμοποιεί το Front του IndiIndex μόνο, μαζεμένα όσα
         //         χρειάζονται. Έχω πάρει copy-paste τα props από το model των Orders, επειδή στο view δεν μπορώ
         //         να εισάγω πάνω από ένα μοντέλο με το @modelκτλ. Υπάρχουν αρκετοί τρόποι να γίνει, αλλά όλοι
         //         κάνουν interfere με το back και θα πρέπει να πειράξω πολλά. Leave it to you, χώρισέ τα όπως θες.
