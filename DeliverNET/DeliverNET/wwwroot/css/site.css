@@ -1,0 +1,71 @@
+﻿::-webkit-scrollbar{
+    display: none;
+}
+
+body {
+    font-family: 'Segoe UI';
+}
+
+a {
+    color: #E0DDC3;
+}
+
+    a:hover {
+        color: #B8B5A0;
+    }
+
+.font-pacifico {
+    font-family: 'Pacifico', cursive;
+}
+
+.parallax {
+    background-image: url('../img/header-bg.jpg');
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.main-bg-image-biker {
+    background-image: url('../img/header-bg.jpg');
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.parallax-map {
+    background-image: url('../img/map-image.png');
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-border-bone {
+    border: 1px;
+    border-style: solid;
+    border-color: #E0DDC3;
+    border-radius: 7px;
+}
+
+.separator-big {
+    height: 500px;
+    background-color: transparent;
+}
+
+.separator-small {
+    height: 130px;
+    background-color: transparent;
+}
+
+.icon-large {
+    font-size: 150px;
+}
