@@ -25,6 +25,8 @@ function addMeToGroup() {
     event.preventDefault();
 }
 
+
+
 //
 //this js receives new orders ,adds and removes orders from the list of available orders in the indexIndi
 //
@@ -47,13 +49,14 @@ connection.on("NewOrder", (orderId, coords, paymentType, Tstampm) => {
     //TODO: append to list of available orders the order summary
     //TODO: also append to list the button which will be pressed to accept an order
     notifyMe()
+    var Eta = ETA(coords);
 
 });
 
 
 connection.on("OrderRemove", (orderId) => {
 
-    //TODO: remove from the list of order the order by order id
+    //TODO: remove from the list of orders the order by order id
 });
 
 //TODO: an ginei refresh xanonati ola ta stoixeia tis listas.. kane kati
@@ -64,7 +67,13 @@ connection.on("OrderRemove", (orderId) => {
 
 
 
-//});
+//}); TODO when document ready
+
+
+//
+//Notifications
+//
+
 function notifyMe() {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
@@ -87,6 +96,24 @@ function notifyMe() {
         });
     }
 
-    // At last, if the user has denied notifications, and you 
-    // want to be respectful there is no need to bother them any more.
+}
+
+//
+// Estimated time and distance
+//
+
+function ETA(busiCoords) {
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        var lat = pos.coords.latitude,
+            long = pos.coords.longitude,
+            coords = lat + ', ' + long;
+        console.log(coords);
+        console.log(busiCoords);
+
+    });
+
+
+
+
+
 }

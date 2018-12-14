@@ -2,7 +2,7 @@
 // this js is for placing a new order in busi index the button 'submit order is bounded with this js'
 
 //when document ready
-window.addEventListener("load", () => {
+//window.addEventListener("load", () => {
     //create an new connection to the hub
     var connection = new signalR.HubConnectionBuilder().withUrl("/Comms/Hubs/MainHub").build();
     //start the connection
@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
         return console.error(err.toString());
     });
     // declare 
-    const newOrderElement = document.getElementById("newOrderSubmit")
+const newOrderElement = document.getElementById("aaaa")
 
 
 
@@ -19,9 +19,12 @@ window.addEventListener("load", () => {
     //var JSONorder=JSON.stringify(order)
 
 
+
+
     newOrderElement.addEventListener("submit", (e) => {
         e.preventDefault();
-        //create an object by the form values
+        console.log("mpika sto event submit")
+       console.log(document.getElementById("comments").value)
         var order = {
             FirstName: document.getElementById("firstName").value,
             LastName: document.getElementById("lastName").value,
@@ -34,6 +37,7 @@ window.addEventListener("load", () => {
             Comments: document.getElementById("comments").value
 
         }
+        console.log("kai edo")
         console.log(order);
         console.log("order submitted")
 
@@ -47,11 +51,11 @@ window.addEventListener("load", () => {
         connection.invoke("PlaceNewOrder", order).catch(function (err) {
             return console.error(err.toString());
         });
-        event.preventDefault();
+        //event.preventDefault();
     }
 
 
 
 
-})
+//})
 
