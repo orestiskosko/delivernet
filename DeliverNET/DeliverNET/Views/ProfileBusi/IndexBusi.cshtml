@@ -32,9 +32,9 @@
 </style>
 
 <body style="height:100%">
-    <div class="row nav-padding m-auto d-block" style="height:100%">
-        <div class="container" style="height:100%">
-            <div class="row" style="height:100%;width:100%">
+    <div class="row nav-padding m-auto d-block h-100">
+        <div class="container h-100">
+            <div class="row h-100 w-100">
 
                 <!-- Order List for Deliverer -->
                 <div class="col-md-6 d-block" style="height:80%">
@@ -80,10 +80,10 @@
 
 
                     <!-- Change Password Menu -->
-                    <div class="div-image-parch container settings-menu position-absolute invisible" style="height:100%;width:100%" id="newForm">
+                    <div class="div-image-parch container settings-menu position-absolute " style="height:100%;width:100%" id="newForm">
                         <h3 class="p-2" style="color:#2F332E">New Order</h3>
                         <hr />
-                        <form class="text-my-dark collapsible" style="height:80%; overflow-y:auto">
+                        <form class="text-my-dark collapsible" id="frmsbt" style="height:80%; overflow-y:auto">
 
                             <input class="form-control" id="firstName" placeholder="First Name" />
                             <span class="text-danger"></span>
@@ -93,23 +93,23 @@
                             <span class="text-danger"></span>
                             <hr />
 
-                            <input class="form-control" id="address" placeholder="Address" />
+                            <input class="form-control" id="address"  placeholder="Address" />
                             <span class="text-danger"></span>
                             <hr />
 
-                            <input class="form-control" id="floor" placeholder="Floor" />
+                            <input class="form-control" id="floor"  placeholder="Floor" />
                             <span class="text-danger"></span>
                             <hr />
 
-                            <input class="form-control" id="doorName" placeholder="Door Name" />
+                            <input class="form-control" id="doorName"  placeholder="Door Name" />
                             <span class="text-danger"></span>
                             <hr />
 
-                            <input class="form-control" id="playmentType" placeholder="Payment Type" />
+                            <input class="form-control" id="paymentType"  placeholder="Payment Type" />
                             <span class="text-danger"></span>
                             <hr />
 
-                            <input class="form-control" id="phoneNumber" placeholder="Phone Number" />
+                            <input class="form-control" id="phoneNumber"  placeholder="Phone Number" />
                             <span class="text-danger"></span>
                             <hr />
 
@@ -117,7 +117,7 @@
                             <span class="text-danger"></span>
                             <hr />
 
-                            <textarea rows="7" name="message" form="usrform" placeholder="Comment" style="width:100%"></textarea>
+                            <textarea rows="7" name="message" id="comments" form="usrform" placeholder="Comment"  style="width:100%"></textarea>
                             <span class="text-danger"></span>
                             <hr />
                             <button type="submit" class="btn btn-my-dark mx-auto d-block">Submit</button>
@@ -133,7 +133,7 @@
 
         </div>
     </div>
-    </div>
+
 </body>
 
 
@@ -163,7 +163,9 @@
         };
     </script>
 
-    <!-- Order Button -->
+    <script src="~/js/PlaceNewOrder.js"></script>
+
+    <!-- Order Button -->   
     <script>
 
         var btnClicked = false;
@@ -181,10 +183,6 @@
                     btnClicked = true);
         };
 
-
-
-
     </script>
 
-    <script src="~/js/PlaceNewOrder.js"></script>
 }

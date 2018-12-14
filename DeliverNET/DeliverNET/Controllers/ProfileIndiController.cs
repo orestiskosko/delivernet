@@ -15,9 +15,10 @@ namespace DeliverNET.Controllers
     public class ProfileIndiController : Controller
     {
         // Dummy order data
-        private static Models.ProfileIndividual.IndividualIndexModel Order_Dummy = new Models.ProfileIndividual.IndividualIndexModel
+        private static Models.ProfileDummies.IndiIndixDummyModel Order_Dummy = new Models.ProfileDummies.IndiIndixDummyModel
         {
             IsWorking = false,
+            IsVerified = false,
             Username = "Pantazakos",
             ActiveOrders = 3,
             RestaurantName = "Ravaisis",
@@ -65,7 +66,7 @@ namespace DeliverNET.Controllers
         [HttpGet]
         public IActionResult SettingsIndi()
         {
-            return View();
+            return View(Order_Dummy);
         }
 
         [HttpGet]

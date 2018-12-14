@@ -180,7 +180,6 @@
 
 .btn-unavailable {
     display: block;
-    background: black;
     border-radius: 50%;
     height: 230px;
     width: 230px;
@@ -194,7 +193,6 @@
 
 .btn-available {
     display: block;
-    background: black;
     border-radius: 50%;
     height: 230px;
     width: 230px;
@@ -243,8 +241,20 @@
     background: radial-gradient(circle at 100px 100px, #AA4836, #3a1b16);
 }
 
+.bg-green-3d {
+    background: radial-gradient(circle at 100px 100px, #4f9335, #22441b);
+}
+
+.bg-green-3d-hover {
+    background: radial-gradient(circle at 100px 100px, #5ea942, #2c5524);
+}
+
+.hov-green-3d:hover {
+    background: radial-gradient(circle at 100px 100px, #55973c, #2c5524);
+}
+
 .bg-carmine-3d-square {
-    background: radial-gradient(circle at 250px 300px, #AA5242, #6d291d);
+    background: radial-gradient(circle at 250px 300px, #b95745, #6f352a);
 }
 
 .bg-carmine-3d-hover {
