@@ -2,16 +2,6 @@
 @inject UserManager<DeliverNETUser> UserManager
 @inject DeliverNETClaimManager ClaimManager
 
-<style>
-    li:hover {
-        cursor: pointer;
-    }
-
-    button:hover {
-        cursor: pointer;
-    }
-</style>
-
 @if (SignInManager.IsSignedIn(User))
 {
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">

@@ -1,8 +1,12 @@
-﻿::-webkit-scrollbar{
+﻿::-webkit-scrollbar {
     display: none;
 }
 
 body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     font-family: 'Segoe UI';
 }
 
@@ -18,12 +22,16 @@ a {
     font-family: 'Pacifico', cursive;
 }
 
+.screen-center {
+    margin: auto auto;
+}
+
 .text-shadow {
     text-shadow: 2px 2px 5px #2F332E;
 }
 
 .parallax {
-    background-image: url('../img/header-bg.jpg');
+    background-image: url('../img/biker.jpg');
     height: 100%;
     width: 100%;
     background-attachment: fixed;
@@ -33,14 +41,45 @@ a {
 }
 
 
-.main-bg-image-biker {
-    background-image: url('../img/header-bg.jpg');
-    position: absolute;
-    height: 100%;
-    width: 100%;
+.bg-img-biker {
+    background-image: url('../img/biker.jpg');
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.bg-img-biker-blur {
+    background-image: url('../img/biker-blur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(5px);
+    background-attachment: fixed;
+}
+
+.bg-img-burger {
+    background-image: url('../img/burger.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.bg-img-pizza {
+    background-image: url('../img/pizza.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed;
+    background-position: center;
+    height: 400px;
+}
+
+.content {
+    margin: auto;
+}
+
+.jumbotron-300 {
+    height: 300px;  /* Fallback for browsers do NOT support vh unit */
+    display: flex;
+    align-items: center;
 }
 
 .parallax-map {
@@ -60,13 +99,19 @@ a {
     border-radius: 7px;
 }
 
-.separator-big {
-    height: 500px;
+
+.spacer-100 {
+    height: 100px;
     background-color: transparent;
 }
 
-.separator-small {
-    height: 130px;
+.spacer-200 {
+    height: 200px;
+    background-color: transparent;
+}
+
+.spacer-300 {
+    height: 300px;
     background-color: transparent;
 }
 
