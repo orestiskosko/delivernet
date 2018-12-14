@@ -18,6 +18,10 @@ a {
     font-family: 'Pacifico', cursive;
 }
 
+.text-shadow {
+    text-shadow: 2px 2px 5px #2F332E;
+}
+
 .parallax {
     background-image: url('../img/header-bg.jpg');
     height: 100%;
@@ -35,8 +39,8 @@ a {
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
-    background-position: center;
     background-size: cover;
+    filter: blur(5px);
 }
 
 .parallax-map {
