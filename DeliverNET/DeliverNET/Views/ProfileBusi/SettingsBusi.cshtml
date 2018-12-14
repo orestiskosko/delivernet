@@ -1,4 +1,5 @@
-﻿
+﻿@model DeliverNET.Models.ProfileDummies.BusiIndixDummyModel
+
 @{
     ViewData["Title"] = "Profile Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -71,6 +72,7 @@
 
 </div>
 
+
 @section Scripts {
 
     <script>
@@ -79,21 +81,25 @@
         var infoClicked = false;
         var contClicked = false;
         var helpClicked = false;
+        var verifyClicked = false;
 
         var sett = document.getElementById('btnSett');
         var info = document.getElementById('btnInfo');
         var cont = document.getElementById('btnCont');
         var help = document.getElementById('btnHelp');
+        var verify = document.getElementById('btnVerify');
 
         var settLab = document.getElementById('labSett');
         var infoLab = document.getElementById('labInfo');
         var contLab = document.getElementById('labCont');
         var helpLab = document.getElementById('labHelp');
+        var verifyLab = document.getElementById('labVerify');
 
         var settMenu = document.getElementById('menuSett');
         var infoMenu = document.getElementById('menuInfo');
         var contMenu = document.getElementById('menuCont');
         var helpMenu = document.getElementById('menuHelp');
+        var verifyMenu = document.getElementById('menuVerify');
 
 
         sett.onmouseover = function () {
@@ -129,58 +135,126 @@
         };
 
         function disableAll() {
+
+            verify.classList.add("invisible");
+            verifyLab.classList.add("invisible");
+
             if (settClicked) {
-                sett.classList.remove("regiClicked"), settLab.classList.remove("regiClicked"),
-                    settMenu.classList.add("invisible"), settClicked = false
+                sett.classList.remove("regiClicked"),
+                    settLab.classList.remove("regiClicked"),
+                    settMenu.classList.add("invisible"),
+                    settClicked = false
             };
             if (infoClicked) {
-                info.classList.remove("regiClicked"), infoLab.classList.remove("regiClicked"),
-                    infoMenu.classList.add("invisible"), infoClicked = false
+                info.classList.remove("regiClicked"),
+                    infoLab.classList.remove("regiClicked"),
+                    infoMenu.classList.add("invisible"),
+                    infoClicked = false
             };
             if (contClicked) {
-                cont.classList.remove("regiClicked"), contLab.classList.remove("regiClicked"),
-                    contMenu.classList.add("invisible"), contClicked = false
+                cont.classList.remove("regiClicked"),
+                    contLab.classList.remove("regiClicked"),
+                    contMenu.classList.add("invisible"),
+                    contClicked = false
             };
             if (helpClicked) {
-                help.classList.remove("regiClicked"), helpLab.classList.remove("regiClicked"),
-                    helpMenu.classList.add("invisible"), helpClicked = false
+                help.classList.remove("regiClicked"),
+                    helpLab.classList.remove("regiClicked"),
+                    helpMenu.classList.add("invisible"),
+                    helpClicked = false
+            };
+
+            if (verifyClicked) {
+                verify.classList.remove("regiClicked"),
+                    verifyLab.classList.remove("regiClicked"),
+                    verifyMenu.classList.add("invisible"),
+                    verifyClicked = false
             };
         };
 
         sett.onclick = function () {
-            settClicked ? (disableAll()) :
-                (
-                    disableAll(),
+            settClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
+                (disableAll(),
                     sett.classList.add("regiClicked"),
                     settLab.classList.add("regiClicked"),
                     settMenu.classList.remove("invisible"),
-                    settClicked = true
-                );
+                    settClicked = true);
         };
 
         info.onclick = function () {
-            infoClicked ? (disableAll()) :
-                (
-                    disableAll(),
+            infoClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
+                (disableAll(),
                     info.classList.add("regiClicked"),
                     infoLab.classList.add("regiClicked"),
                     infoMenu.classList.remove("invisible"),
-                    infoClicked = true
-                );
+                    infoClicked = true);
         };
 
         cont.onclick = function () {
-            contClicked ? (disableAll()) :
-                (disableAll(), cont.classList.add("regiClicked"), contLab.classList.add("regiClicked"),
-                    contMenu.classList.remove("invisible"), contClicked = true);
+            contClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
+                (disableAll(),
+                    cont.classList.add("regiClicked"),
+                    contLab.classList.add("regiClicked"),
+                    contMenu.classList.remove("invisible"),
+                    contClicked = true);
         };
 
         help.onclick = function () {
-            helpClicked ? (disableAll()) :
-                (disableAll(), help.classList.add("regiClicked"), helpLab.classList.add("regiClicked"),
-                    helpMenu.classList.remove("invisible"), helpClicked = true);
+            helpClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
+                (disableAll(),
+                    help.classList.add("regiClicked"),
+                    helpLab.classList.add("regiClicked"),
+                    helpMenu.classList.remove("invisible"),
+                    helpClicked = true);
         };
 
     </script>
 
+    @if (!Model.IsVerified)
+    {
+        <script>
+
+            var verifyClicked = false;
+            var verify = document.getElementById('btnVerify');
+            var verifyLab = document.getElementById('labVerify');
+            var verifyMenu = document.getElementById('menuVerify');
+
+            verify.onmouseover = function () {
+                verifyLab.classList.add("bg-green-3d-hover");
+            };
+
+            verify.onmouseout = function () {
+                verifyLab.classList.remove("bg-green-3d-hover");
+            };
+
+            if (verifyClicked) {
+                verify.classList.remove("regiClicked"),
+                    verifyLab.classList.remove("regiClicked"),
+                    verifyMenu.classList.add("invisible"),
+                    verifyClicked = false
+            };
+
+            verify.onclick = function () {
+                verifyClicked ? (disableAll(),
+                    verify.classList.remove("invisible"),
+                    verifyLab.classList.remove("invisible")) :
+                    (disableAll(),
+                        verify.classList.add("regiClicked"),
+                        verifyLab.classList.add("regiClicked"),
+                        verifyMenu.classList.remove("invisible"),
+                        verifyClicked = true);
+            };
+
+
+
+        </script>
+    }
 }

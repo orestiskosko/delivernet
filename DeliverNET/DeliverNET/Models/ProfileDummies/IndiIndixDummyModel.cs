@@ -17,6 +17,7 @@ namespace DeliverNET.Models.ProfileDummies
         public bool IsWorking { get; set; }
         public string Username { get; set; }  // or ID, whatever
         public int ActiveOrders; // only for our deliverer
+        public bool IsVerified { get; set; }
 
 
         /* BUSINESSMAN PROPERTIES */

@@ -16,6 +16,7 @@ namespace DeliverNET.Models.ProfileDummies
         public string RestaurantName { get; set; }
         public string RestaurantAddress { get; set; }
         public int NumberOfOrders { get; set; }
+        public bool IsVerified { get; set; }
 
 
 

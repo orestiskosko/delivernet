@@ -32,9 +32,9 @@
 </style>
 
 <body style="height:100%">
-    <div class="row nav-padding m-auto d-block" style="height:100%">
-        <div class="container" style="height:100%">
-            <div class="row" style="height:100%;width:100%">
+    <div class="row nav-padding m-auto d-block h-100">
+        <div class="container h-100">
+            <div class="row h-100 w-100">
 
                 <!-- Order List for Deliverer -->
                 <div class="col-md-6 d-block" style="height:80%">
@@ -133,7 +133,7 @@
 
         </div>
     </div>
-    </div>
+
 </body>
 
 
@@ -163,7 +163,9 @@
         };
     </script>
 
-    <!-- Order Button -->
+    <script src="~/js/PlaceNewOrder.js"></script>
+
+    <!-- Order Button -->   
     <script>
 
         var btnClicked = false;
@@ -181,10 +183,6 @@
                     btnClicked = true);
         };
 
-
-
-
     </script>
 
-    <script src="~/js/PlaceNewOrder.js"></script>
 }

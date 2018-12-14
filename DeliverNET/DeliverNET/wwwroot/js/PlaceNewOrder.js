@@ -16,7 +16,7 @@ const newOrderElement = document.getElementById("aaaa")
 
 
 
-    //var JSONorder=JSON.stringify(order)
+//var JSONorder=JSON.stringify(order)
 
 
 
@@ -41,9 +41,9 @@ const newOrderElement = document.getElementById("aaaa")
         console.log(order);
         console.log("order submitted")
 
-        placeANewOrder(order);
+    placeANewOrder(order);
 
-    })
+})
 
     // sends the order back to the server
     function placeANewOrder(order) {

@@ -19,6 +19,7 @@ namespace DeliverNET.Controllers
         private static Models.ProfileDummies.BusiIndixDummyModel Order_Dummy = new Models.ProfileDummies.BusiIndixDummyModel
         {
             IsWorking = false,
+            IsVerified = false,
             DelivererUsername = "Pantazakos",
             NumberOfOrders = 3,
             RestaurantName = "Ravaisis",
@@ -64,7 +65,7 @@ namespace DeliverNET.Controllers
 
         public IActionResult SettingsBusi()
         {
-            return View();
+            return View(Order_Dummy);
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿
+﻿@model DeliverNET.Models.ProfileDummies.IndiIndixDummyModel
 @{
     ViewData["Title"] = "Profile Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,14 +9,15 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
+
     html {
-        height:100%;
+        height: 100%;
     }
 </style>
 
 <body>
-    <div class="row nav-padding" style="height:100%">
-        <div class="col-md-3 px-5" style="text-align:center;height:100%">
+    <div class="row nav-padding h-100">
+        <div class="col-md-3 px-5 h-100" style="text-align:center">
 
             <!--Profile Settings-->
             <div style="height:40%">
@@ -42,10 +43,10 @@
 
         </div>
 
-        <div class="col-md-3 px-5" style="text-align:center;height:100%;margin-top:60px">
+        <div class="col-md-3 px-5 h-100" style="text-align:center">
 
             <!--Edit Information-->
-            <div style="height:35%">
+            <div>
                 <button class="btn bg-winter-3d hov-winter-3d circle btn-shadow-none text-bone p-0" id="btnInfo">
                     <i class="fas fa-unlock-alt" style="font-size: 65px"></i>
                 </button>
@@ -85,21 +86,25 @@
         var infoClicked = false;
         var contClicked = false;
         var helpClicked = false;
+        var verifyClicked = false;
 
         var sett = document.getElementById('btnSett');
         var info = document.getElementById('btnInfo');
         var cont = document.getElementById('btnCont');
         var help = document.getElementById('btnHelp');
+        var verify = document.getElementById('btnVerify');
 
         var settLab = document.getElementById('labSett');
         var infoLab = document.getElementById('labInfo');
         var contLab = document.getElementById('labCont');
         var helpLab = document.getElementById('labHelp');
+        var verifyLab = document.getElementById('labVerify');
 
         var settMenu = document.getElementById('menuSett');
         var infoMenu = document.getElementById('menuInfo');
         var contMenu = document.getElementById('menuCont');
         var helpMenu = document.getElementById('menuHelp');
+        var verifyMenu = document.getElementById('menuVerify');
 
 
         sett.onmouseover = function () {
@@ -135,6 +140,10 @@
         };
 
         function disableAll() {
+
+            verify.classList.add("invisible");
+            verifyLab.classList.add("invisible");
+
             if (settClicked) {
                 sett.classList.remove("regiClicked"),
                     settLab.classList.remove("regiClicked"),
@@ -159,10 +168,19 @@
                     helpMenu.classList.add("invisible"),
                     helpClicked = false
             };
+
+            if (verifyClicked) {
+                verify.classList.remove("regiClicked"),
+                    verifyLab.classList.remove("regiClicked"),
+                    verifyMenu.classList.add("invisible"),
+                    verifyClicked = false
+            };
         };
 
         sett.onclick = function () {
-            settClicked ? disableAll() :
+            settClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
                 (disableAll(),
                     sett.classList.add("regiClicked"),
                     settLab.classList.add("regiClicked"),
@@ -171,7 +189,9 @@
         };
 
         info.onclick = function () {
-            infoClicked ? disableAll() :
+            infoClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
                 (disableAll(),
                     info.classList.add("regiClicked"),
                     infoLab.classList.add("regiClicked"),
@@ -180,7 +200,9 @@
         };
 
         cont.onclick = function () {
-            contClicked ? disableAll() :
+            contClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
                 (disableAll(),
                     cont.classList.add("regiClicked"),
                     contLab.classList.add("regiClicked"),
@@ -189,7 +211,9 @@
         };
 
         help.onclick = function () {
-            helpClicked ? disableAll() :
+            helpClicked ? (disableAll(),
+                verify.classList.remove("invisible"),
+                verifyLab.classList.remove("invisible")) :
                 (disableAll(),
                     help.classList.add("regiClicked"),
                     helpLab.classList.add("regiClicked"),
@@ -199,4 +223,43 @@
 
     </script>
 
+    @if (!Model.IsVerified)
+    {
+        <script>
+
+            var verifyClicked = false;
+            var verify = document.getElementById('btnVerify');
+            var verifyLab = document.getElementById('labVerify');
+            var verifyMenu = document.getElementById('menuVerify');
+
+            verify.onmouseover = function () {
+                verifyLab.classList.add("bg-green-3d-hover");
+            };
+
+            verify.onmouseout = function () {
+                verifyLab.classList.remove("bg-green-3d-hover");
+            };
+
+            if (verifyClicked) {
+                verify.classList.remove("regiClicked"),
+                    verifyLab.classList.remove("regiClicked"),
+                    verifyMenu.classList.add("invisible"),
+                    verifyClicked = false
+            };
+
+            verify.onclick = function () {
+                verifyClicked ? (disableAll(),
+                    verify.classList.remove("invisible"),
+                    verifyLab.classList.remove("invisible")) :
+                    (disableAll(),
+                        verify.classList.add("regiClicked"),
+                        verifyLab.classList.add("regiClicked"),
+                        verifyMenu.classList.remove("invisible"),
+                        verifyClicked = true);
+            };
+
+
+
+        </script>
+    }
 }
