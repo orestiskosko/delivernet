@@ -156,6 +156,36 @@ namespace DeliverNET.Managers
             return false;
         }
 
+        //change isAccepted bool
+        public bool SetIsAccepted(int id, bool status)
+        {
+            Order order = _db.Orders.Find(id);
+            try
+            {
+                order.IsAccepted = status;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        } 
+        
+        //change isPickedUp bool
+        public bool SetIsPickedUp(int id, bool status)
+        {
+            Order order = _db.Orders.Find(id);
+            try
+            {
+                order.IsPickedup = status;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
+
         //change isdelivered bool
         public bool SetIsDelivered(int id,bool status)
         {
@@ -170,26 +200,41 @@ namespace DeliverNET.Managers
             }
             return true;
         }
-        //change isAccepted bool
-        public bool SetIsAccepted(int id, bool status)
+
+        public bool SetAcceptedTime(int orderId,DateTime time)
         {
-            Order order = _db.Orders.Find(id);
+            Order order = _db.Orders.Find(orderId);
             try
             {
-                order.IsAccepted = status;
+                order.AcceptedTime = time;
             }
             catch (Exception e)
             {
                 throw e;
             }
             return true;
-        } //change isPickedUp bool
-        public bool SetIsPickedUp(int id, bool status)
+        }
+
+        public bool SetPickupTime(int orderId, DateTime time)
         {
-            Order order = _db.Orders.Find(id);
+            Order order = _db.Orders.Find(orderId);
             try
             {
-                order.IsPickedup = status;
+                order.PickupTime = time;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
+
+        public bool SetDeliveredTime(int orderId, DateTime time)
+        {
+            Order order = _db.Orders.Find(orderId);
+            try
+            {
+                order.DeliveredTime = time;
             }
             catch (Exception e)
             {
@@ -256,7 +301,7 @@ namespace DeliverNET.Managers
                     _db.Dispose();
                 }
             }
-        }
+        }  
         #endregion
     }
 }

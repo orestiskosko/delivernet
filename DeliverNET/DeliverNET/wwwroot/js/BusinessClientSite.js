@@ -53,7 +53,21 @@ function placeANewOrder(order) {
     //event.preventDefault();
 }
 
+//
+//functions that called when a deliverer accepts picks up or delivers the order
+//
 
+connection.on("OrderAccepted", (deliverer, orderId) => {
+    //TODO:Change status of order with OrderId in the table to accepted
+});
+
+connection.on("OrderPickedUp", (deliverer, orderId) => {
+     //TODO:Change status of order with OrderId in the table to PickedUp
+});
+
+connection.on("OrderDelivered", (deliverer, orderId) => {
+     //TODO:Change status of order with OrderId in the table to accepted
+});
 
 
 //})

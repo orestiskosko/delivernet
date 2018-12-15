@@ -21,7 +21,12 @@ namespace DeliverNET.Managers.Interfaces
         // Update
         bool UpdateAddress(int id, string newAddress);
         bool UpdateReceiver(int id, OrderReceiverInfoModel newReceiverInfo);
+        bool SetIsAccepted(int id, bool status);
+        bool SetIsPickedUp(int id, bool status);
         bool SetIsDelivered(int id, bool status);
+        bool SetAcceptedTime(int id,DateTime time);
+        bool SetPickupTime(int id,DateTime time);
+        bool SetDeliveredTime(int id,DateTime time);
 
         // Delete
         bool DeleteAll();
