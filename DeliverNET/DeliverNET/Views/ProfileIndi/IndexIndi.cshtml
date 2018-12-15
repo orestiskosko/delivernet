@@ -6,39 +6,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- ::placeholder is valid, don't change -->
-<style>
-    html {
-        height: 100%;
-    }
-
-    body {
-        /*background-image: url("/img/background-wood.jpg");*/
-        /*background-size: cover;
-        background-repeat: no-repeat;*/
-    }
-
-    ::placeholder {
-        color: #529ad1;
-    }
-
-    tbody {
-        overflow: auto;
-        line-height: 3;
-    }
-
-    thead > tr, tbody {
-        display: block;
-    }
-</style>
 
 <!-- Order Info Modal -->
 <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-body bg-my-dark p-0" style="border-radius: 5px">
+            <div class="modal-body bg-jet p-0" style="border-radius: 5px">
                 <div class="card text-center">
-                    <div class="card-header bg-my-dark text-bone">
+                    <div class="card-header bg-jet text-bone">
                         <h2 id="modal-restaurantTitle" class="font-pacifico"></h2>
                         <span id="modal-restaurantAddress" class=""></span>
                     </div>
@@ -55,7 +30,7 @@
                         
                         <a class="btn bg-winter text-bone d-block">Accept</a>
                     </div>
-                    <div id="modal-timestamp" class="card-footer bg-my-dark text-bone"></div>
+                    <div id="modal-timestamp" class="card-footer bg-jet text-bone"></div>
                 </div>
             </div>
         </div>
@@ -69,7 +44,7 @@
         <!-- Order List for Deliverer -->
         <div class="col-md-6" onclick="event.stopPropagation()">
             <div id="orderList" class="list-group">
-                <div class="list-group-item flex-column align-items-center bg-my-dark">
+                <div class="list-group-item flex-column align-items-center bg-jet">
                     <span class="text-bone">Order Pool</span>
                 </div>
                 <!--Orders go here-->

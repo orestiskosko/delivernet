@@ -1,8 +1,4 @@
-﻿body {
-    height: 100%;
-}
-
-.login-bg-image {
+﻿.login-bg-image {
     background-image: url('../img/header-bg.jpg');
     height: 100%;
     width: 100%;
@@ -15,14 +11,9 @@
     filter: progid;
 }
 
-.login-center-screen {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    min-height: 100vh;
-}
 
-.login-box{
+.login-box {
+    min-width: 400px;
     border-radius: 8px;
     position: absolute;
     top: 50%;
