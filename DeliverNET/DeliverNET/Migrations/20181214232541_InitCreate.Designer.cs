@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliverNET.Migrations
 {
     [DbContext(typeof(DeliverNETContext))]
-    [Migration("20181212180613_InitCreate")]
+    [Migration("20181214232541_InitCreate")]
     partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,7 +190,7 @@ namespace DeliverNET.Migrations
 
                     b.Property<bool>("IsPickedup");
 
-                    b.Property<bool>("IsRejected");
+                    b.Property<bool>("IsTimedOut");
 
                     b.Property<string>("LastName");
 

@@ -34,6 +34,8 @@ namespace DeliverNET.Models
             builder.Entity<BusinessOwner>().HasKey(bo => bo.DeliverNetUserId);
             builder.Entity<BusinessCashier>().HasKey(bc => bc.DeliverNetUserId);
             builder.Entity<Deliverer>().HasKey(d => d.DeliverNetUserId);
+            builder.Entity<Order>().HasKey(o => o.Id);
+            builder.Entity<Rating>().HasKey(r => r.Id);
 
             builder.Entity<DeliverNETUser>()
                 .HasOne(u => u.BusinessOwner)
@@ -61,7 +63,7 @@ namespace DeliverNET.Models
                 .WithOne(bc => bc.Business)
                 .HasForeignKey<BusinessCashier>(bc => bc.BusinessId);
 
-
+            
 
         }
     }

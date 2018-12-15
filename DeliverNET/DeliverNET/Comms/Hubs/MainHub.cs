@@ -11,80 +11,83 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace DeliverNET.Comms.Hubs
 {
-  
+
     public class MainHub : Hub
     {
         private IOrderManager _mngOrder;
         private IBusinessManager _mngBussiness;
-        private IMasterManager _mngMasterManager;
+        private IMasterManager _mngMaster;
 
         public MainHub(IMasterManager mng)
         {
-            _mngMasterManager = mng;
+            _mngMaster = mng;
             _mngOrder = mng.GetOrderManager();
             _mngBussiness = mng.GetBusinessManager();
 
         }
-        //Invoke from client to add a deliverer to the group of the available deliverers.
-        public void AddToGroupAvailable()
+        // Invoke from client to add a deliverer to the group of the available deliverers.
+        public async Task AddToGroupAvailable()
         {
-            //TODO: Add to group
-
-            Groups.AddToGroupAsync(Context.ConnectionId, "AvailableDeliverers");
+            // Add to group
+            _mngMaster.GetDelivererManager().SetWorkingStatus(Context.UserIdentifier, true);
+            await Groups.AddToGroupAsync(Context.ConnectionId, "AvailableDeliverers");
 
         }
 
         //Invoke from client to remove a deliverer from the group of the available deliverers.
-        public void RemoveFromGroupAvailable()
+        public async Task RemoveFromGroupAvailable()
         {
-            //TODO: Remove from group   
-             Groups.RemoveFromGroupAsync(Context.ConnectionId, "AvailableDeliverers");
+            // Remove from group   
+            _mngMaster.GetDelivererManager().SetWorkingStatus(Context.UserIdentifier, false);
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "AvailableDeliverers");
         }
 
 
-        //Invoke from Client busi in order to send a new order
+        // Invoke from Client busi in order to send a new order
 
-        public void PlaceNewOrder(OrderBusiViewModel order)
+        public async Task PlaceNewOrder(OrderBusiViewModel order)
         {
-            DateTime Tstamp = DateTime.Now;
+            DateTime tstamp = DateTime.Now;
             int orderId;
-            string Geolocation= _mngBussiness.Get(_mngMasterManager.GetBusinessCashierManager().Get(Context.UserIdentifier).BusinessId).Geolocation;
-            
-            Order NewOrder = new Order();
-            NewOrder.Address = order.Address;
-            NewOrder.DoorName = order.DoorName;
-            NewOrder.FirstName = order.FirstName;
-            NewOrder.FloorNo = order.FloorNo;
-            NewOrder.LastName = order.LastName;
-            NewOrder.PhoneNumber = order.PhoneNumber;
-            NewOrder.PaymentTypeId = order.PaymentTypeId;
-            NewOrder.Price = order.Price;
-            NewOrder.Comments = order.Comments;
+            string geolocation = _mngBussiness.Get(_mngMaster.GetBusinessCashierManager().Get(Context.UserIdentifier).BusinessId).Geolocation;
 
-            NewOrder.Business = _mngBussiness.Get(_mngMasterManager.GetBusinessCashierManager().Get(Context.UserIdentifier).BusinessId);
-            NewOrder.Cashier = _mngMasterManager.GetBusinessCashierManager().Get(Context.UserIdentifier);
-            NewOrder.Tstamp =Tstamp;
-            NewOrder.Geolocation= Geolocation;
-            NewOrder.Tariff = 1;
-            NewOrder.AcceptedTime = null;
-            NewOrder.PickupTime = null;
-            NewOrder.DeliveredTime = null;
-            NewOrder.IsAccepted = false;
-            NewOrder.IsPickedup = false;
-            NewOrder.IsDelivered = false;
-            NewOrder.IsTimedOut = false;
+            Order NewOrder = new Order
+            {
+                Address = order.Address,
+                DoorName = order.DoorName,
+                FirstName = order.FirstName,
+                FloorNo = order.FloorNo,
+                LastName = order.LastName,
+                PhoneNumber = order.PhoneNumber,
+                PaymentTypeId = order.PaymentTypeId,
+                Price = order.Price,
+                Comments = order.Comments,
+
+                Business = _mngBussiness.Get(_mngMaster.GetBusinessCashierManager().Get(Context.UserIdentifier).BusinessId),
+                Cashier = _mngMaster.GetBusinessCashierManager().Get(Context.UserIdentifier),
+                Tstamp = tstamp,
+                Geolocation = geolocation,
+                Tariff = 1,
+                AcceptedTime = null,
+                PickupTime = null,
+                DeliveredTime = null,
+                IsAccepted = false,
+                IsPickedup = false,
+                IsDelivered = false,
+                IsTimedOut = false
+            };
 
             _mngOrder.Create(NewOrder);
+
             //TODO: Get from the db the order id
-            orderId = _mngOrder.Get(Tstamp).Id;
+            orderId = _mngOrder.Get(tstamp).Id;
 
             //TODO: create a signalr group and add this bussiness
-            Groups.AddToGroupAsync(Context.ConnectionId,orderId.ToString());
-
+            await Groups.AddToGroupAsync(Context.ConnectionId, orderId.ToString());
 
 
             //TODO: broadcast to delivers group the order and the order id in method newOrderAnnounce the name of the method that will be invoked in the client will be "NewOrder"
-             Clients.Group("AvailableDeliverers").SendAsync("NewOrder", orderId, Geolocation,order.PaymentTypeId,Tstamp);
+            await Clients.Group("AvailableDeliverers").SendAsync("NewOrder", orderId, geolocation, order.PaymentTypeId, tstamp);
 
 
         }
@@ -95,6 +98,24 @@ namespace DeliverNET.Comms.Hubs
         {
             //Add to the group that containes the bussiness with the order id the deliverer that accepted the order
             //TODO:invoke to all available 
+        }
+
+
+
+        // Get order details from db
+        public async Task GetOrderFromDb(string orderId)
+        {
+            Order order = _mngOrder.Get(int.Parse(orderId));
+            Business business = _mngBussiness.Get(order.BusinessId);
+            await Clients.Group("AvailableDeliverers").SendAsync("GetOrder", business, order);
+        }
+
+        // Get all orders that are NOT timedout
+        public async Task GetActiveOrders()
+        {
+            // TODO Write query to get all active orders
+            List<Order> orders = _mngOrder.GetAll();
+            await Clients.Group("AvailableDeliverers").SendAsync("GetActiveOrders", orders);
         }
 
     }

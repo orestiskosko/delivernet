@@ -164,7 +164,7 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int?>("BusinessId");
+                    b.Property<int>("BusinessId");
 
                     b.Property<string>("CashierDeliverNetUserId");
 
@@ -385,7 +385,8 @@ namespace DeliverNET.Migrations
                 {
                     b.HasOne("DeliverNET.Data.Business", "Business")
                         .WithMany()
-                        .HasForeignKey("BusinessId");
+                        .HasForeignKey("BusinessId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DeliverNET.Data.BusinessCashier", "Cashier")
                         .WithMany()

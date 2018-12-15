@@ -297,7 +297,7 @@ namespace DeliverNET.Migrations
                     IsAccepted = table.Column<bool>(nullable: false),
                     IsPickedup = table.Column<bool>(nullable: false),
                     IsDelivered = table.Column<bool>(nullable: false),
-                    IsRejected = table.Column<bool>(nullable: false)
+                    IsTimedOut = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
