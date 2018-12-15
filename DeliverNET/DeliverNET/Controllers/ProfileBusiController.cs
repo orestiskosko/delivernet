@@ -16,28 +16,6 @@ namespace DeliverNET.Controllers
 {
     public class ProfileBusiController : Controller
     {
-        private static Models.ProfileDummies.BusiIndixDummyModel Order_Dummy = new Models.ProfileDummies.BusiIndixDummyModel
-        {
-            IsWorking = false,
-            IsVerified = false,
-            DelivererUsername = "Pantazakos",
-            NumberOfOrders = 3,
-            RestaurantName = "Ravaisis",
-            RestaurantAddress = "Arxiloxou 0",
-            OrderID = 1234,
-            FirstName = "Dimosthenis",
-            LastName = "Pasparakis",
-            Address = "Kapou 32",
-            FloorNo = 2,
-            DoorName = "AFDEmp",
-            PaymentTypeId = 1,
-            State = "Picked",
-            DistanceToShop = 1.5F,
-            ETA = 7,
-            Price = 10.4F,
-            CountWatch = 4.03F,
-            Datetime = DateTime.Now
-        };
         private readonly UserManager<DeliverNETUser> _userManager;
         private readonly IMasterManager _masterManager;
 
@@ -51,21 +29,23 @@ namespace DeliverNET.Controllers
         }
 
         // TODO Authorize only business cashiers
+        [HttpGet]
         public IActionResult IndexBusi()
         {
-            return View(Order_Dummy);
+            return View();
         }
 
         // TODO Authorize only business owners
+        [HttpGet]
         public IActionResult DashboardBusi()
         {
             return View();
         }
 
-
+        [HttpGet]
         public IActionResult SettingsBusi()
         {
-            return View(Order_Dummy);
+            return View();
         }
 
         [HttpGet]
