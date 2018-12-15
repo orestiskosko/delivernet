@@ -17,7 +17,7 @@ function removeMeFromGroup() {
     connection.invoke("RemoveFromGroupAvailable").catch(function (err) {
         return console.error(err.toString());
     });
-    event.preventDefault();
+    //   event.preventDefault();
 }
 //invoke through Signalr the method that removes a deliver from the group of available deliverers
 function addMeToGroup() {
@@ -25,8 +25,7 @@ function addMeToGroup() {
     connection.invoke("AddToGroupAvailable").catch(function (err) {
         return console.error(err.toString());
     });
-    connection.invoke("GetActiveOrders");
-    event.preventDefault();
+    //  event.preventDefault();
 }
 
 
@@ -49,8 +48,9 @@ connection.on("GetActiveOrders",
 //
 
 
-//takes
-connection.on("NewOrder", (orderId, coords, paymentType, Tstamp) => {
+
+//takes the order
+connection.on("NewOrder", (orderId, coords, paymentType, Tstampm) => {
 
     console.log(orderId);
     console.log(coords);
@@ -59,7 +59,11 @@ connection.on("NewOrder", (orderId, coords, paymentType, Tstamp) => {
     //TODO: append to list of available orders the order summary
     //TODO: also append to list the button which will be pressed to accept an order
     notifyMe()
-    var Eta = ETA(coords);
+
+
+    console.log("eimai prin to promise")
+
+    ETA(coords)
 
     // TODO Put real values in here
     appendOrder(orderId, "3", "5", "5:00");
@@ -73,16 +77,59 @@ connection.on("OrderRemove", (orderId) => {
     //TODO: remove from the list of orders the order by order id
 });
 
-//TODO: an ginei refresh xanonati ola ta stoixeia tis listas.. kane kati
+//
+// Estimated time and distance
+//
 
-//TODO:when the deliverer presses the accept button an event will occur and send back to the server with signalr the responce
+function ETA(busiCoords) {
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        var lat = pos.coords.latitude.toFixed(6),
+            long = pos.coords.longitude.toFixed(6),
+            coords = lat + ', ' + long;
+        console.log(coords);
+        console.log(busiCoords);
+        calculateDistance(coords, busiCoords)
+    });
+}
+
+function calculateDistance(coords, busiCoords) {
+    // alert(typeof mycoords)
+    var origin = coords;
+    console.log(coords);
+    var destination = busiCoords;
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+        {
+            origins: [origin],
+            destinations: [destination],
+            travelMode: google.maps.TravelMode.DRIVING,
+            // unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
+            unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
+            avoidHighways: false,
+            avoidTolls: false
+        }, callback);
+}
+// get distance results
+function callback(response, status) {
+    if (status != google.maps.DistanceMatrixStatus.OK) {
+        $('#result').html(err);
+    } else {
+        var origin = response.originAddresses[0];
+        var destination = response.destinationAddresses[0];
+        if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+            $('#result').html("Better get on a plane. There are no roads between " + origin + " and " + destination);
+        } else {
+            //  alert(JSON.stringify(response.rows[0].elements[0].distance.value));
+            // connection.invoke("TakeDistance", JSON.stringify(response.rows[0].elements[0].distance.value + ',' + JSON.stringify(response.rows[0].elements[0].duration.value)));
 
 
+            // connection.invoke("TakeDistance", JSON.stringify(response.rows[0].elements[0].duration.value));
+            console.log(response.rows[0].elements[0].distance.text);
+            console.log(response.rows[0].elements[0].duration.text);
 
-
-
-//}); TODO when document ready
-
+        }
+    }
+}
 
 //
 // Browser notification
@@ -220,18 +267,5 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 // Estimated time and distance
 //
 
-function ETA(busiCoords) {
-    navigator.geolocation.getCurrentPosition(function (pos) {
-        var lat = pos.coords.latitude,
-            long = pos.coords.longitude,
-            coords = lat + ', ' + long;
-        console.log(coords);
-        console.log(busiCoords);
-
-    });
-
-
-
-
-
-}
+//TODO:when the deliverer presses the accept button an event will occur and send back to the server with signalr the responce
+//TODO when document ready
