@@ -107,7 +107,6 @@ connection.on("OrderRemove", (orderId) => {
 //
 // Estimated time and distance
 //
-
 function ETA(orderId, busiCoords) {
 
     var orderETA;
@@ -254,7 +253,7 @@ var orderItemHtml = function (orderId, distance, eta, timer) {
                 </a>`
 }
 
-
+// custom remove button logic for testing
 var removeOrderBtn = document.getElementById("removeOrderBtn");
 removeOrderBtn.addEventListener("click", () => {
     var orderId = document.getElementById("orderToRemove").value;
@@ -271,8 +270,11 @@ connection.on("GetOrder", (business, order) => {
     console.log(business);
     console.log(order);
 
+    var tStampF = new Date(order.tstamp);
+    var tStamp = `${tStampF.getHours()}:${tStampF.getMinutes()} - ${tStampF.toDateString()}`;
+
     document.getElementById("modal-restaurantTitle").innerText = business.title;
-    document.getElementById("modal-timestamp").innerText = order.tstamp;
+    document.getElementById("modal-timestamp").innerText = tStamp;
     document.getElementById("modal-restaurantAddress").innerText = business.address;
     document.getElementById("modal-price").innerText = order.price;
     if (order.paymentTypeId == "0") {
