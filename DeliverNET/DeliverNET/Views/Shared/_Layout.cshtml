@@ -3,7 +3,6 @@
 }
 @inject SignInManager<DeliverNETUser> SignInManager
 @inject UserManager<DeliverNETUser> UserManager
-@inject DeliverNETClaimManager ClaimManager
 
 <!DOCTYPE html>
 <html>
@@ -18,8 +17,8 @@
         <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=PT+Serif:700" rel="stylesheet">
 
-        <link href="~/css/OwnCSS.css" rel="stylesheet">
         <link href="~/css/site.css" rel="stylesheet">
+        <link href="~/css/OwnCSS.css" rel="stylesheet">
         <link href="~/css/colors.css" rel="stylesheet">
     </environment>
     <environment exclude="Development">
@@ -34,51 +33,48 @@
 
 <body>
 
-    <div class="bg-img-burger">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg sticky-top bg-jet">
-            <div class="container">
-                <a class="navbar-brand font-pacifico" asp-controller="Home" asp-action="Index">Delivernet</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars text-bone"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggler">
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <div>
-            <div>
-                @RenderBody()
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-jet">
+        <div class="container">
+            <a class="navbar-brand font-pacifico" asp-controller="Home" asp-action="Index">Delivernet</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-bone"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <partial name="_LoginPartial" />
             </div>
         </div>
+    </nav>
 
-        <!-- Footer -->
-        <footer class="bg-jet text-bone" id="footer">
-            <div class="container py-3">
-                <div class="row">
-                    <div class="col-sm-6 text-left">
-                        <span class="copyright">Copyright &copy; Delivernet</span>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <a class="mx-3" href="#">
-                            <i class="fab fa-twitter text-bone"></i>
-                        </a>
-                        <a class="mx-3" href="#">
-                            <i class="fab fa-facebook-f text-bone"></i>
-                        </a>
-                        <a class="mx-3" href="#">
-                            <i class="fab fa-linkedin-in text-bone"></i>
-                        </a>
-                    </div>
+    <!-- Main Content -->
+    <div class="bg-img-burger">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-jet text-bone" id="footer">
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <span class="copyright">Copyright &copy; Delivernet</span>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a class="mx-3" href="#">
+                        <i class="fab fa-twitter text-bone"></i>
+                    </a>
+                    <a class="mx-3" href="#">
+                        <i class="fab fa-facebook-f text-bone"></i>
+                    </a>
+                    <a class="mx-3" href="#">
+                        <i class="fab fa-linkedin-in text-bone"></i>
+                    </a>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-    </div>
+
 
 
     <environment include="Development">
@@ -99,12 +95,10 @@
         <script src="~/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="~/vendor/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
+        <!--google maps api scripts-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBsxQgSj5tMe7y7LX6P42cTuKlN37aK2Ec" type="text/javascript"></script>
 
-        @*<script>
-                (document.body.scrollHeight > window.innerHeight)
-                    ? document.getElementById("footer").classList.remove("fixed-bottom")
-                    : document.getElementById("footer").classList.add("fixed-bottom");
-            </script>*@
 
     </environment>
     <environment exclude="Development">
@@ -122,9 +116,6 @@
         </script>
     </environment>
 
-    <!--google maps api scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBsxQgSj5tMe7y7LX6P42cTuKlN37aK2Ec" type="text/javascript"></script>
 
     @RenderSection("Scripts", required: false)
 

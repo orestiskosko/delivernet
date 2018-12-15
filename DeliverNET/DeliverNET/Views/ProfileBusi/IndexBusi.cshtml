@@ -2,139 +2,86 @@
 
 @{
     ViewData["Title"] = "DeliverNET | WorkSpace";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutBusi.cshtml";
 }
 
-<!-- ::placeholder is valid, don't change -->
-<style>
-    html {
-        height: 100%;
-    }
+<div class="container pt-3">
+    <div class="row">
 
-    body {
-        background-image: url("/img/background-wood.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    tbody {
-        overflow: auto;
-        line-height: 3;
-    }
-
-    thead > tr, tbody {
-        display: block;
-    }
-
-    row {
-        display: inherit;
-    }
-</style>
-
-<body style="height:100%">
-    <div class="row nav-padding m-auto d-block h-100">
-        <div class="container h-100">
-            <div class="row h-100 w-100">
-
-                <!-- Order List for Deliverer -->
-                <div class="col-md-6 d-block" style="height:80%">
-                    <h3 class="text-center text-bone table-standard bg-winter-3d-square m-0 p-2" style="overflow-y:hidden;max-height:60px">Order List</h3>
-                    <table class="table-standard bg-winter-3d-square" style="height:100%">
-                        <tbody class="container collapsible" style="max-height:100%">
-
-                            <tr class="text-bone text-center" style="border-bottom:solid 2px #2F332E">
-                                <th>&ensp;</th>
-                                <th colspan="2"></th>
-                                <th style="font-size:large;width:50%">Address</th>
-                                <th style="font-size:large">Timer</th>
-                                <th style="font-size:large">Status</th>
-                            </tr>
-
-                            @for (int i = 0; i < Model.NumberOfOrders; i++)
-                            {
-
-                                <tr class="text-bone text-center" style="border-bottom:solid 1px #2F332E">
-                                    <th style="text-align:start;font-weight:400">@(i + 1).</th>
-                                    <th>&ensp;</th>
-                                    <th colspan="2" class="text-nowrap" style="font-size:large;font-weight:300">@Model.Address</th>
-                                    <th style="font-size:large;width:50%;font-weight:300">@Model.CountWatch m</th>
-                                    <th>
-                                        <p class="bg-jet text-center m-auto px-4 py-2" style="border-radius:7px 55px;font-weight:400"
-                                           id="status">@Model.State</p>
-                                    </th>
-                                </tr>
-                            }
-
-                        </tbody>
-                    </table>
+        <!-- Order List for Deliverer -->
+        <div class="col-md-6" onclick="event.stopPropagation()">
+            <div id="orderList" class="list-group">
+                <div class="list-group-item flex-column align-items-center bg-jet">
+                    <h4 class="text-bone m-0">Submitted Orders</h4>
                 </div>
+                <!--Orders go here-->
+            </div>
+        </div>
 
-                <!-- Acquire Delivery -->
-                <div class="col-md-5 ml-5" style="text-align:center;height:90%;width:100%">
-                    <!-- Input Order Button -->
-                    <div class="position-absolute">
-                        <button class="btn square btn-shadow-none text-bone" id="btnReady">
-                            <i class="fas fa-plus" style="font-size: 120px"></i>
-                        </button>
+        <!-- Acquire Delivery -->
+        <div class="col-md-6">
+            <!-- Submit new order form -->
+            <div class="bg-jet p-3 rounded" id="newForm">
+                <div class="d-flex justify-content-between">
+                    <h4 class="d-inline text-bone ">New Order</h4>
+                    <h4 class="d-inline text-bone font-pacifico">Rabaisi</h4>
+                </div>
+                <form id="aaaa">
+                    <div class="form-group">
+                        <input class="form-control" id="firstName" placeholder="First Name" value="" />
+                        <span class="text-danger"></span>
                     </div>
 
-
-                    <!-- Change Password Menu -->
-                    <div class="div-image-parch container settings-menu position-absolute  " style="height:100%;width:100%" id="newForm">
-                        <h3 class="p-2" style="color:#2F332E">New Order</h3>
-                        <hr />
-                        <form id="aaaa" class="text-my-dark collapsible" style="height:80%; overflow-y:auto">
-
-                            <input class="form-control" id="firstName" placeholder="First Name" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="lastName" placeholder="Last Name" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="address" placeholder="Address" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="floor" placeholder="Floor" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="doorName" placeholder="Door Name" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="paymentType" placeholder="Payment Type" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="phoneNumber" placeholder="Phone Number"  value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <input class="form-control" id="price" placeholder="Price" value=""/>
-                            <span class="text-danger"></span>
-                            <hr />
-
-                            <textarea rows="7" name="message" form="usrform" placeholder="Comment"  style="width:100%" id="comments"></textarea>
-                            <span class="text-danger"></span>
-                            <hr />
-                            <button type="submit" class="btn btn-my-dark mx-auto d-block">Submit</button>
-                        </form>
+                    <div class="form-group">
+                        <input class="form-control" id="lastName" placeholder="Last Name" value="" />
+                        <span class="text-danger"></span>
                     </div>
 
+                    <div class="form-group">
+                        <input class="form-control" id="address" placeholder="Address" value="" />
+                        <span class="text-danger"></span>
+                    </div>
 
-                </div>
+                    <div class="form-group">
+                        <input class="form-control" id="floor" placeholder="Floor" value="" />
+                        <span class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <input class="form-control" id="doorName" placeholder="Door Name" value="" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" id="paymentType" placeholder="Payment Type" value="" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" id="phoneNumber" placeholder="Phone Number" value="" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" id="price" placeholder="Price" value="" />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control w-100" rows="7" name="message" form="usrform" placeholder="Comment" id="comments"></textarea>
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn bg-winter text-bone mx-auto d-block">Submit</button>
+                </form>
             </div>
 
 
-
         </div>
+
     </div>
 
-</body>
+</div>
 
 
 @section Scripts {
@@ -165,7 +112,7 @@
 
     <script src="~/js/PlaceNewOrder.js"></script>
 
-    <!-- Order Button -->   
+    <!-- Order Button -->
     <script>
 
         var btnClicked = false;

@@ -2,15 +2,9 @@
 
 @{
     ViewData["Title"] = "Profile Settings";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutBusi.cshtml";
 }
-<style>
-    body {
-        background-image: url("/img/background-wood.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-</style>
+
 
 <div class="row">
     <div class="nav-padding col-md-3 px-5 align-items-center" style="text-align:center">
@@ -66,7 +60,7 @@
     </div>
 
     <!-- All the different Menus inside this partial -->
-    <partial name="SettingsIndiPartial" />
+    <partial name="_SettingsBusiPartial" />
 
 
 

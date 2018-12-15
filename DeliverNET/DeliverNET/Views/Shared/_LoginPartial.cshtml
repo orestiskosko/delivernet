@@ -10,14 +10,14 @@
         {
 
             <li class=" nav-item">
-                <a class="nav-link text-bone" style="color:#E0DDC3" asp-controller="ProfileIndi" asp-action="IndexIndi">
-                    <i class="fas fa-desktop mr-1" style="font-size:medium"></i>&ensp;WorkSpace
+                <a class="nav-link text-bone" asp-controller="ProfileIndi" asp-action="IndexIndi">
+                    @*<i class="fas fa-desktop mr-1" style="font-size:medium"></i>*@&ensp;Workspace
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-bone" style="color:#E0DDC3" asp-controller="ProfileIndi" asp-action="DashboardIndi">
-                    <i class="fas fa-chart-line mr-1" style="font-size:larger"></i>&ensp;DashBoard
+                <a class="nav-link text-bone" asp-controller="ProfileIndi" asp-action="DashboardIndi">
+                    @*<i class="fas fa-chart-line mr-1" style="font-size:larger"></i>*@&ensp;Dashboard
                 </a>
             </li>
 
@@ -26,25 +26,25 @@
         {
 
             <li class="nav-item">
-                <a class="nav-link text-bone" style="color:#E0DDC3" asp-controller="ProfileBusi" asp-action="IndexBusi">
-                    <i class="fas fa-desktop mr-1" style="font-size:medium"></i>&ensp;WorkSpace
+                <a class="nav-link text-bone" asp-controller="ProfileBusi" asp-action="IndexBusi">
+                    @*<i class="fas fa-desktop mr-1" style="font-size:medium"></i>*@&ensp;Workspace
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-bone" style="color:#E0DDC3" asp-area="" asp-controller="ProfileBusi" asp-action="DashboardBusi">
-                    <i class="fas fa-chart-line mr-1" style="font-size:larger"></i>&ensp;DashBoard
+                <a class="nav-link text-bone" asp-area="" asp-controller="ProfileBusi" asp-action="DashboardBusi">
+                    @*<i class="fas fa-chart-line mr-1" style="font-size:larger"></i>*@&ensp;Dashboard
                 </a>
             </li>
 
         }
 
-        <li class="nav-item dropdown ml-5">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span>@UserManager.GetUserName(User)</span>
+        <li class="nav-item dropdown text-bone ml-5">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="text-bone">@UserManager.GetUserName(User)</span>
                 <i class="fas fa-user text-bone" id="profileIcon" style="font-size:large"></i>
             </a>
-            <div class="dropdown-menu bg-jet" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu bg-jet text-bone" aria-labelledby="navbarDropdownMenuLink">
                 @if (await ClaimManager.HasClaim(User, JobTypes.Individual))
                 {
                     <!--Indi Reviews-->
