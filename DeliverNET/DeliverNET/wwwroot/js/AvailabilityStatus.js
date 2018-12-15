@@ -25,6 +25,9 @@ function addMeToGroup() {
     connection.invoke("AddToGroupAvailable").catch(function (err) {
         return console.error(err.toString());
     });
+    connection.invoke("GetActiveOrders").catch(function (err) {
+        return console.error(err.toString());
+    });
     //  event.preventDefault();
 }
 
@@ -50,7 +53,7 @@ connection.on("GetActiveOrders",
 
 
 //takes the order
-connection.on("NewOrder", (orderId, coords, paymentType, Tstampm) => {
+connection.on("NewOrder", (orderId, coords, paymentType, Tstamp) => {
 
     console.log(orderId);
     console.log(coords);
@@ -63,10 +66,7 @@ connection.on("NewOrder", (orderId, coords, paymentType, Tstampm) => {
 
     console.log("eimai prin to promise")
 
-    ETA(coords)
-
-    // TODO Put real values in here
-    appendOrder(orderId, "3", "5", "5:00");
+    ETA(orderId, coords)
 });
 
 
@@ -81,7 +81,11 @@ connection.on("OrderRemove", (orderId) => {
 // Estimated time and distance
 //
 
-function ETA(busiCoords) {
+function ETA(orderId, busiCoords) {
+
+    var orderETA;
+    var orderDistance;
+
     navigator.geolocation.getCurrentPosition(function (pos) {
         var lat = pos.coords.latitude.toFixed(6),
             long = pos.coords.longitude.toFixed(6),
@@ -90,45 +94,57 @@ function ETA(busiCoords) {
         console.log(busiCoords);
         calculateDistance(coords, busiCoords)
     });
-}
 
-function calculateDistance(coords, busiCoords) {
-    // alert(typeof mycoords)
-    var origin = coords;
-    console.log(coords);
-    var destination = busiCoords;
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-        {
-            origins: [origin],
-            destinations: [destination],
-            travelMode: google.maps.TravelMode.DRIVING,
-            // unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
-            unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
-            avoidHighways: false,
-            avoidTolls: false
-        }, callback);
-}
-// get distance results
-function callback(response, status) {
-    if (status != google.maps.DistanceMatrixStatus.OK) {
-        $('#result').html(err);
-    } else {
-        var origin = response.originAddresses[0];
-        var destination = response.destinationAddresses[0];
-        if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
-            $('#result').html("Better get on a plane. There are no roads between " + origin + " and " + destination);
+
+    function calculateDistance(coords, busiCoords) {
+        // alert(typeof mycoords)
+        var origin = coords;
+        console.log(coords);
+        var destination = busiCoords;
+        var service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix(
+            {
+                origins: [origin],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.DRIVING,
+                // unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
+                unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
+                avoidHighways: false,
+                avoidTolls: false
+            },
+            callback);
+    }
+
+    // get distance results
+    function callback(response, status) {
+        if (status != google.maps.DistanceMatrixStatus.OK) {
+            $('#result').html(err);
         } else {
-            //  alert(JSON.stringify(response.rows[0].elements[0].distance.value));
-            // connection.invoke("TakeDistance", JSON.stringify(response.rows[0].elements[0].distance.value + ',' + JSON.stringify(response.rows[0].elements[0].duration.value)));
+            var origin = response.originAddresses[0];
+            var destination = response.destinationAddresses[0];
+            if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+                $('#result').html("Better get on a plane. There are no roads between " +
+                    origin +
+                    " and " +
+                    destination);
+            } else {
+                //  alert(JSON.stringify(response.rows[0].elements[0].distance.value));
+                // connection.invoke("TakeDistance", JSON.stringify(response.rows[0].elements[0].distance.value + ',' + JSON.stringify(response.rows[0].elements[0].duration.value)));
 
 
-            // connection.invoke("TakeDistance", JSON.stringify(response.rows[0].elements[0].duration.value));
-            console.log(response.rows[0].elements[0].distance.text);
-            console.log(response.rows[0].elements[0].duration.text);
+                // connection.invoke("TakeDistance", JSON.stringify(response.rows[0].elements[0].duration.value));
+                orderDistance = response.rows[0].elements[0].distance.text;
+                orderETA = response.rows[0].elements[0].duration.text;
 
+                console.log(orderDistance);
+                console.log(orderETA);
+
+                // TODO Put real values in here
+                appendOrder(orderId, orderDistance, orderETA, "5:00");
+            }
         }
     }
+
 }
 
 //
@@ -143,7 +159,7 @@ function notifyMe() {
     // Let's check whether notification permissions have already been granted
     else if (Notification.permission === "granted") {
         // If it's okay let's create a notification
-        var notification = new Notification("You have a new order");
+        var notification = new Notification(`${userName} have a new order`);
     }
 
     // Otherwise, we need to ask the user for permission
@@ -151,7 +167,7 @@ function notifyMe() {
         Notification.requestPermission().then(function (permission) {
             // If the user accepts, let's create a notification
             if (permission === "granted") {
-                var notification = new Notification("You have a new order");
+                var notification = new Notification(`${userName} have a new order`);
             }
         });
     }
