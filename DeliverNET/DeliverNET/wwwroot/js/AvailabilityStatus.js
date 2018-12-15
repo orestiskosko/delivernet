@@ -213,11 +213,11 @@ var orderItemHtml = function (orderId, distance, eta, timer) {
                         </div>
                         <div>
                             <span class="d-block"><strong>Distance</strong></span>
-                            <span class="d-block" id="orderDistance">${distance}<span> km</span></span>
+                            <span class="d-block" id="orderDistance">${distance}</span>
                         </div>
                         <div>
                             <span class="d-block"><strong>ETA</strong></span>
-                            <span class="d-block" id="orderDistance">${eta}<span> min</span></span>
+                            <span class="d-block" id="orderDistance">${eta}</span>
                         </div>
                         <div>
                             <span class="d-block"><strong>Timer</strong></span>
