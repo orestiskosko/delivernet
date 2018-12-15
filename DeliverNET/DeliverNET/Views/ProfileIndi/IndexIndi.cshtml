@@ -78,7 +78,7 @@
                             </tr>
 
                             <tr class="text-bone text-center" style="width:100%">
-                                <th class="text-nowrap" style="width:50%;font-weight:300">Price:</th>     
+                                <th class="text-nowrap" style="width:50%;font-weight:300">Price:</th>
                                 @if (Model.PaymentTypeId == 0)
                                 {
                                     <th style="width:50%;font-weight:400">-</th>
@@ -176,14 +176,14 @@
                     btn.classList.add("btn-unavailable"),
                     IsWorking.value = 'false',
                     btn.innerHTML = htmlON,
-                    removeMeFromGroup()):   // Remove from group of available deliverers
+                    removeMeFromGroup()) :   // Remove from group of available deliverers
 
-            (IsClicked = true,
-                btn.classList.remove("btn-unavailable"),
-                btn.classList.add("btn-available"),
-                IsWorking.value = 'true',
-                btn.innerHTML = htmlOFF,
-                    addMeToGroup() );         // Add to group  -- bugs everything fuck off gamw tin panagia
+                (IsClicked = true,
+                    btn.classList.remove("btn-unavailable"),
+                    btn.classList.add("btn-available"),
+                    IsWorking.value = 'true',
+                    btn.innerHTML = htmlOFF,
+                    addMeToGroup());         // Add to group  -- bugs everything fuck off gamw tin panagia
         }
 
     </script>
@@ -212,4 +212,6 @@
 
     <script src="~/js/AvailabilityStatus.js"></script>
     <script src="~/js/OrderReceiver.js"></script>
+
+
 }
