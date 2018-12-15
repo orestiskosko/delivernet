@@ -2,83 +2,73 @@
 @{
     ViewData["Title"] = "DeliverNET | Register";
 }
-<style>
-    body {
-        background-color: #706C61;
-        /*background-image: url("/img/header-bg.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;*/
-    }
-</style>
-<section>
 
-    <div class="container align-items-center">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h3>Registration Form</h3>
-                <br />
-                <!-- TODO :: Set Rediridection Route according to User Role when just registered -->
-                <form class="text-my-dark" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="DOB" class="form-control" placeholder="Date of birth" />
-                        <span asp-validation-for="DOB" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="Email" class="form-control" placeholder="Email" />
-                        <span asp-validation-for="Email" class="text-danger "></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="Password" class="form-control" placeholder="Password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="JobType">
-                            You choose to register as:
-                            <input asp-for="JobType" id="jobInput" class="form-control-plaintext" disabled />
-                        </label>
-                        <span asp-validation-for="JobType" class="text-danger"></span>
-                    </div>
-                    <div class="form-row justify-content-center">
-                        <button type="submit" class="btn btn-my-dark">Register</button>
-                    </div>
-                </form>
-            </div>
+<div class="container align-items-center">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h3>Registration Form</h3>
+            <br />
+            <!-- TODO :: Set Rediridection Route according to User Role when just registered -->
+            <form class="text-my-dark" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="DOB" class="form-control" placeholder="Date of birth" />
+                    <span asp-validation-for="DOB" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger "></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="JobType">
+                        You choose to register as:
+                        <input asp-for="JobType" id="jobInput" class="form-control-plaintext" disabled />
+                    </label>
+                    <span asp-validation-for="JobType" class="text-danger"></span>
+                </div>
+                <div class="form-row justify-content-center">
+                    <button type="submit" class="btn btn-my-dark">Register</button>
+                </div>
+            </form>
+        </div>
 
-            <!-- Deliverer Btn -->
-            <div class="col-md-3 text-center">
-                <h2 class="text-bone">Deliverer</h2>
-                <br />
-                <button class="btn bg-carmine hov-carmine circle btn-shadow-none text-bone" id="btnIndi">
-                    <i class="fas fa-motorcycle" style="font-size: 80px"></i>
-                </button>
-            </div>
+        <!-- Deliverer Btn -->
+        <div class="col-md-3 text-center">
+            <h2 class="text-bone">Deliverer</h2>
+            <br />
+            <button class="btn bg-carmine hov-carmine circle btn-shadow-none text-bone" id="btnIndi">
+                <i class="fas fa-motorcycle" style="font-size: 80px"></i>
+            </button>
+        </div>
 
-            <!-- Business Btn -->
-            <div class="col-md-3" style="text-align: center">
-                <h2 class="text-bone">Businessman</h2>
-                <br />
-                <button name="btnBusi" class="btn bg-winter hov-winter circle btn-shadow-none text-bone" id="btnBusi">
-                    <i class="fas fa-briefcase" style="font-size: 80px"></i>
-                </button>
-            </div>
-
+        <!-- Business Btn -->
+        <div class="col-md-3" style="text-align: center">
+            <h2 class="text-bone">Businessman</h2>
+            <br />
+            <button name="btnBusi" class="btn bg-winter hov-winter circle btn-shadow-none text-bone" id="btnBusi">
+                <i class="fas fa-briefcase" style="font-size: 80px"></i>
+            </button>
         </div>
 
     </div>
-</section>
+
+</div>
 
 
 @section Scripts {

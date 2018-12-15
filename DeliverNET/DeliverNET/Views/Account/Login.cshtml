@@ -4,76 +4,65 @@
 @using Microsoft.AspNetCore.Authentication
 
 @{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
     ViewData["Title"] = "Log in";
     var authSchemes = (List<AuthenticationScheme>)ViewData["ExternalLogins"];
 }
 
-<section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                    <h4>Login to Delivernet</h4>
-                    <hr />
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <input asp-for="Email" class="form-control" placeholder="Email" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="Password" class="form-control" placeholder="Password"/>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="RememberMe">
-                                <input asp-for="RememberMe" />
-                                @Html.DisplayNameFor(m => m.RememberMe)
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group align-items-center">
-                        <button type="submit" class="btn bg-green text-my-dark">Log in</button>
-                    </div>
-                    <div class="form-group">
-                        <p>
-                            <a class="text-my-dark">Forgot your password?</a>
-                        </p>
-                        <p>
-                            <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="text-my-dark">Register as a new user</a>
-                        </p>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-md-6">
-                <h4>Use another service to log in.</h4>
-                <hr />
-                @{
-                    if ((authSchemes?.Count ?? 0) != 0)
-                    {
-                        <form asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in authSchemes)
-                                    {
-                                        <button type="submit" class="btn bg-transparent" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
-                                            <div>
-                                                @*Use this to display the provider's name: @provider.DisplayName*@
-                                                <i class="fab fa-facebook-square" style="font-size:30px; color: dodgerblue"></i>
-                                            </div>
-                                        </button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
-            </div>
+<div class="login-box bg-jet w-25">
+    <form class="p-3" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+        <h4 class="text-bone">Login to Delivernet</h4>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-    </div>
-</section>
+        <div class="form-group">
+            <input asp-for="Password" class="form-control" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <label asp-for="RememberMe" class="text-bone">
+                <input type="checkbox" asp-for="RememberMe" />
+                @Html.DisplayNameFor(m => m.RememberMe)
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn text-jet">Log in</button>
+        </div>
+        <div class="form-group text-bone">
+            <p>
+                <a class="text-bone">Forgot your password?</a>
+            </p>
+            <p>
+                <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="text-bone">Register as a new user</a>
+            </p>
+        </div>
+    </form>
+
+    @{
+        if ((authSchemes?.Count ?? 0) != 0)
+        {
+            <form asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <h4 class="d-inline text-bone">Login using</h4>
+                <div>
+                    <p>
+                        @foreach (var provider in authSchemes)
+                        {
+                            <button type="submit" class="btn bg-transparent mx-auto" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                <div>
+                                    @*Use this to display the provider's name: @provider.DisplayName*@
+                                    <i class="fab fa-facebook-square" style="font-size:30px; color: #3b5998"></i>
+                                </div>
+                            </button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    }
+</div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

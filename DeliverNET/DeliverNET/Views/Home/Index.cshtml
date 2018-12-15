@@ -1,158 +1,52 @@
-﻿@model DeliverNET.Models.HomeViewModels.ContactUsViewModel
-<!-- Login Modal -->
-@*<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content p-0" style="background-color: transparent; border: none">
-                <div class="modal-body bg-my-dark" style="border-radius: 20px">
-                    <form asp-controller="Login" asp-action="SendToLoginIdentity">
-                        <h5 class="text-bone text-center mb-4">Login</h5>
-                        <div class="form-group">
-                            <input type="email" class="form-control" aria-describedby="emailHelp"
-                                   placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label text-bone" for="exampleCheck1">Remember me</label>
-                        </div>
-                        <button type="submit" class="btn bg-green text-my-dark">Submit</button>
-                        <p class="text-center text-bone text-accordion my-4">- or else login with -</p>
-                        <a href="#">
-                            <i class="fab fa-facebook-square" style="font-size:30px; color: dodgerblue"></i>
-                        </a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>*@
-<style>
-    button:hover {
-        cursor: pointer
-    }
-    header {
-        background: url(~/img/header-bg.jpg);
-        display: block;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-    }
-</style>
+﻿
 
-<!-- Header -->
-<header class="masthead" style="height:50%">
-    <div class="separator-big"></div>
-    <a style="text-decoration: none" asp-area="" asp-controller="Home" asp-action="AboutIndi">
-        <div class="bg-carmine hov-carmine">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <i class="fas fa-motorcycle text-my-dark" style="font-size: 150px"></i>
-                    </div>
-                    <div class="col-md-6 text-bone text-right">
-                        <h1 class="pt-3"><i>FOR INDIVIDUALS</i></h1>
-                        <br />
-                        <p>Job-finding website, searching for people.</p>
-                        <p>Trading slavers from all across the world.</p>
-                        <p>Fuck Pythonas, fuck Michelle, drink Pasparakis turds.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <div class="separator-small bg-transparent"></div>
-    <a style="text-decoration: none" asp-area="" asp-controller="Home" asp-action="AboutBusi">
-        <div class="bg-winter hov-winter">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6 text-bone text-left">
-                        <h1 class="pt-3"><i>FOR BUSINESSES</i></h1>
-                        <br />
-                        <p>The best Service-Finder agency in Holargos.</p>
-                        <p>Our next target is Korinthos, for pethera.</p>
-                        <p>Still expanding.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <i class="fas fa-utensils m-4 text-my-dark" style="font-size: 150px;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <div class="separator-small bg-transparent"></div>
-</header>
+<div class="spacer-100"></div>
 
-<!-- Contact -->
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase" style="color: #E0DDC3">Contact Us</h2>
-                <h3 class="section-subheading" style="color: #E0DDC3">Forever at your service.</h3>
+<div class="jumbotron bg-transparent text-center">
+    <h1 class="text-shadow text-bone font-pacifico display-1">Delivernet</h1>
+</div>
+
+<div class="spacer-100"></div>
+
+<div class="jumbotron-300 bg-carmine">
+    <div class="container text-jet">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-sm-1 text-md-left text-sm-center">
+                <i class="fas fa-motorcycle icon-large"></i>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <form id="contactUsForm" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input asp-for="Name" class="form-control" placeholder="Your Name *">
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Email" class="form-control" placeholder="Your Email *">
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="PhoneNumber" class="form-control" placeholder="Your Phone *">
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea asp-for="Message" class="form-control" placeholder="Your Message *"></textarea>
-                                <span asp-validation-for="Message" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-lg-12 text-center">
-                            <div id="success"></div>
-                            <button asp-action="ContactUs" id="contactUseSubmitBtn" type="submit" class="btn-nav-border hov-not-bone text-bone text-nowrap text-uppercase" style="font-size:25px; border-width:3px">Send Message</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-md-6 col-sm-1 text-md-right text-sm-center">
+                <h1><i>INDIVIDUALS</i></h1>
+                <p>
+                    Job-finding website, searching for people.
+                    Trading slavers from all across the world.
+                    Job-finding website, searching for people.
+                    Trading slavers from all across the world.
+                </p>
             </div>
         </div>
     </div>
-</section>
+</div>
 
+<div class="spacer-100"></div>
 
-@section Scripts{
+<div class=" jumbotron-300 bg-winter">
+    <div class="container text-jet">
+        <div class="row align-items-center">
+            <div class="col-sm-6 text-md-left text-sm-center">
+                <h1><i>BUSINESSES</i></h1>
+                <p>
+                    The best Service-Finder agency in Holargos.
+                    Our next target is Korinthos, for pethera.
+                    Still expanding.
+                </p>
+            </div>
+            <div class="col-sm-6 text-md-right text-sm-center">
+                <i class="fas fa-utensils m-4 icon-large"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
-    @*TODO Notify user on succesfuul conact us message sent.*@
-    <script>
-        $('#contactUseSubmitBtn').click(function () {
-            $('#contactUsForm').submit();
+<div class="spacer-100"></div>
 
-        });
-    </script>
-
-    @*<script type="text/javascript">
-            $(document).ready(function () {
-                $("#btnclick").click(function () {
-                    $("#loginModal").modal({
-                        show: true,
-                        focus: true
-                    })
-                });
-
-                $("#HidebtnModal").click(function () {
-                    $("#loginModal").modal("hide");
-                });
-            });
-        </script>*@
-}
+<partial name="_ContactUsPartial" />

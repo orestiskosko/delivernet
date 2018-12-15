@@ -188,10 +188,9 @@ namespace DeliverNET.Controllers
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout(RegisterViewModel model, string returnUrl = null)
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Logout(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");

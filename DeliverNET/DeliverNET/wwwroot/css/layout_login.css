@@ -1,0 +1,32 @@
+﻿body {
+    height: 100%;
+}
+
+.login-bg-image {
+    background-image: url('../img/header-bg.jpg');
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    -webkit-filter: blur(20px);
+    -o-filter: blur(20px);
+    filter: blur(20px);
+    filter: progid;
+}
+
+.login-center-screen {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.login-box{
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
