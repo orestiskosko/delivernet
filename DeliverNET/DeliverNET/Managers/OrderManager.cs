@@ -141,6 +141,50 @@ namespace DeliverNET.Managers
             return false;
         }
 
+        //change isdelivered bool
+        public bool SetIsDelivered(int id,bool status)
+        {
+            Order order = _db.Orders.Find(id);
+            try
+            {
+                order.IsDelivered = status;
+            }
+            catch (Exception e)
+            { 
+                throw e;
+            }
+            return true;
+        }
+        //change isAccepted bool
+        public bool SetIsAccepted(int id, bool status)
+        {
+            Order order = _db.Orders.Find(id);
+            try
+            {
+                order.IsAccepted = status;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        } //change isPickedUp bool
+        public bool SetIsPickedUp(int id, bool status)
+        {
+            Order order = _db.Orders.Find(id);
+            try
+            {
+                order.IsPickedup = status;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
+
+
+
 
         // Delete
         // TODO Remove this method

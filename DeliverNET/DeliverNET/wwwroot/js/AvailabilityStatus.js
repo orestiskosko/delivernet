@@ -236,7 +236,7 @@ removeOrderBtn.addEventListener("click", () => {
 
 
 //
-// Open order detils modal logic
+// Open order details modal logic
 //
 // Find orderId based on click on specific order list item
 connection.on("GetOrder", (business, order) => {
@@ -273,15 +273,28 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 });
 
 
-
-
-
-
-
-
 //
-// Estimated time and distance
+//Displays the countdown timer inside the diplay property
 //
+function startTimer(orderId) { //TODO: Take as input to the function the duration in seconds and place them to the duration property
+     var duration = 5, //secs
+        display = document.getElementById("time");
+    var timer = duration, minutes, seconds;
+    var myVar = setInterval(function () { // loops every 1 sec
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            console.log(`the order with orderId ${"orderId"} is timedout`)
+            clearInterval(myVar) //TODO: Remove from list the order with order id
+        }
+    }, 1000);
+}
 
 //TODO:when the deliverer presses the accept button an event will occur and send back to the server with signalr the responce
 //TODO when document ready

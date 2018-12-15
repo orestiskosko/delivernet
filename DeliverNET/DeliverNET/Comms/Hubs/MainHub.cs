@@ -92,12 +92,27 @@ namespace DeliverNET.Comms.Hubs
 
         }
 
+        //
+        //accept pickedup delivered status change to db
+        //
+
 
         // invoke by client deliverer when accepted
-        public void Accepted(string orderid)
+        public void OderAccepted(int orderid)
         {
-            //Add to the group that containes the bussiness with the order id the deliverer that accepted the order
-            //TODO:invoke to all available 
+            
+        }
+
+        // invoke by client deliverer when PickedUp
+        public void OrderPickedUo(string orderid)
+        {
+           
+        }
+
+        // invoke by client deliverer when Delivered
+        public void OrderDelivered(string orderid)
+        {
+          
         }
 
 
@@ -117,6 +132,8 @@ namespace DeliverNET.Comms.Hubs
             List<Order> orders = _mngOrder.GetAll();
             await Clients.Group("AvailableDeliverers").SendAsync("GetActiveOrders", orders);
         }
+
+
 
     }
 
