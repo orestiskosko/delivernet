@@ -286,12 +286,8 @@ connection.on("GetOrder", (business, order) => {
 // Add event listener for all order items
 document.getElementById("orderList").addEventListener("click", (e) => {
 
-    var orderId = e.path.find((el) => {
-        return el.nodeName == "A";
-    }).id
-
+    var orderId = e.target.offsetParent.id;
     connection.invoke("GetOrderFromDb", orderId);
-
     $("#orderModal").modal({
         show: true,
         focus: true
@@ -304,7 +300,7 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 //Displays the countdown timer inside the diplay property
 //
 function startTimer(orderId) { //TODO: Take as input to the function the duration in seconds and place them to the duration property
-     var duration = 5, //secs
+    var duration = 5, //secs
         display = document.getElementById("time");
     var timer = duration, minutes, seconds;
     var myVar = setInterval(function () { // loops every 1 sec
