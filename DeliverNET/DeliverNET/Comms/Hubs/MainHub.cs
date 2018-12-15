@@ -107,15 +107,23 @@ namespace DeliverNET.Comms.Hubs
         {
             Order order = _mngOrder.Get(int.Parse(orderId));
             Business business = _mngBussiness.Get(order.BusinessId);
-            await Clients.Group("AvailableDeliverers").SendAsync("GetOrder", business, order);
+            await Clients.Caller.SendAsync("GetOrder", business, order);
         }
 
         // Get all orders that are NOT timedout
         public async Task GetActiveOrders()
         {
             // TODO Write query to get all active orders
-            List<Order> orders = _mngOrder.GetAll();
-            await Clients.Group("AvailableDeliverers").SendAsync("GetActiveOrders", orders);
+            List<Order> orders = _mngOrder.GetActive();
+            await Clients.Caller.SendAsync("GetActiveOrders", orders);
+        }
+
+
+        // Set deliverer working status
+        public async Task GetDelivererWorkingStatus()
+        {
+            bool isWorking = _mngMaster.GetDelivererManager().GetWorkingStatus(Context.UserIdentifier);
+            await Clients.Caller.SendAsync("GetWorkingStatus", isWorking);
         }
 
     }
