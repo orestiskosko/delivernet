@@ -10,7 +10,10 @@ namespace DeliverNET.Data
     public class Order
     {
         public int Id { get; set; }
+
+        public int BusinessId { get; set; }
         public Business Business { get; set; }
+
         public BusinessCashier Cashier { get; set; }
 
         public Deliverer Deliverer { get; set; }

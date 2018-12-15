@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliverNET.Migrations
 {
     [DbContext(typeof(DeliverNETContext))]
-    [Migration("20181212180846_ChangeInOrder")]
-    partial class ChangeInOrder
+    [Migration("20181214232922_Change1")]
+    partial class Change1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -166,7 +166,7 @@ namespace DeliverNET.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int?>("BusinessId");
+                    b.Property<int>("BusinessId");
 
                     b.Property<string>("CashierDeliverNetUserId");
 
@@ -387,7 +387,8 @@ namespace DeliverNET.Migrations
                 {
                     b.HasOne("DeliverNET.Data.Business", "Business")
                         .WithMany()
-                        .HasForeignKey("BusinessId");
+                        .HasForeignKey("BusinessId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DeliverNET.Data.BusinessCashier", "Cashier")
                         .WithMany()
