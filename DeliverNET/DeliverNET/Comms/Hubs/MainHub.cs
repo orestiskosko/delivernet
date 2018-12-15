@@ -17,12 +17,14 @@ namespace DeliverNET.Comms.Hubs
         private IOrderManager _mngOrder;
         private IBusinessManager _mngBussiness;
         private IMasterManager _mngMaster;
-
+        private IDelivererManager _mngDeliverer;
+        private string GroupAvailableName = "AvailableDeliverers";
         public MainHub(IMasterManager mng)
         {
             _mngMaster = mng;
             _mngOrder = mng.GetOrderManager();
             _mngBussiness = mng.GetBusinessManager();
+            _mngDeliverer = mng.GetDelivererManager();
 
         }
         // Invoke from client to add a deliverer to the group of the available deliverers.
@@ -30,7 +32,7 @@ namespace DeliverNET.Comms.Hubs
         {
             // Add to group
             _mngMaster.GetDelivererManager().SetWorkingStatus(Context.UserIdentifier, true);
-            await Groups.AddToGroupAsync(Context.ConnectionId, "AvailableDeliverers");
+            await Groups.AddToGroupAsync(Context.ConnectionId, GroupAvailableName);
 
         }
 
@@ -39,7 +41,7 @@ namespace DeliverNET.Comms.Hubs
         {
             // Remove from group   
             _mngMaster.GetDelivererManager().SetWorkingStatus(Context.UserIdentifier, false);
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "AvailableDeliverers");
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, GroupAvailableName);
         }
 
 
@@ -79,41 +81,20 @@ namespace DeliverNET.Comms.Hubs
 
             _mngOrder.Create(NewOrder);
 
-            //TODO: Get from the db the order id
+            // Get from the db the order id
             orderId = _mngOrder.Get(tstamp).Id;
 
-            //TODO: create a signalr group and add this bussiness
+            // create a signalr group and add this bussiness
             await Groups.AddToGroupAsync(Context.ConnectionId, orderId.ToString());
 
 
-            //TODO: broadcast to delivers group the order and the order id in method newOrderAnnounce the name of the method that will be invoked in the client will be "NewOrder"
-            await Clients.Group("AvailableDeliverers").SendAsync("NewOrder", orderId, geolocation, order.PaymentTypeId, tstamp);
+            // broadcast to deliverers group the order and the order id in method newOrderAnnounce the name of the method that will be invoked in the client will be "NewOrder"
+            await Clients.Group(GroupAvailableName).SendAsync("NewOrder", orderId, geolocation, order.PaymentTypeId, tstamp);
 
 
         }
 
-        //
-        //accept pickedup delivered status change to db
-        //
 
-
-        // invoke by client deliverer when accepted
-        public void OderAccepted(int orderid)
-        {
-            
-        }
-
-        // invoke by client deliverer when PickedUp
-        public void OrderPickedUo(string orderid)
-        {
-           
-        }
-
-        // invoke by client deliverer when Delivered
-        public void OrderDelivered(string orderid)
-        {
-          
-        }
 
 
 
@@ -142,7 +123,43 @@ namespace DeliverNET.Comms.Hubs
         }
 
 
+        //
+        //accept pickedup delivered functions
+        //
 
+        // invokes from client site when a deliverer acceptes the order
+        public void OrderAccepted(string orderId)
+        {
+
+            _mngOrder.SetIsAccepted(int.Parse(orderId), true);  //change status to db to IsAccepted=true
+            _mngOrder.SetAcceptedTime(int.Parse(orderId), DateTime.Now); //add the current time to the property acceptedtime in the db for this order
+            _mngDeliverer.SetWorkingStatus(Context.ConnectionId, false); // is working to db change to false
+            _mngDeliverer.SetDeliveringStatus(Context.ConnectionId, true); //is delivering db change to true
+            Groups.RemoveFromGroupAsync(Context.ConnectionId, "AvailableDeliverers");  //remove from group availabledeliverers the context.useridentifier deliverer 
+            Groups.AddToGroupAsync(Context.ConnectionId, orderId); // add to group with name the order id the deliverer that accepted the order
+            Clients.Group(GroupAvailableName).SendAsync("AnOrderIsAccepted", orderId); //Broadcast to available deliverers the order is taken=>invoke function AnOrderIsAccepted
+            Clients.Group(Convert.ToString(orderId)).SendAsync("OrderAcceptedStatus", Context.UserIdentifier, orderId);// invoke to grouped business to tell that the order is accepted
+
+        }
+
+        // invokes from client site when a deliverer PickesUp the order
+        public void OrderPickedUp(string orderId)
+        {
+            _mngOrder.SetPickupTime(int.Parse(orderId), DateTime.Now);//add the current time to the property Pickeduptime in the db for this order
+            _mngOrder.SetIsPickedUp(int.Parse(orderId), true); //change status to db to IsPickedUp=true
+            Clients.Group(Convert.ToString(orderId)).SendAsync("OrderPickedUpStatus", Context.UserIdentifier, orderId);// invoke OrderPickedUpStatus with order id to grouped businness
+        }
+
+        // invokes from client site when a deliverer Finally delivers the order
+        public void OrderDelivered(string orderId)
+        {
+            _mngOrder.SetDeliveredTime(int.Parse(orderId), DateTime.Now); //add the current time to the property isdelivered in the db for this 
+            Clients.Group(Convert.ToString(orderId)).SendAsync("OrderDeliveredStatus", Context.UserIdentifier, orderId);// invoke OrderPickedUpStatus with order id to grouped businness
+            _mngOrder.SetIsDelivered(int.Parse(orderId), true); //change status to db to IsDelivered=true
+            _mngDeliverer.SetDeliveringStatus(Context.ConnectionId, false); //Change deliverer status IsDelivering to false
+            Groups.RemoveFromGroupAsync(Context.ConnectionId, orderId); //remove from group the deliverer
+            //TODO:remove from group with name the orderId the business find from order id the cashier id
+            //TODO: think if you want to add the deliverer again to group with available deliverers
+        }
     }
-
 }

@@ -304,7 +304,7 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 //Displays the countdown timer inside the diplay property
 //
 function startTimer(orderId) { //TODO: Take as input to the function the duration in seconds and place them to the duration property
-     var duration = 5, //secs
+    var duration = 5, //secs
         display = document.getElementById("time");
     var timer = duration, minutes, seconds;
     var myVar = setInterval(function () { // loops every 1 sec
@@ -323,5 +323,50 @@ function startTimer(orderId) { //TODO: Take as input to the function the duratio
     }, 1000);
 }
 
-//TODO:when the deliverer presses the accept button an event will occur and send back to the server with signalr the responce
+//
+//functions that invoke the server in order to change status of accepted orders(accepted,pickedup,delivered
+//
+
+//When the deliverer accepts the order this function is called
+function orderAcceptedStatus(orderId) {
+    connection.invoke("OrderAccepted", orderId).catch(function (err) {//invoke server to method OrderAccepted
+        return console.error(err.toString());
+
+    });
+}
+
+
+//When the deliverer pickesup the order this function id called
+function orderPickedUpStatus(orderId) {
+    connection.invoke("OrderPickedUp", orderId).catch(function (err) {//invoke server to method OrderPickedUp
+        return console.error(err.toString());
+
+    });
+}
+
+//When the deliverer finally delivers the order this function id called
+function orderDeliveredStatus(orderId) {
+    connection.invoke("OrderDelivered", orderId).catch(function (err) {//invoke server to method OrderDelivered
+        return console.error(err.toString());
+    });
+
+}
+
+
+//
+//When an order is taken by an other deliverer or timedout
+//
+
+connection.on("AnOrderIsAccepted", (orderId) => {
+    removeOrder(orderId);
+});
+
+connection.on("AnOrderIsTimedOut", (orderId) => {
+    removeOrder(orderId);
+});
+
+
+
+
+
 //TODO when document ready
