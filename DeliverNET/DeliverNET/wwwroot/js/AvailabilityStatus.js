@@ -1,11 +1,34 @@
 ﻿"use strict";
 // This Script is binded to the available button 'btnReady' on the deliverer indexindi in order to add or remove from the group of available deliverers
 //window.addEventListener("load", () => {
-var connection = new signalR.HubConnectionBuilder().withUrl("/Comms/Hubs/MainHub").build();
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/Comms/Hubs/MainHub")
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
 
-connection.start().catch(function (err) {
-    return console.error(err.toString());
-});
+connection.start()
+    .then(() => {
+        checkWorkingStatus();
+    })
+    .catch(function (err) {
+        return console.error(err.toString());
+    });
+
+
+var checkWorkingStatus = function () {
+
+    connection.invoke("GetDelivererWorkingStatus").catch(function (err) {
+        return console.error(err.toString());
+    });
+
+}
+
+connection.on("GetWorkingStatus", (isWorking) => {
+    if (isWorking) {
+        document.getElementById("btnReady").click();
+    }
+})
+
 
 
 
@@ -14,21 +37,25 @@ connection.start().catch(function (err) {
 //invoke through Signalr the method that removes a deliver from the group of available deliverers
 function removeMeFromGroup() {
     console.log('eimai unavailable')
+
+    // Reomove from group of available deliverers
     connection.invoke("RemoveFromGroupAvailable").catch(function (err) {
         return console.error(err.toString());
     });
-    //   event.preventDefault();
 }
 //invoke through Signalr the method that removes a deliver from the group of available deliverers
 function addMeToGroup() {
     console.log('eimai available')
+
+    // Add to group of available deliverers
     connection.invoke("AddToGroupAvailable").catch(function (err) {
         return console.error(err.toString());
     });
+
+    // Get active orders
     connection.invoke("GetActiveOrders").catch(function (err) {
         return console.error(err.toString());
     });
-    //  event.preventDefault();
 }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -98,6 +99,20 @@ namespace DeliverNET.Managers
             return orders;
         }
 
+        public List<Order> GetActive()
+        {
+            List<Order> orders;
+            try
+            {
+                orders = _db.Orders.Where(o => o.IsTimedOut == false).ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return orders;
+        }
 
         
 

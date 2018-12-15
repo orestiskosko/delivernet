@@ -35,7 +35,6 @@ newOrderElement.addEventListener("submit", (e) => {
         PhoneNumber: document.getElementById("phoneNumber").value,
         Price: document.getElementById("price").value,
         Comments: document.getElementById("comments").value
-
     }
     console.log("kai edo");
     console.log(order);

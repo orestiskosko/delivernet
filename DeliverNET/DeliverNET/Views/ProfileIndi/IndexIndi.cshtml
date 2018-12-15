@@ -1,7 +1,4 @@
-﻿@model DeliverNET.Models.ProfileDummies.IndiIndixDummyModel
-<!-- This invisible checkbox is set by the availability button, upon click -->
-@Html.CheckBoxFor(x => x.IsWorking)
-@{
+﻿@{
     ViewData["Title"] = "DeliverNET | WorkSpace";
     Layout = "~/Views/Shared/_LayoutIndi.cshtml";
 }
@@ -89,30 +86,23 @@
         var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
         var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> Available</p >';
 
+
         btn.onclick = function () {
             IsClicked ?
                 (IsClicked = false,
-                    btn.classList.remove("btn-available"),
                     btn.classList.add("btn-unavailable"),
-                    IsWorking.value = 'false',
+                    btn.classList.remove("btn-available"),
                     btn.innerHTML = htmlON,
                     removeMeFromGroup(), // Remove from group of available deliverers
                     clearOrderList()) :   
 
                 (IsClicked = true,
-                    btn.classList.remove("btn-unavailable"),
                     btn.classList.add("btn-available"),
-                    IsWorking.value = 'true',
+                    btn.classList.remove("btn-unavailable"),
                     btn.innerHTML = htmlOFF,
                     addMeToGroup());         // Add to group  -- bugs everything fuck off gamw tin panagia
         }
 
-    </script>
-
-    <!-- Make checkbox for (IsWorking) field disappear -->
-    <script>
-        var IsWorking = document.getElementById('IsWorking');
-        IsWorking.style.display = 'none';
     </script>
 
     <script src="~/js/AvailabilityStatus.js"></script>

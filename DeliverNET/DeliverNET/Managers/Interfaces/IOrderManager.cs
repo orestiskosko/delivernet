@@ -16,6 +16,7 @@ namespace DeliverNET.Managers.Interfaces
         Order Get(DateTime tStamp);
         List<Order> Get(Business business);
         List<Order> Get(Deliverer deliverer);
+        List<Order> GetActive();
         
         // Update
         bool UpdateAddress(int id, string newAddress);
