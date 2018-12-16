@@ -12,10 +12,12 @@ var connection = new signalR.HubConnectionBuilder()
 //start the connection
 connection.start()
     .then(() => {
-        //fuction here starts after connection establish
+        connection.invoke("GetActiveOrders").catch(function (err) {
+            return console.log.error(err.toString());
+        })
     })
     .catch(function (err) {
-    return console.error(err.toString());
+        return console.error(err.toString());
     });
 
 // declare 
@@ -46,16 +48,22 @@ newOrderElement.addEventListener("submit", (e) => {
 
 })
 
- 
+
 //the server sends back the order in an object in order for the client to append it to the html
-connection.on("AppendThisOrder" ,(orderFor) => {
-    console.log("girise to "+orderFor);
-    //TODO:call append function
+connection.on("GetOrderIdForAppend", (orderId) => {
+    connection.invoke("GetOrderFromDbBusi", orderId).catch(function (err) {
+        return console.error(err.toString());
+    });
 });
+
+// appends new order in list at time of submit
+connection.on("AppendNewOrder",
+    order => {
+        appendOrder(order);
+    });
 
 // sends the order back to the server
 function placeANewOrder(order) {
-    console.log('order goes to server');
     connection.invoke("PlaceNewOrder", order).catch(function (err) {
         return console.error(err.toString());
     });
@@ -63,11 +71,7 @@ function placeANewOrder(order) {
 }
 
 
-connection.on("AppendThisOrder",
-    order => {
-        console.log("FAAAAAAAAAAAAAAAAAAAK");
-        console.log(order);
-    });
+
 
 //
 //functions that called when a deliverer accepts picks up or delivers the order
@@ -86,53 +90,126 @@ connection.on("OrderDelivered", (deliverer, orderId) => {
 });
 
 
+
+
 //
 // Order list manipulation
 //
 // append order item
-var appendOrder = function (orderId, distance, eta, timer) {
+var appendOrder = function (order) {
     var orderList = document.getElementById("orderList");
-    orderList.innerHTML += orderItemHtml(orderId, distance, eta, timer);
+
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(orderItemHtml(order), "text/html");
+
+    orderList.prepend(doc.getElementById(order.id));
 }
 
 // remove order item
 var removeOrder = function (orderId) {
-    var orderToRemove = document.getElementById(orderId);
-    orderToRemove.parentNode.removeChild(orderToRemove);
+    document.getElementById(orderId).parentNode.removeChild(orderToRemove);
 }
 
 // remove all orders form list
 var clearOrderList = function () {
-    var orderList = document.getElementById("orderList");
-    var t = true;
-    while (t) {
-        if (orderList.lastChild.nodeName == "A") {
-            orderList.removeChild(orderList.lastChild);
-        } else {
-            t = false;
-        }
-    }
+    document.getElementById("orderList").getElementsByClassName("card").remove();
 }
 
 // order item html
-var orderItemHtml = function (orderId, adrress, timer) {
-    return `<a id="${orderId}" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <span class="d-block"><strong>Id</strong></span>
-                            <span class="d-block" id="orderId">${orderId}</span>
+var orderItemHtml = function (order) {
+
+    // Format date appropriately for display
+    var t = new Date(order.tstamp);
+    var timeDisp = `${t.getDate()}/${t.getMonth() + 1}-${t.getHours()}:${t.getMinutes()}`
+
+    // Format payment type based on value
+    console.log(order.paymentTypeId);
+    var paymentType;
+    if (order.paymentTypeId == "0") {
+        paymentType = "Cash";
+    } else {
+        paymentType = "Credit Card";
+    }
+
+    // return order item html
+    return `<div id="${order.id}" class="card">
+                        <div class="card-header" id="heading-order-${order.id}">
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div><strong>Date</strong></div>
+                                    <div id="orderHead-Tstamp">${timeDisp}</div>
+                                </div>
+                                <div>
+                                    <div><strong>Last Name</strong></div>
+                                    <div id="orderHead-LastName">${order.lastName}</div>
+                                </div>
+                                <div>
+                                    <div><strong>Address</strong></div>
+                                    <div id="orderHead-Address">${order.address}</div>
+                                </div>
+                                <div>
+                                    <div><strong>Price</strong></div>
+                                    <div id="orderHead-Price">${order.price}</div>
+                                </div>
+                                <div class="justify-content-center">
+                                    <div><strong>Status</strong></div>
+                                    <div id="orderHead-Status" class="orderStatus-Searching">
+                                        Searching
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btn" data-toggle="collapse" data-target="#collapse-order-${order.id}" aria-expanded="true" aria-controls="collapse-order-${order.id}">
+                                        <span class="fas fa-arrow-down text-jet"></span>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                        <div>
-                            <span class="d-block"><strong>Distance</strong></span>
-                            <span class="d-block" id="orderDistance">${adrress}</span>
+
+                        <div id="collapse-order-${order.id}" class="collapse" aria-labelledby="heading-order-${order.id}" data-parent="#orderList">
+                            <div class="card-body">
+                                <div class="container no-gutters">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div><strong>Full Name</strong></div>
+                                            <div id="orderBody-FullName">${order.firstName} ${order.lastName}</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div><strong>Door Name</strong></div>
+                                            <div id="orderBody-DoorName">${order.doorName}</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div><strong>Floor</strong></div>
+                                            <div id="orderBody-Floor">${order.floorNo}</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div><strong>Phone Number</strong></div>
+                                            <div id="orderBody-PhoneNumber">${order.phoneNumber}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <div><strong>Payment Type</strong></div>
+                                            <div id="orderBody-PaymentType">${paymentType}</div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div><strong>Comments</strong></div>
+                                            <div id="orderBody-Comments">${order.comments}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <span class="d-block"><strong>Timer</strong></span>
-                            <span class="d-block" id="orderDistance">${timer}</span>
-                        </div>
-                    </div>
-                </a>`
+                    </div>`
 }
+//
+//
+//
+
+
+
 
 //
 // Get all NON TIMEDOUT orders
@@ -140,9 +217,103 @@ var orderItemHtml = function (orderId, adrress, timer) {
 connection.on("GetActiveOrders",
     (orders) => {
         orders.forEach((o) => {
-            appendOrder(o.id, "--", "--", "5:00");
+            appendOrder(o);
         })
     });
 
 //})
 
+
+
+//
+// Background timer that updates orders in list
+//
+var orderWatcher = setInterval(function () {
+    var orderList = document.getElementById("orderList").getElementsByClassName("card");
+
+    // Return if no roders are appended
+    if (orderList.length == 0) {
+        return;
+    }
+
+    for (var i = 0; i < orderList.length; i++) {
+
+        //console.log(`${i} - ClassListLength: ${orderList[i].classList.length}`);
+
+        if (orderList[i].classList.contains("animate")) {
+            continue;
+        }
+
+        // Check if timed out
+        connection.invoke("CheckOrderTimeout", orderList[i].id).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        // Check if accepted
+        connection.invoke("CheckOrderAccepted", orderList[i].id).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        // Check if pickedup
+        connection.invoke("CheckOrderPickedup", orderList[i].id).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        // Check if delivered
+        connection.invoke("CheckOrderDelivered", orderList[i].id).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+    }
+}, 1000);
+
+// Update if timedout
+connection.on("CheckOrderTimeout", (orderId, tStamp, isTimedOut) => {
+
+    // If timed out remove from list
+    if (isTimedOut) {
+        document.getElementById(orderId).classList.add("animate");
+        document.getElementById(orderId).addEventListener("animationend", function (event) {
+            document.getElementById(orderId).remove();
+        }, false);
+    }
+});
+
+// Update if accepted
+connection.on("CheckOrderAccepted", (orderId, isAccepted) => {
+
+    // If isAccepted change status
+    if (isAccepted) {
+        var statusEl = document.getElementById(orderId);
+        statusEl.classList.remove("orderStatus-Searching");
+        statusEl.classList.add("orderStatus-Accepted");
+        statuEl.innerText = "Accepted";
+    }
+});
+
+// Update if pickedup
+connection.on("CheckOrderPickedup", (orderId, isPickedup) => {
+
+    // If isPickedup change status
+    if (isPickedup) {
+        var statusEl = document.getElementById(orderId);
+        statusEl.classList.remove("orderStatus-Accepted");
+        statusEl.classList.add("orderStatus-Pickedup");
+        statuEl.innerText = "Pickedup";
+    }
+});
+
+// Update if delivered
+connection.on("CheckOrderDelivered", (orderId, isDelivered) => {
+
+    // If isDelivered change status
+    if (isDelivered) {
+        var statusEl = document.getElementById(orderId);
+        statusEl.classList.remove("orderStatus-Pickedup");
+        statusEl.classList.add("orderStatus-Delivered");
+        statuEl.innerText = "Delivered";
+    }
+});
+//
+//
+//

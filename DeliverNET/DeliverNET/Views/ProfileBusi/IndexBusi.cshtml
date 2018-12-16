@@ -9,17 +9,19 @@
     <div class="row">
 
         <!-- Order List for Deliverer -->
-        <div class="col-md-6" onclick="event.stopPropagation()">
-            <div id="orderList" class="list-group">
+        <div class="col-md-7">
+            <div class="list-group">
                 <div class="list-group-item flex-column align-items-center bg-jet">
                     <h4 class="text-bone m-0">Submitted Orders</h4>
                 </div>
-                <!--Orders go here-->
+                <div class="accordion" id="orderList">
+                    <!-- Order are appended here-->
+                </div>
             </div>
         </div>
 
         <!-- Acquire Delivery -->
-        <div class="col-md-6">
+        <div class="col-md-5">
             <!-- Submit new order form -->
             <div class="bg-jet p-3 rounded" id="newForm">
                 <div class="d-flex justify-content-between">
