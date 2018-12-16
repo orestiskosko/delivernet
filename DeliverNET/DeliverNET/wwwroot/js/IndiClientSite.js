@@ -39,7 +39,7 @@ connection.on("GetActiveOrders", (orders) => {
     orders.forEach((o) => {
         if (!o.isAccepted) {
             console.log(!o.orderAcceptedStatus);
-        appendOrder(o.id, "--", "--", "5:00");
+            appendOrder(o.id, "--", "--", "5:00");
         }
     })
 });
@@ -259,7 +259,7 @@ connection.on("GetOrder", (business, order) => {
 
     console.log(business);
     console.log(order);
-    
+
     var tStampF = new Date(order.tstamp);
     var tStamp = `${tStampF.getHours()}:${tStampF.getMinutes()} - ${tStampF.toDateString()}`;
 
@@ -267,7 +267,7 @@ connection.on("GetOrder", (business, order) => {
     document.getElementById("modal-timestamp").innerText = tStamp;
     document.getElementById("modal-restaurantAddress").innerText = business.address;
     document.getElementById("modal-price").innerText = order.price;
-    document.getElementById("acceptOrderBtn").id = order.id;
+    document.getElementById("modal-orderId").value = order.id;
     if (order.paymentTypeId == "0") {
         document.getElementById("modal-paymentType").innerText = "Cash";
     } else {
@@ -341,11 +341,11 @@ connection.on("CheckOrderTimeout",
 //
 
 //When the deliverer accepts the order this function is called
-function orderAcceptedStatus(orderId) {
-    console.log("The order accepted has order Id:"+orderId);
+function orderAcceptedStatus() {
+    var orderId = document.getElementById("modal-orderId").value;
+    console.log("The order accepted has order Id:" + orderId);
     connection.invoke("OrderAccepted", orderId).catch(function (err) {//invoke server to method OrderAccepted
         return console.error(err.toString());
-
     });
 }
 
