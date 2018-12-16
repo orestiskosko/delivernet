@@ -8,6 +8,7 @@ using DeliverNET.Managers.Interfaces;
 using DeliverNET.Models;
 using DeliverNET.Models.ProfileBusiViewModels;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Hosting;
 
 namespace DeliverNET.Comms.Hubs
 {
@@ -19,7 +20,10 @@ namespace DeliverNET.Comms.Hubs
         private IMasterManager _mngMaster;
         private IDelivererManager _mngDeliverer;
         private string GroupAvailableName = "AvailableDeliverers";
-        public MainHub(IMasterManager mng)
+
+
+        public MainHub(
+            IMasterManager mng)
         {
             _mngMaster = mng;
             _mngOrder = mng.GetOrderManager();
@@ -80,20 +84,16 @@ namespace DeliverNET.Comms.Hubs
             };
 
             _mngOrder.Create(NewOrder);
-
+            
             // Get from the db the order id
             orderId = _mngOrder.Get(tstamp).Id;
 
             // create a signalr group and add this bussiness
             await Groups.AddToGroupAsync(Context.ConnectionId, orderId.ToString());
 
-
             // broadcast to deliverers group the order and the order id in method newOrderAnnounce the name of the method that will be invoked in the client will be "NewOrder"
             await Clients.Group(GroupAvailableName).SendAsync("NewOrder", orderId, geolocation, order.PaymentTypeId, tstamp);
-
-
         }
-
 
 
 
@@ -158,8 +158,25 @@ namespace DeliverNET.Comms.Hubs
             _mngOrder.SetIsDelivered(int.Parse(orderId), true); //change status to db to IsDelivered=true
             _mngDeliverer.SetDeliveringStatus(Context.ConnectionId, false); //Change deliverer status IsDelivering to false
             Groups.RemoveFromGroupAsync(Context.ConnectionId, orderId); //remove from group the deliverer
-            //TODO:remove from group with name the orderId the business find from order id the cashier id
-            //TODO: think if you want to add the deliverer again to group with available deliverers
+            //TODO: remove cashier from group name of orderId
+
+            //TODO: decide if you want to add the deliverer again to group with available deliverers
+
+        }
+
+        
+        // This is called only by Cashier users
+        public void RemoveFromOrderGroup(string orderId)
+        {
+            Groups.RemoveFromGroupAsync(Context.ConnectionId, orderId);
+        }
+
+
+        //
+        public async Task CheckOrderTimeout(string orderId)
+        {
+            Order order = _mngOrder.Get(int.Parse(orderId));
+            await Clients.Caller.SendAsync("CheckOrderTimeout", orderId, order.Tstamp, order.IsTimedOut);
         }
     }
 }

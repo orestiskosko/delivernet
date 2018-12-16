@@ -110,26 +110,5 @@
         };
     </script>
 
-
-    <!-- Order Button -->
-    <script>
-
-        var btnClicked = false;
-        var button = document.getElementById('btnReady');
-        var newForm = document.getElementById('newForm');
-
-        button.onclick = function () {
-            btnClicked ? button.classList.add("bg-carmine") : button.classList.add("bg-winter");
-            btnClicked ? (
-                newForm.classList.add("invisible"),
-                button.classList.remove("invisible"),
-                btnClicked = false) :
-                (newForm.classList.remove("invisible"),
-                    button.classList.add("invisible"),
-                    btnClicked = true);
-        };
-
-    </script>
-
     <script src="~/js/BusinessClientSite.js"></script>
 }

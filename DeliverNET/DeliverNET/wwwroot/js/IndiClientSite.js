@@ -226,7 +226,6 @@ var clearOrderList = function () {
             t = false;
         }
     }
-
 }
 
 // order item html
@@ -243,14 +242,23 @@ var orderItemHtml = function (orderId, distance, eta, timer) {
                         </div>
                         <div>
                             <span class="d-block"><strong>ETA</strong></span>
-                            <span class="d-block" id="orderDistance">${eta}</span>
+                            <span class="d-block" id="orderETA">${eta}</span>
                         </div>
                         <div>
                             <span class="d-block"><strong>Timer</strong></span>
-                            <span class="d-block" id="orderDistance">${timer}</span>
+                            <span class="d-block" id="orderTimer">${timer}</span>
                         </div>
                     </div>
                 </a>`
+}
+
+// No order item html
+var noOrdersHtml = function () {
+    return `<div id="noOrdersText" class="d-flex justify-content-center">
+                <div>
+                    <span class="d-block"><strong>No available orders.</strong></span>
+                </div>
+            </div>`
 }
 
 // custom remove button logic for testing
@@ -299,27 +307,50 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 
 
 //
-//Displays the countdown timer inside the diplay property
+// Background timer that checks for timed-out orders
 //
-function startTimer(orderId) { //TODO: Take as input to the function the duration in seconds and place them to the duration property
-    var duration = 5, //secs
-        display = document.getElementById("time");
-    var timer = duration, minutes, seconds;
-    var myVar = setInterval(function () { // loops every 1 sec
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+var orderWatcher = setInterval(function () {
+    var orderList = document.getElementById("orderList").getElementsByTagName("a");
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+    for (var i = 0; i < orderList.length; i++) {
+        connection.invoke("CheckOrderTimeout", orderList[i].id).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+},
+    1000);
 
-        display.textContent = minutes + ":" + seconds;
+connection.on("CheckOrderTimeout",
+    (orderId, tStamp, isTimedOut) => {
 
-        if (--timer < 0) {
-            console.log(`the order with orderId ${"orderId"} is timedout`)
-            clearInterval(myVar) //TODO: Remove from list the order with order id
+        function millisToMinutesAndSeconds(millis) {
+            var minutes = Math.floor(millis / 60000);
+            var seconds = ((millis % 60000) / 1000).toFixed(0);
+            return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
         }
-    }, 1000);
-}
+
+        if (isTimedOut) {
+            document.getElementById(orderId).classList.add("animate");
+            document.getElementById(orderId).addEventListener("animationend", function (event) {
+                document.getElementById(orderId).remove();
+            }, false);
+            //removeOrder(orderId);
+        } else {
+            var timeNow = new Date();
+            var parsedTime = new Date(tStamp);
+            var diff = timeNow - parsedTime;
+
+            var orderItemFields = document.getElementById(orderId).getElementsByTagName("span");
+
+            for (var i = 0; i < orderItemFields.length; i++) {
+                if (orderItemFields[i].id === "orderTimer") {
+                    var toDisp = millisToMinutesAndSeconds(5000 - diff);                 
+                    orderItemFields[i].innerText = (diff < 5000)? toDisp : "0:00";
+                }
+            }
+        }
+    });
+
 
 //
 //functions that invoke the server in order to change status of accepted orders(accepted,pickedup,delivered
