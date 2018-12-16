@@ -21,8 +21,6 @@ connection.start()
 // declare 
 const newOrderElement = document.getElementById("orderForm")
 
-//var JSONorder=JSON.stringify(order)
-
 newOrderElement.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log("mpika sto event submit");
@@ -38,8 +36,8 @@ newOrderElement.addEventListener("submit", (e) => {
         Price: document.getElementById("price").value,
         Comments: document.getElementById("comments").value
     }
-    console.log("kai edo");
-    console.log(order);
+    //console.log("kai edo");
+    //console.log(order);
     console.log("order submitted");
     //TODO:append the new order
     //TODO:take from server the orderid
@@ -64,6 +62,13 @@ function placeANewOrder(order) {
     //event.preventDefault();
 }
 
+
+connection.on("AppendThisOrder",
+    order => {
+        console.log("FAAAAAAAAAAAAAAAAAAAK");
+        console.log(order);
+    });
+
 //
 //functions that called when a deliverer accepts picks up or delivers the order
 //
@@ -73,11 +78,11 @@ connection.on("OrderAccepted", (deliverer, orderId) => {
 });
 
 connection.on("OrderPickedUp", (deliverer, orderId) => {
-     //TODO:Change status of order with OrderId in the table to PickedUp
+    //TODO:Change status of order with OrderId in the table to PickedUp
 });
 
 connection.on("OrderDelivered", (deliverer, orderId) => {
-     //TODO:Change status of order with OrderId in the table to accepted
+    //TODO:Change status of order with OrderId in the table to accepted
 });
 
 
