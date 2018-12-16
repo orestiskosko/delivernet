@@ -24,15 +24,25 @@ var checkWorkingStatus = function () {
 }
 
 //when refresh press the button if IsWorking is true
-connection.on("GetWorkingStatus", (isWorking) => {
+connection.on("GetWorkingStatus", (isWorking, isDelivering) => {
+    //TODO:Marios If is delivering get status and show the corresponding button
     if (isWorking) {
         document.getElementById("btnReady").click();
     }
 })
 
 
-
-
+//
+// Get all NON TIMEDOUT orders
+//
+connection.on("GetActiveOrders", (orders) => {
+    orders.forEach((o) => {
+        if (!o.isAccepted) {
+            console.log(!o.orderAcceptedStatus);
+        appendOrder(o.id, "--", "--", "5:00");
+        }
+    })
+});
 
 
 //invoke through Signalr the method that removes a deliver from the group of available deliverers
@@ -60,25 +70,6 @@ function addMeToGroup() {
 }
 
 
-
-//
-// Get all NON TIMEDOUT orders
-//
-connection.on("GetActiveOrders", (orders) => {
-    orders.forEach((o) => {
-        appendOrder(o.id, "--", "--", "5:00");
-    })
-});
-
-
-
-
-//
-//this js receives new orders ,adds and removes orders from the list of available orders in the indexIndi
-//
-
-
-
 //takes the order
 connection.on("NewOrder", (orderId, coords, paymentType, Tstamp) => {
 
@@ -86,23 +77,12 @@ connection.on("NewOrder", (orderId, coords, paymentType, Tstamp) => {
     console.log(coords);
     console.log(paymentType);
     console.log(Tstamp);
-    //TODO: append to list of available orders the order summary
-    //TODO: also append to list the button which will be pressed to accept an order
     notifyMe()
-
-
     console.log("eimai prin to promise")
 
     ETA(orderId, coords)
 });
 
-
-
-
-connection.on("OrderRemove", (orderId) => {
-
-    //TODO: remove from the list of orders the order by order id
-});
 
 //
 // Estimated time and distance
@@ -172,6 +152,7 @@ function ETA(orderId, busiCoords) {
     }
 
 }
+
 
 //
 // Browser notification
@@ -272,12 +253,13 @@ removeOrderBtn.addEventListener("click", () => {
 //
 // Open order details modal logic
 //
+
 // Find orderId based on click on specific order list item
 connection.on("GetOrder", (business, order) => {
 
     console.log(business);
     console.log(order);
-
+    
     var tStampF = new Date(order.tstamp);
     var tStamp = `${tStampF.getHours()}:${tStampF.getMinutes()} - ${tStampF.toDateString()}`;
 
@@ -285,6 +267,7 @@ connection.on("GetOrder", (business, order) => {
     document.getElementById("modal-timestamp").innerText = tStamp;
     document.getElementById("modal-restaurantAddress").innerText = business.address;
     document.getElementById("modal-price").innerText = order.price;
+    document.getElementById("acceptOrderBtn").id = order.id;
     if (order.paymentTypeId == "0") {
         document.getElementById("modal-paymentType").innerText = "Cash";
     } else {
@@ -305,14 +288,6 @@ document.getElementById("orderList").addEventListener("click", (e) => {
     })
 
 });
-
-
-
-
-
-
-
-
 
 //
 // Background timer that checks for timed-out orders
@@ -353,20 +328,12 @@ connection.on("CheckOrderTimeout",
 
             for (var i = 0; i < orderItemFields.length; i++) {
                 if (orderItemFields[i].id === "orderTimer") {
-                    var toDisp = millisToMinutesAndSeconds(5000 - diff);
-                    orderItemFields[i].innerText = (diff < 5000) ? toDisp : "0:00";
+                    var toDisp = millisToMinutesAndSeconds(500000 - diff);
+                    orderItemFields[i].innerText = (diff < 500000) ? toDisp : "0:00";
                 }
             }
         }
     });
-//
-//
-//
-
-
-
-
-
 
 
 //
@@ -375,15 +342,16 @@ connection.on("CheckOrderTimeout",
 
 //When the deliverer accepts the order this function is called
 function orderAcceptedStatus(orderId) {
+    console.log("The order accepted has order Id:"+orderId);
     connection.invoke("OrderAccepted", orderId).catch(function (err) {//invoke server to method OrderAccepted
         return console.error(err.toString());
 
     });
 }
 
-
 //When the deliverer pickesup the order this function id called
 function orderPickedUpStatus(orderId) {
+    console.log("The order that Picked up has order Id:" + orderId);
     connection.invoke("OrderPickedUp", orderId).catch(function (err) {//invoke server to method OrderPickedUp
         return console.error(err.toString());
 
@@ -392,6 +360,7 @@ function orderPickedUpStatus(orderId) {
 
 //When the deliverer finally delivers the order this function id called
 function orderDeliveredStatus(orderId) {
+    console.log("The order that deliveres has order Id:" + orderId);
     connection.invoke("OrderDelivered", orderId).catch(function (err) {//invoke server to method OrderDelivered
         return console.error(err.toString());
     });
@@ -400,19 +369,12 @@ function orderDeliveredStatus(orderId) {
 
 
 //
-//When an order is taken by an other deliverer or timedout
+//When an order is taken by an other deliverer
 //
-
 connection.on("AnOrderIsAccepted", (orderId) => {
     removeOrder(orderId);
 });
 
-connection.on("AnOrderIsTimedOut", (orderId) => {
-    removeOrder(orderId);
-});
 
 
-
-
-
-//TODO when document ready
+//TODO:Marios when document ready

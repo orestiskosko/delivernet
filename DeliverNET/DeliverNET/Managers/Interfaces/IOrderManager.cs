@@ -27,6 +27,7 @@ namespace DeliverNET.Managers.Interfaces
         bool SetAcceptedTime(int id,DateTime time);
         bool SetPickupTime(int id,DateTime time);
         bool SetDeliveredTime(int id,DateTime time);
+        bool SetDeliverer(int id, Deliverer deliverer);
 
         // Delete
         bool DeleteAll();

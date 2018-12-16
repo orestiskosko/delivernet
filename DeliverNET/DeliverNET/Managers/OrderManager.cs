@@ -156,7 +156,6 @@ namespace DeliverNET.Managers
             return false;
         }
 
-        //change isAccepted bool
         public bool SetIsAccepted(int id, bool status)
         {
             Order order = _db.Orders.Find(id);
@@ -171,7 +170,6 @@ namespace DeliverNET.Managers
             return true;
         } 
         
-        //change isPickedUp bool
         public bool SetIsPickedUp(int id, bool status)
         {
             Order order = _db.Orders.Find(id);
@@ -186,7 +184,6 @@ namespace DeliverNET.Managers
             return true;
         }
 
-        //change isdelivered bool
         public bool SetIsDelivered(int id,bool status)
         {
             Order order = _db.Orders.Find(id);
@@ -243,6 +240,19 @@ namespace DeliverNET.Managers
             return true;
         }
 
+        public bool SetDeliverer(int orderId, Deliverer deliverer)
+        {
+            Order order = _db.Orders.Find(orderId);
+            try
+            {
+                order.Deliverer = deliverer;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
 
 
 
@@ -301,7 +311,9 @@ namespace DeliverNET.Managers
                     _db.Dispose();
                 }
             }
-        }  
+        }
+
+       
         #endregion
     }
 }

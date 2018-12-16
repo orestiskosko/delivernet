@@ -130,8 +130,9 @@ namespace DeliverNET.Comms.Hubs
         // Get deliverer working status
         public async Task GetDelivererWorkingStatus()
         {
-            bool isWorking = _mngMaster.GetDelivererManager().GetWorkingStatus(Context.UserIdentifier);
-            await Clients.Caller.SendAsync("GetWorkingStatus", isWorking);
+            bool isWorking =_mngDeliverer.GetWorkingStatus(Context.UserIdentifier);
+            bool isDelivering = _mngDeliverer.GetDeliveringStatus(Context.UserIdentifier);
+            await Clients.Caller.SendAsync("GetWorkingStatus", isWorking , isDelivering);
         }
 
 
@@ -143,14 +144,19 @@ namespace DeliverNET.Comms.Hubs
         public void OrderAccepted(string orderId)
         {
 
-            _mngOrder.SetIsAccepted(int.Parse(orderId), true);  //change status to db to IsAccepted=true
             _mngOrder.SetAcceptedTime(int.Parse(orderId), DateTime.Now); //add the current time to the property acceptedtime in the db for this order
-            _mngDeliverer.SetWorkingStatus(Context.ConnectionId, false); // is working to db change to false
-            _mngDeliverer.SetDeliveringStatus(Context.ConnectionId, true); //is delivering db change to true
+            _mngOrder.SetIsAccepted(int.Parse(orderId), true);  //change status to db to IsAccepted=true
+            _mngOrder.SetDeliverer(int.Parse(orderId), _mngDeliverer.Get(Context.UserIdentifier));//The deliverer that accepted the order
+
+            _mngDeliverer.SetWorkingStatus(Context.UserIdentifier, false); // is working to db change to false
+            _mngDeliverer.SetDeliveringStatus(Context.UserIdentifier, true); //is delivering db change to true
+
             Groups.RemoveFromGroupAsync(Context.ConnectionId, "AvailableDeliverers");  //remove from group availabledeliverers the context.useridentifier deliverer 
+
+            Clients.Group(Convert.ToString(orderId)).SendAsync("OrderAcceptedStatus", orderId);// invoke to grouped business to tell that the order is accepted
             Groups.AddToGroupAsync(Context.ConnectionId, orderId); // add to group with name the order id the deliverer that accepted the order
+
             Clients.Group(GroupAvailableName).SendAsync("AnOrderIsAccepted", orderId); //Broadcast to available deliverers the order is taken=>invoke function AnOrderIsAccepted
-            Clients.Group(Convert.ToString(orderId)).SendAsync("OrderAcceptedStatus", Context.UserIdentifier, orderId);// invoke to grouped business to tell that the order is accepted
 
         }
 
@@ -168,9 +174,9 @@ namespace DeliverNET.Comms.Hubs
             _mngOrder.SetDeliveredTime(int.Parse(orderId), DateTime.Now); //add the current time to the property isdelivered in the db for this 
             Clients.Group(Convert.ToString(orderId)).SendAsync("OrderDeliveredStatus", Context.UserIdentifier, orderId);// invoke OrderPickedUpStatus with order id to grouped businness
             _mngOrder.SetIsDelivered(int.Parse(orderId), true); //change status to db to IsDelivered=true
-            _mngDeliverer.SetDeliveringStatus(Context.ConnectionId, false); //Change deliverer status IsDelivering to false
+            _mngDeliverer.SetDeliveringStatus(Context.UserIdentifier, false); //Change deliverer status IsDelivering to false
             Groups.RemoveFromGroupAsync(Context.ConnectionId, orderId); //remove from group the deliverer
-            //TODO: remove cashier from group name of orderId
+            Groups.RemoveFromGroupAsync(_mngOrder.Get(int.Parse(orderId)).Cashier.DeliverNetUserId, orderId); //remove cashier from group name of orderId
 
             //TODO: decide if you want to add the deliverer again to group with available deliverers
 
