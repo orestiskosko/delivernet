@@ -19,7 +19,7 @@ namespace DeliverNET.Services
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly ILogger _logger;
         private Timer _timer;
-        private const int timeOutTimeInSec = 5;
+        private const int timeOutTimeInSec = 300;
 
         public OrderTimeWatcher(
             IServiceScopeFactory scopeFactory,

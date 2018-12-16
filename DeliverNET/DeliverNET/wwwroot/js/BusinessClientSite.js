@@ -73,16 +73,18 @@ connection.on("AppendThisOrder",
 //functions that called when a deliverer accepts picks up or delivers the order
 //
 
-connection.on("OrderAccepted", (deliverer, orderId) => {
-    //TODO:Change status of order with OrderId in the table to accepted
+connection.on("OrderAcceptedStatus", ( orderId) => {
+  //  console.log(deliverer);
+    console.log("The order with orderid:" + orderId + " is accepted by a deliverer");
+    //TODO:Marios=>Oresti Change status of order with OrderId in the table to accepted
 });
 
 connection.on("OrderPickedUp", (deliverer, orderId) => {
-    //TODO:Change status of order with OrderId in the table to PickedUp
+    //TODO:Marios=>Oresti Change status of order with OrderId in the table to PickedUp
 });
 
 connection.on("OrderDelivered", (deliverer, orderId) => {
-    //TODO:Change status of order with OrderId in the table to accepted
+    //TODO:Marios=>Oresti Change status of order with OrderId in the table to accepted
 });
 
 
