@@ -1,8 +1,16 @@
-﻿@model DeliverNET.Models.ProfileBusiViewModels.OrderBusiViewModel
+﻿@using System.Net.Http
+@model DeliverNET.Models.ProfileBusiViewModels.OrderBusiViewModel
+
+@inject IMasterManager MasterManager
+@inject UserManager<DeliverNETUser> UserManager
 
 @{
     ViewData["Title"] = "DeliverNET | WorkSpace";
     Layout = "~/Views/Shared/_LayoutBusi.cshtml";
+
+    DeliverNETUser user = await UserManager.FindByNameAsync(User.Identity.Name);
+    BusinessCashier cashier = MasterManager.GetBusinessCashierManager().Get(user.Id);
+    Business business = MasterManager.GetBusinessManager().Get(cashier.BusinessId);
 }
 
 <div class="container pt-3">
@@ -26,7 +34,7 @@
             <div class="bg-jet p-3 rounded" id="newForm">
                 <div class="d-flex justify-content-between">
                     <h4 class="d-inline text-bone ">New Order</h4>
-                    <h4 class="d-inline text-bone font-pacifico">Rabaisi</h4>
+                    <h4 class="d-inline text-bone font-pacifico">@business.Title</h4>
                 </div>
                 <form id="orderForm">
                     <div class="form-group">
