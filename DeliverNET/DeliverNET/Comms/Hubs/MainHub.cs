@@ -87,10 +87,13 @@ namespace DeliverNET.Comms.Hubs
             // create a signalr group and add this bussiness
             await Groups.AddToGroupAsync(Context.ConnectionId, orderId.ToString());
 
+            //send the whole order back to the client invoked this method
+
+            await Clients.Caller.SendAsync("AppendThisOrder", _mngOrder.Get(orderId));
+            //await Clients.Group(orderId.ToString()).SendAsync("AppendThisOrder", _mngOrder.Get(orderId));
 
             // broadcast to deliverers group the order and the order id in method newOrderAnnounce the name of the method that will be invoked in the client will be "NewOrder"
             await Clients.Group(GroupAvailableName).SendAsync("NewOrder", orderId, geolocation, order.PaymentTypeId, tstamp);
-
 
         }
 
