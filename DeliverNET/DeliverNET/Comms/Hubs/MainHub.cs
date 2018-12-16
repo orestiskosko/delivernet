@@ -119,10 +119,18 @@ namespace DeliverNET.Comms.Hubs
             await Clients.Caller.SendAsync("AppendNewOrder", order);
         }
 
-        // Get all orders that are NOT timed out
+        // Get all orders that are NOT timed out for deliverer
         public async Task GetActiveOrders()
         {
             List<Order> orders = _mngOrder.GetActive();
+            await Clients.Caller.SendAsync("GetActiveOrders", orders);
+        }
+
+        // Get all orders that are NOT timed out for cashiers
+        public async Task GetActiveOrdersForBusi()
+        {
+            BusinessCashier cashier = _mngMaster.GetBusinessCashierManager().Get(Context.UserIdentifier);
+            List<Order> orders = _mngOrder.GetActive(cashier.BusinessId);
             await Clients.Caller.SendAsync("GetActiveOrders", orders);
         }
 

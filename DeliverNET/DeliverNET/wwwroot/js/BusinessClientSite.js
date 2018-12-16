@@ -12,7 +12,7 @@ var connection = new signalR.HubConnectionBuilder()
 //start the connection
 connection.start()
     .then(() => {
-        connection.invoke("GetActiveOrders").catch(function (err) {
+        connection.invoke("GetActiveOrdersForBusi").catch(function (err) {
             return console.log.error(err.toString());
         })
     })
@@ -156,7 +156,7 @@ var orderItemHtml = function (order) {
                                 </div>
                                 <div class="justify-content-center">
                                     <div><strong>Status</strong></div>
-                                    <div id="orderHead-Status" class="orderStatus-Searching">
+                                    <div id="orderHead-Status-${order.id}" class="orderStatus-Searching">
                                         Searching
                                     </div>
                                 </div>
@@ -286,10 +286,10 @@ connection.on("CheckOrderAccepted", (orderId, isAccepted) => {
 
     // If isAccepted change status
     if (isAccepted) {
-        var statusEl = document.getElementById(orderId);
+        var statusEl = document.getElementById(`orderHead-Status-${orderId}`);
         statusEl.classList.remove("orderStatus-Searching");
         statusEl.classList.add("orderStatus-Accepted");
-        statuEl.innerText = "Accepted";
+        statusEl.innerHTML = "Accepted";
     }
 });
 
@@ -298,10 +298,10 @@ connection.on("CheckOrderPickedup", (orderId, isPickedup) => {
 
     // If isPickedup change status
     if (isPickedup) {
-        var statusEl = document.getElementById(orderId);
+        var statusEl = document.getElementById(`orderHead-Status-${orderId}`);
         statusEl.classList.remove("orderStatus-Accepted");
         statusEl.classList.add("orderStatus-Pickedup");
-        statuEl.innerText = "Pickedup";
+        statusEl.innerHTML = "Pickedup";
     }
 });
 
@@ -310,10 +310,10 @@ connection.on("CheckOrderDelivered", (orderId, isDelivered) => {
 
     // If isDelivered change status
     if (isDelivered) {
-        var statusEl = document.getElementById(orderId);
+        var statusEl = document.getElementById(`orderHead-Status-${orderId}`);
         statusEl.classList.remove("orderStatus-Pickedup");
         statusEl.classList.add("orderStatus-Delivered");
-        statuEl.innerText = "Delivered";
+        statusEl.innerHTML = "Delivered";
     }
 });
 //

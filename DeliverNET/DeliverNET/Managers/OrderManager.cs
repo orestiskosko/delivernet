@@ -115,6 +115,24 @@ namespace DeliverNET.Managers
         }
 
         
+        public List<Order> GetActive(int businessId)
+        {
+            List<Order> orders;
+            try
+            {
+                orders = _db.Orders
+                    .Where(o => o.IsTimedOut == false && o.BusinessId == businessId)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return orders;
+        }
+
+        
 
         // Update
         public bool UpdateAddress(int id, string newAddress)
@@ -312,8 +330,6 @@ namespace DeliverNET.Managers
                 }
             }
         }
-
-       
         #endregion
     }
 }
