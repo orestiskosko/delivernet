@@ -293,6 +293,7 @@ connection.on("GetOrder", (business, order) => {
 
 });
 
+
 // Add event listener for all order items
 document.getElementById("orderList").addEventListener("click", (e) => {
 
@@ -324,8 +325,7 @@ var orderWatcher = setInterval(function () {
             return console.error(err.toString());
         });
     }
-},
-    1000);
+}, 1000);
 
 connection.on("CheckOrderTimeout",
     (orderId, tStamp, isTimedOut) => {

@@ -93,7 +93,7 @@ namespace DeliverNET.Comms.Hubs
 
             //send the whole order back to the client invoked this method
 
-            await Clients.Caller.SendAsync("AppendThisOrder", _mngOrder.Get(orderId));
+            await Clients.Caller.SendAsync("GetOrderIdForAppend", orderId);
             //await Clients.Group(orderId.ToString()).SendAsync("AppendThisOrder", _mngOrder.Get(orderId));
 
             // broadcast to deliverers group the order and the order id in method newOrderAnnounce the name of the method that will be invoked in the client will be "NewOrder"
@@ -104,7 +104,7 @@ namespace DeliverNET.Comms.Hubs
 
 
 
-        // Get order details from db
+        // Get specific order details from db (for deliverer)
         public async Task GetOrderFromDb(string orderId)
         {
             Order order = _mngOrder.Get(int.Parse(orderId));
@@ -112,16 +112,22 @@ namespace DeliverNET.Comms.Hubs
             await Clients.Caller.SendAsync("GetOrder", business, order);
         }
 
-        // Get all orders that are NOT timedout
+        // get specific order object (for business cashier)
+        public async Task GetOrderFromDbBusi(string orderId)
+        {
+            Order order = _mngOrder.Get(int.Parse(orderId));
+            await Clients.Caller.SendAsync("AppendNewOrder", order);
+        }
+
+        // Get all orders that are NOT timed out
         public async Task GetActiveOrders()
         {
-            // TODO Write query to get all active orders
             List<Order> orders = _mngOrder.GetActive();
             await Clients.Caller.SendAsync("GetActiveOrders", orders);
         }
 
 
-        // Set deliverer working status
+        // Get deliverer working status
         public async Task GetDelivererWorkingStatus()
         {
             bool isWorking = _mngMaster.GetDelivererManager().GetWorkingStatus(Context.UserIdentifier);
@@ -179,10 +185,34 @@ namespace DeliverNET.Comms.Hubs
 
 
         //
+        // Order checks
+        //
+        // broadcasts if order is timed out
         public async Task CheckOrderTimeout(string orderId)
         {
             Order order = _mngOrder.Get(int.Parse(orderId));
             await Clients.Caller.SendAsync("CheckOrderTimeout", orderId, order.Tstamp, order.IsTimedOut);
+        }
+
+        // broadcasts if order is accepted
+        public async Task CheckOrderAccepted(string orderId)
+        {
+            Order order = _mngOrder.Get(int.Parse(orderId));
+            await Clients.Caller.SendAsync("CheckOrderAccepted", orderId, order.IsAccepted);
+        }
+
+        // broadcasts if order is pickedup
+        public async Task CheckOrderPickedup(string orderId)
+        {
+            Order order = _mngOrder.Get(int.Parse(orderId));
+            await Clients.Caller.SendAsync("CheckOrderPickedup", orderId, order.IsPickedup);
+        }
+
+        // broadcasts if order is delivered
+        public async Task CheckOrderDelivered(string orderId)
+        {
+            Order order = _mngOrder.Get(int.Parse(orderId));
+            await Clients.Caller.SendAsync("CheckOrderDelivered", orderId, order.IsDelivered);
         }
     }
 }
