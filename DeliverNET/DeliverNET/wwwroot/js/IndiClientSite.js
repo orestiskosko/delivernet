@@ -23,6 +23,7 @@ var checkWorkingStatus = function () {
 
 }
 
+//when refresh press the button if IsWorking is true
 connection.on("GetWorkingStatus", (isWorking) => {
     if (isWorking) {
         document.getElementById("btnReady").click();
@@ -63,8 +64,7 @@ function addMeToGroup() {
 //
 // Get all NON TIMEDOUT orders
 //
-connection.on("GetActiveOrders",
-    (orders) => {
+connection.on("GetActiveOrders",(orders) => {
         orders.forEach((o) => {
             appendOrder(o.id, "--", "--", "5:00");
         })
@@ -177,21 +177,21 @@ function ETA(orderId, busiCoords) {
 // Browser notification
 //
 function notifyMe() {
-    // Let's check if the browser supports notifications
+    // check if the browser supports notifications
     if (!("Notification" in window)) {
         alert("This browser does not support desktop notification");
     }
 
-    // Let's check whether notification permissions have already been granted
+    //  check whether notification permissions have already been granted
     else if (Notification.permission === "granted") {
         // If it's okay let's create a notification
         var notification = new Notification(`${userName} have a new order`);
     }
 
-    // Otherwise, we need to ask the user for permission
+    // Otherwise ask the user for permission
     else if (Notification.permission !== "denied") {
         Notification.requestPermission().then(function (permission) {
-            // If the user accepts, let's create a notification
+            // If the user accepts create a notification
             if (permission === "granted") {
                 var notification = new Notification(`${userName} have a new order`);
             }
@@ -226,7 +226,6 @@ var clearOrderList = function () {
             t = false;
         }
     }
-
 }
 
 // order item html
