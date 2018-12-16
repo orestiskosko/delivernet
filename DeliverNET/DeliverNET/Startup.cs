@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using DeliverNET.Data;
 using System.Security.Claims;
+using DeliverNET.Comms;
 using DeliverNET.Services;
 using Microsoft.Extensions.Logging;
 using DeliverNET.Models;
@@ -23,6 +24,8 @@ using DeliverNET.Infrastructure.Account;
 using DeliverNET.Managers;
 using DeliverNET.Managers.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Hosting;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace DeliverNET
 {
@@ -86,7 +89,10 @@ namespace DeliverNET
             services.AddSingleton<IEmailSender, MailSender>();
             services.AddTransient<DeliverNETClaimManager>();
             services.AddTransient<Seeder>();
-        }
+
+            // Add hosted services
+            services.AddSingleton<IHostedService, OrderTimeWatcher>();
+        }   
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seeder seeder)
