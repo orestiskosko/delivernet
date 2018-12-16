@@ -20,14 +20,14 @@ namespace DeliverNET.Models.ProfileBusiViewModels
         public string Address { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [Range(0, 15, ErrorMessage = "Please enter a value between 0 - 15.")]
         public int? FloorNo { get; set; }
 
         [DataType(DataType.Text)]
         public string DoorName { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [Range(0, 1)]
         public int PaymentTypeId { get; set; }
 
         [DataType(DataType.PhoneNumber)]
@@ -37,7 +37,7 @@ namespace DeliverNET.Models.ProfileBusiViewModels
         [DataType(DataType.Currency)]
         public float Price { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Text)]
         public string Comments { get; set; }
     }
 }

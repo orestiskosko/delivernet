@@ -64,11 +64,11 @@ function addMeToGroup() {
 //
 // Get all NON TIMEDOUT orders
 //
-connection.on("GetActiveOrders",(orders) => {
-        orders.forEach((o) => {
-            appendOrder(o.id, "--", "--", "5:00");
-        })
-    });
+connection.on("GetActiveOrders", (orders) => {
+    orders.forEach((o) => {
+        appendOrder(o.id, "--", "--", "5:00");
+    })
+});
 
 
 
@@ -306,6 +306,13 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 });
 
 
+
+
+
+
+
+
+
 //
 // Background timer that checks for timed-out orders
 //
@@ -329,12 +336,14 @@ connection.on("CheckOrderTimeout",
             return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
         }
 
+        // If timed out remove from list
         if (isTimedOut) {
             document.getElementById(orderId).classList.add("animate");
             document.getElementById(orderId).addEventListener("animationend", function (event) {
                 document.getElementById(orderId).remove();
             }, false);
-            //removeOrder(orderId);
+
+            // else update timer on order list item
         } else {
             var timeNow = new Date();
             var parsedTime = new Date(tStamp);
@@ -344,12 +353,20 @@ connection.on("CheckOrderTimeout",
 
             for (var i = 0; i < orderItemFields.length; i++) {
                 if (orderItemFields[i].id === "orderTimer") {
-                    var toDisp = millisToMinutesAndSeconds(5000 - diff);                 
-                    orderItemFields[i].innerText = (diff < 5000)? toDisp : "0:00";
+                    var toDisp = millisToMinutesAndSeconds(5000 - diff);
+                    orderItemFields[i].innerText = (diff < 5000) ? toDisp : "0:00";
                 }
             }
         }
     });
+//
+//
+//
+
+
+
+
+
 
 
 //
