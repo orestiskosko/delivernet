@@ -8,14 +8,14 @@ const connection = new signalR.HubConnectionBuilder()
 
 connection.start()
     .then(() => {
-        checkWorkingStatus();
+        checkDelivererStatus();
     })
     .catch(function (err) {
         return console.error(err.toString());
     });
 
 
-var checkWorkingStatus = function () {
+var checkDelivererStatus = function () {
 
     connection.invoke("GetDelivererWorkingStatus").catch(function (err) {
         return console.error(err.toString());
@@ -23,13 +23,47 @@ var checkWorkingStatus = function () {
 
 }
 
+
 //when refresh press the button if IsWorking is true
 connection.on("GetWorkingStatus", (isWorking, isDelivering) => {
-    //TODO:Marios If is delivering get status and show the corresponding button
+
+    // if he is working just press the available button
     if (isWorking) {
         document.getElementById("btnReady").click();
     }
+
+    // if he is delivering find his order and refer to corresponding function
+    if (isDelivering) {
+        connection.invoke("GetAcceptedOrderPhase").catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
 })
+
+
+connection.on("GetOrderPhase", (orderId, isAccepted, isPickedup, isDelivered) => {
+
+    if (isDelivered) {
+        return;
+    }
+
+    // update orderid in hidden field of all modals
+    updateModalOrderIdHidden(orderId);
+
+    if (isPickedup) {
+        $("#orderPickedModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    } else if (isAccepted) {
+        $("#orderAcceptedModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+});
+
 
 
 //
@@ -282,10 +316,8 @@ document.getElementById("orderList").addEventListener("click", (e) => {
 
     var orderId = e.target.offsetParent.id;
     connection.invoke("GetOrderFromDb", orderId);
-    $("#orderModal").modal({
-        show: true,
-        focus: true
-    })
+
+    $("#orderModal").modal('show');
 
 });
 
@@ -341,7 +373,7 @@ connection.on("CheckOrderTimeout",
 //
 
 //When the deliverer accepts the order this function is called
-function orderAcceptedStatus() {
+function onOrderAccepted() {
     var orderId = document.getElementById("modal-orderId").value;
     console.log("The order accepted has order Id:" + orderId);
     connection.invoke("OrderAccepted", orderId).catch(function (err) {//invoke server to method OrderAccepted
@@ -349,32 +381,70 @@ function orderAcceptedStatus() {
     });
 }
 
-//When the deliverer pickesup the order this function id called
-function orderPickedUpStatus(orderId) {
-    console.log("The order that Picked up has order Id:" + orderId);
-    connection.invoke("OrderPickedUp", orderId).catch(function (err) {//invoke server to method OrderPickedUp
-        return console.error(err.toString());
-
-    });
-}
-
-//When the deliverer finally delivers the order this function id called
-function orderDeliveredStatus(orderId) {
-    console.log("The order that deliveres has order Id:" + orderId);
-    connection.invoke("OrderDelivered", orderId).catch(function (err) {//invoke server to method OrderDelivered
-        return console.error(err.toString());
-    });
-
-}
-
-
-//
 //When an order is taken by an other deliverer
-//
 connection.on("AnOrderIsAccepted", (orderId) => {
     removeOrder(orderId);
 });
 
+// when this deliverer accepted an order
+connection.on("OnOrderAccepted", (order) => {
+    console.log(order);
 
+    // hide order info modal
+    $("#orderModal").modal('hide');
+
+    // show order accepted modal
+    $("#orderAcceptedModal").modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+});
+
+
+function onOrderPicked() {
+    console.log("order pickedup");
+
+    // Get order id from order info modal
+    var orderId = document.getElementById("modal-orderId").value;
+
+    // invoke method on server to inform of pick up
+    connection.invoke("OrderPickedUp", orderId).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    // hide accepted modal
+    $("#orderAcceptedModal").modal('hide');
+
+    // open delivered modal
+    $("#orderPickedModal").modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+};
+
+
+function onOrderDelivered() {
+    console.log("order delivered");
+
+    // Get order id from order info modal
+    var orderId = document.getElementById("modal-orderId").value;
+
+    // invoke method on server to inform of pick up
+    connection.invoke("OrderDelivered", orderId).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    // hide accepted modal
+    $("#orderPickedModal").modal('hide');
+
+    removeOrder(orderId);
+};
+
+
+function updateModalOrderIdHidden(orderId) {
+    document.getElementById("modal-orderId").value = orderId;
+    document.getElementById("modalAccepted-orderId").value = orderId;
+    document.getElementById("modalPicked-orderId").value = orderId;
+};
 
 //TODO:Marios when document ready

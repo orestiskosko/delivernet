@@ -14,6 +14,7 @@
                         <span id="modal-restaurantAddress" class=""></span>
                     </div>
                     <div class="card-body bg-carmine">
+
                         <p class="">
                             <strong>Payment Type: </strong>
                             <span id="modal-paymentType"></span>
@@ -23,12 +24,182 @@
                             <strong>Price: </strong>
                             <span id="modal-price"></span>
                         </p>
-
-                        <input class="form-control" hidden type="text" id="modal-orderId" />
+                                              
+                        <input class="form-control" hidden type="text" id="modal-orderId"/>
                         <a onclick="orderAcceptedStatus()" id="acceptOrderBtn" class="btn bg-winter text-bone d-block">Accept</a>
                     </div>
-                    <div id="modal-timestamp" class="card-footer bg-jet text-bone"></div>
+                    <div id="modal-timestamp" class="card-footer" bg-jet text-bone"></div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Order Accepted Modal -->
+<div class="modal fade rounded" id="orderAcceptedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-jet">
+                <h4 class="text-bone">Order Accepted!</h4>
+            </div>
+            <div class="modal-body bg-bone">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-jet">Restaurant Info</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Name</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet mb-0">Address</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet mb-0">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-jet">Order Info</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Price</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Payment</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button onclick="onOrderPicked()" class="btn btn-block bg-winter text-bone mt-3">Picked Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center bg-jet">
+                <input hidden type="text" id="modalAccepted-orderId" />
+                <span id="modalAccepted-timestamp" class="text-bone">eliybrliergbly</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Order Picked Modal -->
+<div class="modal fade rounded" id="orderPickedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-jet">
+                <h4 class="text-bone">Order Picked!</h4>
+            </div>
+            <div class="modal-body bg-bone">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-jet">Customer Info</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Name</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Address</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Door Name</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Floor No</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Phone Number</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <hr />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-jet">Order Info</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Price</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="text-jet">Payment</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-jet">tade</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button onclick="onOrderDelivered()" class="btn btn-block bg-winter text-bone mt-3">Delivered</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center bg-jet">
+                <input hidden type="text" id="modalPicked-orderId" />
+                <span id="modalAccepted-timestamp" class="text-bone">eliybrliergbly</span>
             </div>
         </div>
     </div>
@@ -87,12 +258,12 @@
 
 
 
-        var userName = "@User.Identity.Name";
-        var IsClicked = false;
-        var btn = document.getElementById('btnReady');
-        var IsWorking = document.getElementById('IsWorking');
-        var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
-        var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> Available</p >';
+            var userName = "@User.Identity.Name";
+            var IsClicked = false;
+            var btn = document.getElementById('btnReady');
+            var IsWorking = document.getElementById('IsWorking');
+            var htmlON = '<i class="fas fa-signal" style="font-size: 70px"></i> <p> Not Available</p >';
+            var htmlOFF = '<i class="fas fa-check" style="font-size: 70px"></i> <p> Available</p >';
 
 
         btn.onclick = function () {
@@ -102,14 +273,14 @@
                     btn.classList.remove("btn-available"),
                     btn.innerHTML = htmlON,
                     removeMeFromGroup(), // Remove from group of available deliverers
-                    clearOrderList()) :
+                    clearOrderList()) :   
 
-                (IsClicked = true,
-                    btn.classList.add("btn-available"),
-                    btn.classList.remove("btn-unavailable"),
-                    btn.innerHTML = htmlOFF,
-                    addMeToGroup());         // Add to group  -- bugs everything fuck off gamw tin panagia
-        }
+                    (IsClicked = true,
+                        btn.classList.add("btn-available"),
+                        btn.classList.remove("btn-unavailable"),
+                        btn.innerHTML = htmlOFF,
+                        addMeToGroup());         // Add to group  -- bugs everything fuck off gamw tin panagia
+            }
 
     </script>
 
