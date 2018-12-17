@@ -113,7 +113,6 @@ namespace DeliverNET.Managers
 
             return orders;
         }
-
         
         public List<Order> GetActive(int businessId)
         {
@@ -162,6 +161,7 @@ namespace DeliverNET.Managers
                     order.LastName = newReceiverInfo.LastName;
                     order.FloorNo = newReceiverInfo.FloorNo;
                     order.DoorName = newReceiverInfo.DoorName;
+                    _db.SaveChanges();
                 }
                 catch (Exception e)
                 {
@@ -180,6 +180,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.IsAccepted = status;
+                _db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -194,6 +195,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.IsPickedup = status;
+                _db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -208,6 +210,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.IsDelivered = status;
+                _db.SaveChanges();
             }
             catch (Exception e)
             { 
@@ -222,6 +225,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.AcceptedTime = time;
+                _db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -236,6 +240,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.PickupTime = time;
+                _db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -250,6 +255,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.DeliveredTime = time;
+                _db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -264,6 +270,7 @@ namespace DeliverNET.Managers
             try
             {
                 order.Deliverer = deliverer;
+                _db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -272,7 +279,20 @@ namespace DeliverNET.Managers
             return true;
         }
 
-
+        public bool SetTimeoutState(int id, bool status)
+        {
+            Order order = _db.Orders.Find(id);
+            try
+            {
+                order.IsTimedOut = status;
+                _db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return true;
+        }
 
         // Delete
         // TODO Remove this method

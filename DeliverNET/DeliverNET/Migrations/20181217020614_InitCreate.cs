@@ -276,9 +276,9 @@ namespace DeliverNET.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BusinessId = table.Column<int>(nullable: true),
-                    CashierDeliverNetUserId = table.Column<string>(nullable: true),
-                    DelivererDeliverNetUserId = table.Column<string>(nullable: true),
+                    BusinessId = table.Column<int>(nullable: false),
+                    CashierId = table.Column<string>(nullable: true),
+                    DelivererId = table.Column<string>(nullable: true),
                     Tstamp = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     Geolocation = table.Column<string>(nullable: true),
@@ -307,16 +307,16 @@ namespace DeliverNET.Migrations
                         column: x => x.BusinessId,
                         principalTable: "Businesses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_BusinessCashiers_CashierDeliverNetUserId",
-                        column: x => x.CashierDeliverNetUserId,
+                        name: "FK_Orders_BusinessCashiers_CashierId",
+                        column: x => x.CashierId,
                         principalTable: "BusinessCashiers",
                         principalColumn: "DeliverNetUserId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Orders_Deliverers_DelivererDeliverNetUserId",
-                        column: x => x.DelivererDeliverNetUserId,
+                        name: "FK_Orders_Deliverers_DelivererId",
+                        column: x => x.DelivererId,
                         principalTable: "Deliverers",
                         principalColumn: "DeliverNetUserId",
                         onDelete: ReferentialAction.Restrict);
@@ -379,14 +379,14 @@ namespace DeliverNET.Migrations
                 column: "BusinessId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_CashierDeliverNetUserId",
+                name: "IX_Orders_CashierId",
                 table: "Orders",
-                column: "CashierDeliverNetUserId");
+                column: "CashierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_DelivererDeliverNetUserId",
+                name: "IX_Orders_DelivererId",
                 table: "Orders",
-                column: "DelivererDeliverNetUserId");
+                column: "DelivererId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_RateeId",
