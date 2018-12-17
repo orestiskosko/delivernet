@@ -44,24 +44,24 @@
                 <span class="text-bone">@UserManager.GetUserName(User)</span>
                 <i class="fas fa-user text-bone" id="profileIcon" style="font-size:large"></i>
             </a>
-            <div class="dropdown-menu bg-jet text-bone" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu bg-jet text-bone mt-1 py-0" aria-labelledby="navbarDropdownMenuLink">
                 @if (await ClaimManager.HasClaim(User, JobTypes.Individual))
                 {
                     <!--Indi Reviews-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileIndi" asp-action="ReviewsIndi">Reviews</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileIndi" asp-action="ReviewsIndi">Reviews</a>
                     <!--Indi Settings-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileIndi" asp-action="SettingsIndi">Settings</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileIndi" asp-action="SettingsIndi">Settings</a>
                 }
                 else
                 {
                     <!--Busi Reviews-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileBusi" asp-action="ReviewsBusi">Reviews</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileBusi" asp-action="ReviewsBusi">Reviews</a>
                     <!--Busi Settings-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileBusi" asp-action="SettingsBusi">Settings</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileBusi" asp-action="SettingsBusi">Settings</a>
                 }
 
                 <!--Logout Button-->
-                <a class="dropdown-item text-bone" asp-controller="Account" asp-action="Logout">Logout</a>
+                <a class="dropdown-item jet-hov text-bone" asp-controller="Account" asp-action="Logout">Logout</a>
             </div>
         </li>
     </ul>

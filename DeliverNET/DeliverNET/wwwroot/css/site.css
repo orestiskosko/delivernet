@@ -39,6 +39,23 @@ a {
     text-shadow: 2px 2px 5px #2F332E;
 }
 
+.bg-img-biker {
+    background-image: url('../img/bike-blur.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: inherit;
+}
+
+.bg-img-bistro {
+    background-image: url('../img/food-wood-blur.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: inherit;
+}
 
 .bg-img-burger {
     background-image: url('../img/burger.jpeg');
@@ -50,7 +67,7 @@ a {
 }
 
 .bg-img-carmine {
-    background: radial-gradient(circle at 100px 100px, #AA4836, #3a1b16);
+    background: radial-gradient(circle at 100px 100px, #a14231, #341b18);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

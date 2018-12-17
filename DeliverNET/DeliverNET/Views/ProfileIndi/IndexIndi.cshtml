@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_LayoutIndi.cshtml";
 }
 
-
 <!-- Order Info Modal -->
 <div class="modal fade rounded" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -24,8 +23,8 @@
                             <strong>Price: </strong>
                             <span id="modal-price"></span>
                         </p>
-                                              
-                        <input class="form-control" hidden type="text" id="modal-orderId"/>
+
+                        <input class="form-control" hidden type="text" id="modal-orderId" />
                         <a onclick="orderAcceptedStatus()" id="acceptOrderBtn" class="btn bg-winter text-bone d-block">Accept</a>
                     </div>
                     <div id="modal-timestamp" class="card-footer bg-jet text-bone"></div>
@@ -40,7 +39,7 @@
     <div class="row">
 
         <!-- Order List for Deliverer -->
-        <div class="col-md-6" onclick="event.stopPropagation()">
+        <div class="col-md-6 px-0 bg-carmine-3d" onclick="event.stopPropagation()" style="border:solid 1px #E0DDC3;border-radius:4px;height:70vh">
             <div id="orderList" class="list-group">
                 <div class="list-group-item flex-column align-items-center bg-jet">
                     <span class="text-bone">Order Pool</span>
@@ -62,7 +61,7 @@
     </div>
 
     <!--Test button to remove order based on id-->
-    <div class="row no-gutters">
+    <div class="row no-gutters mt-3">
         <div class="col-md-5">
             <input type="text" id="orderToRemove" class="form-control" placeholder="Order Id" />
         </div>
@@ -75,6 +74,13 @@
 
 
 @section Scripts {
+
+    <!-- Background Image -->
+    <script>
+        var back = document.getElementById('bodyDiv');
+        back.classList.remove("bg-img-carmine");
+        back.classList.add("bg-img-biker");
+    </script>
 
     <!-- Available Button Logic -->
     <script>
@@ -96,7 +102,7 @@
                     btn.classList.remove("btn-available"),
                     btn.innerHTML = htmlON,
                     removeMeFromGroup(), // Remove from group of available deliverers
-                    clearOrderList()) :   
+                    clearOrderList()) :
 
                 (IsClicked = true,
                     btn.classList.add("btn-available"),

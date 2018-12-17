@@ -182,8 +182,17 @@
     height: 47px;
 }
 
+.jet-hov:hover {
+    background-color: #414640;
+    color: #E0DDC3;
+}
+
 .bg-carmine-3d {
     background: radial-gradient(circle at 100px 100px, #AA4836, #3a1b16);
+}
+
+.bg-bone-3d {
+    background: radial-gradient(circle at 100px 100px, #eae7cd, #e6e4d6);
 }
 
 .bg-carmine-3d-square {
