@@ -50,7 +50,7 @@ a {
 }
 
 .bg-img-carmine {
-    background-color: #AA4836;
+    background: radial-gradient(circle at 100px 100px, #AA4836, #3a1b16);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -59,7 +59,7 @@ a {
 }
 
 .bg-img-winter {
-    background-color: #518282;
+    background: radial-gradient(circle at 0px 0px, #629696, #2c3c3c);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

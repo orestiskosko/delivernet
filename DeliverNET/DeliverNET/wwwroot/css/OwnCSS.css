@@ -57,8 +57,8 @@
 }
 
 .circle {
-    width: 145px;
-    height: 145px;
+    width: 85px;
+    height: 85px;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
     border-radius: 225px;
@@ -186,18 +186,6 @@
     background: radial-gradient(circle at 100px 100px, #AA4836, #3a1b16);
 }
 
-.bg-green-3d {
-    background: radial-gradient(circle at 100px 100px, #4f9335, #22441b);
-}
-
-.bg-green-3d-hover {
-    background: radial-gradient(circle at 100px 100px, #5ea942, #2c5524);
-}
-
-.hov-green-3d:hover {
-    background: radial-gradient(circle at 100px 100px, #55973c, #2c5524);
-}
-
 .bg-carmine-3d-square {
     background: radial-gradient(circle at 250px 300px, #b95745, #6f352a);
 }
@@ -212,6 +200,22 @@
 
 .bg-winter-3d {
     background: radial-gradient(circle at 100px 100px, #629696, #2c3c3c);
+}
+
+.bg-jet-3d {
+    background: linear-gradient(to right, #474e46, #2F332E);
+}
+
+.bg-jet-3d-hov {
+    background: linear-gradient(to right, #4f564e, #3c413b);
+}
+
+.bg-jet-green-3d {
+    background: radial-gradient(circle at 50px 100px, #3c4d39, #1f2c1c);
+}
+
+.bg-jet-green-3d-hov {
+    background: radial-gradient(circle at 50px 100px, #43563f, #273723);
 }
 
 .bg-winter-3d-square {
@@ -232,13 +236,13 @@
 
 .complete-center {
     column-fill: balance;
-    transform: translateY(-50%);
+    transform: translateY(15%);
 }
 
 .settings-menu {
-    color: #E0DDC3;
+    color: #2F332E;
     border: solid;
     border-width: 1px;
     border-radius: 2px;
-    box-shadow: 0 0 0 1px hsl(0, 0%, 80%);
+    border-color: #E0DDC3;
 }
