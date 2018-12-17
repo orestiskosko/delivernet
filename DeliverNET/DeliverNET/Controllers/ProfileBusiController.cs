@@ -16,6 +16,27 @@ namespace DeliverNET.Controllers
 {
     public class ProfileBusiController : Controller
     {
+        // Dummy order data
+        private static Models.ProfileDummies.BusiIndixDummyModel Order_Dummy = new Models.ProfileDummies.BusiIndixDummyModel
+        {
+            IsWorking = false,
+            IsVerified = false,
+            IsCashier = true,
+            RestaurantName = "Ravaisis",
+            RestaurantAddress = "Arxiloxou 0",
+            OrderID = 1234,
+            FirstName = "Dimosthenis",
+            LastName = "Pasparakis",
+            Address = "Kapou 32",
+            FloorNo = 2,
+            DoorName = "AFDEmp",
+            PaymentTypeId = 0,
+            State = "Picked",
+            DistanceToShop = 1.5F,
+            ETA = 7,
+            Price = 10.4F,
+        };
+
         private readonly UserManager<DeliverNETUser> _userManager;
         private readonly IMasterManager _masterManager;
 
@@ -45,7 +66,7 @@ namespace DeliverNET.Controllers
         [HttpGet]
         public IActionResult SettingsBusi()
         {
-            return View();
+            return View(Order_Dummy);
         }
 
         [HttpGet]

@@ -1,218 +1,176 @@
 ﻿@model DeliverNET.Models.ProfileDummies.IndiIndixDummyModel
-<!-- Menus depending on pressed button -->
-<div class="col-md-6 px-5 h-100" style="text-align:center">
 
-    <!-- Change Password Menu -->
-    <div class="div-image-parch settings-menu col-md-7 ml-5 p-4 position-absolute invisible" style="height:88%" id="menuSett">
-        <h3 style="color:#2F332E">Change Password</h3>
-        <hr />
-        <form class="text-my-dark" style="width:80%">
-            <label><strong>Enter your OLD Password</strong></label>
-            <input class="form-control" />
-            <span class="text-danger"></span> <!-- TODO: Insert wrong text shit -->
-            <hr />
-            <label><strong>Enter your NEW Password</strong></label>
-            <input class="form-control" />
-            <span class="text-danger"></span>
-            <hr />
-            <label><strong>Confirm Password</strong></label>
-            <input class="form-control" />
-            <span class="text-danger"></span>
-            <hr />
-            <button type="submit" class="btn btn-my-dark mx-auto d-block">Apply</button>
-        </form>
-    </div>
+<div class="container col-md-6">
 
-    <!-- Edit Information Menu -->
-    <div class="div-image-parch settings-menu col-md-7 ml-5 p-4 position-absolute invisible" style="height:88%" id="menuInfo">
-        <h3 style="color:#2F332E">Edit Information</h3>
-        <hr />
-        <form class="text-my-dark" style="width:80%">
-            <div class="form-group">
-                <label><strong>City</strong></label>
-                <span class="text-danger"></span> <!-- Here we enter the asp-validation-for -->
-                <input class="form-control" placeholder="PREVIOUS CITY NAME" list="cities" />
-                <datalist id="cities">
-                    <option>Athens</option>
-                    <option>Patra</option>
-                    <option>Korinthos</option>
-                    <option>Xalkida</option>
-                    <option>Giannena</option>
-                    <option>Thessaloniki</option>
-                    <option>H Poutana H Mana tou Oresti</option>
-                </datalist>
-            </div>
-            <div class="form-group">
-                <label><strong>Area</strong></label>
+    <!-- Menus depending on pressed button -->
+    <div class="d-flex justify-content-center">
+
+        <!-- Change Password Menu -->
+        <div class="bg-jet-3d text-bone mt-5 p-5 settings-menu position-absolute w-75 invisible" style="height:80%" id="menuSett">
+            <h3>Change Password</h3>
+            <hr />
+            <form class="text-my-dark" style="width:90%">
+
+                <label><strong>Enter your OLD Password</strong></label>
+                <input class="form-control mb-3" />
+                <span class="text-danger"></span> <!-- TODO: Insert wrong text shit -->
+
+                <label><strong>Enter your NEW Password</strong></label>
+                <input class="form-control mb-3" />
                 <span class="text-danger"></span>
-                <input class="form-control" placeholder="PREVIOUS AREA NAME" list="region" />
-                <datalist id="region">
-                    <!-- Connect here IF Statement list depending on City (we need the input above first) -->
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                </datalist>
-            </div>
-            <hr />
-            <div class="form-group position-relative">
-                <label><strong>Mobile Phone</strong></label>
-                <input class="form-control input-with-place" placeholder="PREVIOUS PHONE" />
-                <span class="unit" style="color:#808080">+30&ensp;</span>
-                <span class="text-danger"></span>
-            </div>
-            <hr />
-            <div class="form-group">
-                <label><strong>Email</strong></label>
-                <input class="form-control" placeholder="PREVIOUS ADDRESS" />
-                <span class="text-danger"></span>
-            </div>
-            <hr />
-            <button type="submit" class="btn btn-my-dark mx-auto d-block">Edit</button>
-        </form>
-    </div>
 
-    <!-- Contact Menu -->
-    <div class="div-image-parch settings-menu col-md-7 ml-5 p-4 position-absolute invisible" style="height:88%" id="menuCont">
-        <h3 style="color:#2F332E">Contact Us!</h3>
-        <hr />
-        <form class="text-my-dark" style="width:80%">
-            <label><strong>Subject</strong></label>
-            <input class="form-control" placeholder="Subject Title" />
-            <span class="text-danger"></span> <!-- TODO: Insert wrong text shit -->
-            <br />
-            <label><strong>Message:</strong></label>
-            <textarea rows="7" class="w-100" name="message" form="usrform" placeholder="Up to 250 characters"></textarea>
-            <hr />
-            <button type="submit" class="btn btn-my-dark mx-auto d-block">Send</button>
-        </form>
-    </div>
-
-    <!-- Help Menu -->
-    <div class="div-image-parch settings-menu col-md-7 ml-5 p-4 position-absolute invisible" style="height:88%" id="menuHelp">
-        <h3 style="color:#2F332E">Help Me About:</h3>
-        <hr />
-        <br />
-        <ul class="pl-3" style="color:#2F332E;font-size:23px;font-weight:600">
-            <li>
-                <a>Payment</a>
-                <hr />
-            </li>
-            <li>
-                <a>Policy</a>
-                <hr />
-            </li>
-            <li>
-                <a>Recommendations</a>
-                <hr />
-            </li>
-            <li>
-                <a>Frequently Asked Questions</a>
-                <hr />
-            </li>
-        </ul>
-    </div>
-
-
-    @if (!Model.IsVerified)
-    {
-        <!-- Verify Menu -->
-    <div class="div-image-parch container settings-menu col-md-7 ml-5 p-4 position-absolute invisible" style="height:88%;overflow-y:auto" id="menuVerify">
-        <h3 style="color:#2F332E">Verification Form:</h3>
-        <hr />
-        <!-- TODO Connect the inputs of this form with Db -->
-        <form class="text-my-dark collapsible">
-            <div class="form-group">
-                <label><strong>City</strong></label>
-                <span class="text-danger"></span> <!-- Here we enter the asp-validation-for -->
-                <input class="form-control" placeholder="Choose A City" list="cities" />
-                <datalist id="cities">
-                    <option>Athens</option>
-                    <option>Patra</option>
-                    <option>Korinthos</option>
-                    <option>Xalkida</option>
-                    <option>Giannena</option>
-                    <option>Thessaloniki</option>
-                    <option>H Poutana H Mana tou Oresti</option>
-                </datalist>
-            </div>
-            <hr />
-            <div class="form-group">
-                <label><strong>Area</strong></label>
+                <label><strong>Confirm Password</strong></label>
+                <input class="form-control mb-3" />
                 <span class="text-danger"></span>
-                <input class="form-control" placeholder="City Area" list="region" />
-                <datalist id="region">
-                    <!-- Connect here IF Statement list depending on City (we need the input above first) -->
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                    <option>Sto mouni tis manas tou Oresti</option>
-                </datalist>
-            </div>
+
+                <button type="submit" class="btn btn-my-dark mx-auto d-block">Apply</button>
+            </form>
+        </div>
+
+        <!-- Edit Information Menu -->
+        <div class="bg-jet-3d text-bone mt-5 p-5 settings-menu position-absolute w-75 invisible" style="height:80%" id="menuInfo">
+            <h3>Edit Information</h3>
             <hr />
-            <div class="form-group">
-                <label><strong>Restaurant Name</strong></label>
-                <input class="form-control" placeholder="Restaurant" />
-                <span class="text-danger"></span>
-            </div>
-            <hr />
-            <div class="form-group">
+            <form class="text-my-dark" style="width:90%">
+
                 <label><strong>Restaurant Address</strong></label>
-                <input class="form-control" placeholder="Address" />
+                <input class="form-control mb-3" placeholder="PREVIOUS ADDRESS" />
                 <span class="text-danger"></span>
-            </div>
-            <hr />
-            <div class="form-group">
-                <label><strong>Owner Name</strong></label>
-                <input class="form-control" placeholder="Full Name" />
-                <span class="text-danger"></span>
-            </div>
-            <hr />
-            <div class="form-group position-relative">
-                <label><strong>Mobile Phone</strong></label>
-                <input class="form-control input-with-place" />
-                <span class="unit" style="color:#808080">+30&ensp;</span>
-                <span class="text-danger"></span>
-            </div>
-            <hr />
-            <div class="form-group">
-                <label><strong>Email</strong></label>
-                <input class="form-control" placeholder="Email Address" />
-                <span class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-my-dark">Send</button>
-        </form>
-    </div>
 
-        <!--Verify-->
-        <div style="top:50%;transform:translate(0, 50%)">
-            <button class="btn bg-green-3d hov-green-3d circle btn-shadow-none text-bone p-0" id="btnVerify">
-                <i class="fas fa-address-card" style="font-size: 65px"></i>
-            </button>
-            <br />
-            <button class="btn btn-dead btn-shadow-none bg-green-3d text-bone py-0"
-                    style="border-radius:20px;font-size:22px;width:30%" id="labVerify">
-                Verify
-            </button>
+
+                <label><strong>Area</strong></label>
+                <span class="text-danger"></span>
+                <input class="form-control mb-3" placeholder="PREVIOUS AREA NAME" list="region" />
+                <datalist id="region">
+                    <!-- Connect here IF Statement list depending on City (we need the input above first) -->
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                    <option>Sto mouni tis manas tou Oresti</option>
+                </datalist>
+
+                <div class="position-relative">
+                    <label><strong>Mobile Phone</strong></label>
+                    <input class="form-control input-with-place  mb-3" placeholder="PREVIOUS PHONE" />
+                    <span class="unit" style="color:#808080">+30&ensp;</span>
+                    <span class="text-danger"></span>
+                </div>
+
+                <label><strong>Email</strong></label>
+                <input class="form-control  mb-3" placeholder="PREVIOUS ADDRESS" />
+                <span class="text-danger"></span>
+
+                <button type="submit" class="btn btn-my-dark mx-auto d-block">Apply</button>
+
+            </form>
         </div>
-    }
-    else
-    {
-        <div>
-            <p id="labVerify"></p>
-            <p id="menuVerify"></p>
-            <p id="btnVerify"></p>
+
+        <!-- Add Cashier Menu -->
+        <div class="bg-jet-3d text-bone mt-5 p-5 settings-menu position-absolute w-75 invisible" style="height:80%" id="menuCashier">
+            <h3>Add Cashier</h3>
+            <hr />
+            <form class="text-my-dark" style="width:90%">
+
+                <label><strong>Username</strong></label>
+                <input class="form-control mb-3" />
+                <span class="text-danger"></span> <!-- TODO: Insert wrong text shit -->
+
+                <label><strong>Password</strong></label>
+                <input class="form-control mb-3" />
+                <span class="text-danger"></span>
+
+                <label><strong>Confirm Password</strong></label>
+                <input class="form-control mb-3" />
+                <span class="text-danger"></span>
+
+                <button type="submit" class="btn btn-my-dark mx-auto d-block">Apply</button>
+            </form>
         </div>
-    }
+
+        <!-- Help Menu -->
+        <div class="bg-jet-3d text-bone mt-5 p-5 settings-menu position-absolute w-75 invisible" style="height:80%" id="menuHelp">
+            <h3>Help Me About:</h3>
+            <hr />
+            <ul style="font-size:23px;font-weight:400">
+
+                <li class="mb-3">
+                    <a>Payment</a>
+                </li>
+
+                <li class="mb-3">
+                    <a>Policy</a>
+                </li>
+
+                <li class="mb-3">
+                    <a>Recommendations</a>
+                </li>
+
+                <li class="mb-3">
+                    <a>Frequently Asked Questions</a>
+                </li>
+
+            </ul>
+        </div>
+
+        @if (!Model.IsVerified)
+        {
+            <!-- Verify Menu for Owner -->
+            <div class="bg-jet-3d text-bone mt-5 p-5 settings-menu position-absolute w-75 invisible" style="height:80%" id="menuVerify">
+                <h3>Verification Form:</h3>
+                <hr />
+
+                <!-- TODO Connect the inputs of this form with Db -->
+                <form class="text-my-dark collapsible p-0" style="height:90%;overflow-y:auto">
+
+                    <label><strong>City</strong></label>
+                    <span class="text-danger"></span> <!-- Here we enter the asp-validation-for -->
+                    <input class="form-control mb-3" placeholder="Choose A City" list="cities" />
+                    <datalist id="cities">
+                        <option>Athens</option>
+                        <option>Patra</option>
+                        <option>Korinthos</option>
+                        <option>Xalkida</option>
+                        <option>Giannena</option>
+                        <option>Thessaloniki</option>
+                        <option>H Poutana H Mana tou Oresti</option>
+                    </datalist>
+
+                    <label><strong>Area</strong></label>
+                    <span class="text-danger"></span>
+                    <input class="form-control mb-3" placeholder="City Area" list="region" />
+                    <datalist id="region">
+                        <!-- Connect here IF Statement list depending on City (we need the input above first) -->
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                        <option>Sto mouni tis manas tou Oresti</option>
+                    </datalist>
+
+                    <label><strong>OTHER STUFF WE WANT TO LEARN</strong></label>
+                    <input class="form-control mb-3" placeholder="OTHER" />
+                    <span class="text-danger"></span>
+
+                    <div class="form-group position-relative mb-3">
+                        <label><strong>Mobile Phone</strong></label>
+                        <input class="form-control input-with-place" />
+                        <span class="unit" style="color:#808080">+30&ensp;</span>
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-my-dark mx-auto d-block">Send</button>
+                </form>
+            </div>
+        }
+    </div>
 
 </div>

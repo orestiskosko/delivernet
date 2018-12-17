@@ -79,7 +79,7 @@
 
                     <div class="form-group">
                         <textarea asp-for="Comments" class="form-control w-100" rows="7" placeholder="Comment" id="comments"></textarea>
-                        <span asp-validation-for="Comments">s</span>
+                        <span asp-validation-for="Comments"></span>
                     </div>
 
                     <button type="submit" class="btn bg-winter text-bone mx-auto d-block">Submit</button>
@@ -95,6 +95,13 @@
 
 
 @section Scripts {
+
+    <!-- Background Image -->
+    <script>
+        var back = document.getElementById('bodyDiv');
+        back.classList.remove("bg-img-winter");
+        back.classList.add("bg-img-bistro");
+    </script>
 
     <!-- Status UI -->
     <script>

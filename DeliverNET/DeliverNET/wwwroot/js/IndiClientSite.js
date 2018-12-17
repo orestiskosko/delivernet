@@ -211,7 +211,7 @@ var clearOrderList = function () {
 
 // order item html
 var orderItemHtml = function (orderId, distance, eta, timer) {
-    return `<a id="${orderId}" class="list-group-item list-group-item-action flex-column align-items-start">
+    return `<a id="${orderId}" class="list-group-item list-group-item-action bg-bone-3d mb-1 flex-column align-items-start" style="cursor:pointer">
                     <div class="d-flex justify-content-between">
                         <div>
                             <span class="d-block"><strong>Id</strong></span>

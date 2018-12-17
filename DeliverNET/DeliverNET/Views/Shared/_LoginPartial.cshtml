@@ -9,15 +9,15 @@
         @if (await ClaimManager.HasClaim(User, JobTypes.Individual))
         {
 
-            <li class=" nav-item">
+            <li class="nav-item mr-4">
                 <a class="nav-link text-bone" asp-controller="ProfileIndi" asp-action="IndexIndi">
-                    @*<i class="fas fa-desktop mr-1" style="font-size:medium"></i>*@&ensp;Workspace
+                    <i class="fas fa-desktop mr-1" style="font-size:medium;font-weight:600"></i>&ensp;Workspace
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link text-bone" asp-controller="ProfileIndi" asp-action="DashboardIndi">
-                    @*<i class="fas fa-chart-line mr-1" style="font-size:larger"></i>*@&ensp;Dashboard
+                    <i class="fas fa-chart-bar mr-1" style="font-size:large;font-weight:400"></i>&ensp;Dashboard
                 </a>
             </li>
 
@@ -25,43 +25,43 @@
         else
         {
 
-            <li class="nav-item">
+            <li class="nav-item mr-4">
                 <a class="nav-link text-bone" asp-controller="ProfileBusi" asp-action="IndexBusi">
-                    @*<i class="fas fa-desktop mr-1" style="font-size:medium"></i>*@&ensp;Workspace
+                    <i class="fas fa-desktop mr-1" style="font-size:medium;font-weight:600"></i>&ensp;Workspace
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link text-bone" asp-area="" asp-controller="ProfileBusi" asp-action="DashboardBusi">
-                    @*<i class="fas fa-chart-line mr-1" style="font-size:larger"></i>*@&ensp;Dashboard
+                    <i class="fas fa-chart-bar mr-1" style="font-size:large;font-weight:400"></i>&ensp;Dashboard
                 </a>
             </li>
 
         }
 
         <li class="nav-item dropdown text-bone ml-5">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" style="cursor:pointer" aria-haspopup="true" aria-expanded="false">
                 <span class="text-bone">@UserManager.GetUserName(User)</span>
                 <i class="fas fa-user text-bone" id="profileIcon" style="font-size:large"></i>
             </a>
-            <div class="dropdown-menu bg-jet text-bone" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu bg-jet text-bone mt-1 py-0" aria-labelledby="navbarDropdownMenuLink">
                 @if (await ClaimManager.HasClaim(User, JobTypes.Individual))
                 {
                     <!--Indi Reviews-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileIndi" asp-action="ReviewsIndi">Reviews</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileIndi" asp-action="ReviewsIndi">Reviews</a>
                     <!--Indi Settings-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileIndi" asp-action="SettingsIndi">Settings</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileIndi" asp-action="SettingsIndi">Settings</a>
                 }
                 else
                 {
                     <!--Busi Reviews-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileBusi" asp-action="ReviewsBusi">Reviews</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileBusi" asp-action="ReviewsBusi">Reviews</a>
                     <!--Busi Settings-->
-                    <a class="dropdown-item text-bone" asp-controller="ProfileBusi" asp-action="SettingsBusi">Settings</a>
+                    <a class="dropdown-item jet-hov text-bone" asp-controller="ProfileBusi" asp-action="SettingsBusi">Settings</a>
                 }
 
                 <!--Logout Button-->
-                <a class="dropdown-item text-bone" asp-controller="Account" asp-action="Logout">Logout</a>
+                <a class="dropdown-item jet-hov text-bone" asp-controller="Account" asp-action="Logout">Logout</a>
             </div>
         </li>
     </ul>
@@ -70,10 +70,10 @@ else
 {
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         @*<li class="nav-item">
-            <audio controls="controls">
-                <source src="~/Last%20Christmas%20(metal%20cover%20by%20Leo%20Moracchioli).mp3" type="audio/mpeg" />
-            </audio>
-        </li>*@
+                <audio controls="controls">
+                    <source src="~/Last%20Christmas%20(metal%20cover%20by%20Leo%20Moracchioli).mp3" type="audio/mpeg" />
+                </audio>
+            </li>*@
         <li class="nav-item">
             <a class="nav-link text-carmine hov-not-carmine text-nowrap border-0" asp-area="" asp-controller="Home" asp-action="AboutIndi">Individuals</a>
         </li>
