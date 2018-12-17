@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliverNET.Migrations
 {
     [DbContext(typeof(DeliverNETContext))]
-    [Migration("20181214232922_Change1")]
-    partial class Change1
+    [Migration("20181217020614_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,13 +168,13 @@ namespace DeliverNET.Migrations
 
                     b.Property<int>("BusinessId");
 
-                    b.Property<string>("CashierDeliverNetUserId");
+                    b.Property<string>("CashierId");
 
                     b.Property<string>("Comments");
 
                     b.Property<DateTime?>("DeliveredTime");
 
-                    b.Property<string>("DelivererDeliverNetUserId");
+                    b.Property<string>("DelivererId");
 
                     b.Property<string>("DoorName");
 
@@ -210,9 +210,9 @@ namespace DeliverNET.Migrations
 
                     b.HasIndex("BusinessId");
 
-                    b.HasIndex("CashierDeliverNetUserId");
+                    b.HasIndex("CashierId");
 
-                    b.HasIndex("DelivererDeliverNetUserId");
+                    b.HasIndex("DelivererId");
 
                     b.ToTable("Orders");
                 });
@@ -392,11 +392,11 @@ namespace DeliverNET.Migrations
 
                     b.HasOne("DeliverNET.Data.BusinessCashier", "Cashier")
                         .WithMany()
-                        .HasForeignKey("CashierDeliverNetUserId");
+                        .HasForeignKey("CashierId");
 
                     b.HasOne("DeliverNET.Data.Deliverer", "Deliverer")
                         .WithMany()
-                        .HasForeignKey("DelivererDeliverNetUserId");
+                        .HasForeignKey("DelivererId");
                 });
 
             modelBuilder.Entity("DeliverNET.Data.Rating", b =>

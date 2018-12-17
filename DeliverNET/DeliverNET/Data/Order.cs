@@ -14,9 +14,13 @@ namespace DeliverNET.Data
         public int BusinessId { get; set; }
         public Business Business { get; set; }
 
+        public string CashierId { get; set; }
         public BusinessCashier Cashier { get; set; }
 
+        public string DelivererId { get; set; }
         public Deliverer Deliverer { get; set; }
+
+
         public DateTime Tstamp { get; set; }
 
         public string Address { get; set; }
