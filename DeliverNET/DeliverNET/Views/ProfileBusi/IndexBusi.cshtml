@@ -1,16 +1,8 @@
-﻿@using System.Net.Http
-@model DeliverNET.Models.ProfileBusiViewModels.OrderBusiViewModel
-
-@inject IMasterManager MasterManager
-@inject UserManager<DeliverNETUser> UserManager
+﻿@model DeliverNET.Models.ProfileBusiViewModels.OrderBusiViewModel
 
 @{
     ViewData["Title"] = "DeliverNET | WorkSpace";
     Layout = "~/Views/Shared/_LayoutBusi.cshtml";
-
-    DeliverNETUser user = await UserManager.FindByNameAsync(User.Identity.Name);
-    BusinessCashier cashier = MasterManager.GetBusinessCashierManager().Get(user.Id);
-    Business business = MasterManager.GetBusinessManager().Get(cashier.BusinessId);
 }
 
 <div class="container pt-3">
@@ -34,7 +26,7 @@
             <div class="bg-jet p-3 rounded" id="newForm">
                 <div class="d-flex justify-content-between">
                     <h4 class="d-inline text-bone ">New Order</h4>
-                    <h4 class="d-inline text-bone font-pacifico">@business.Title</h4>
+                    <h4 class="d-inline text-bone font-pacifico">@ViewData["BusinessTitle"]</h4>
                 </div>
                 <form id="orderForm">
                     <div class="form-group">
@@ -101,30 +93,6 @@
         var back = document.getElementById('bodyDiv');
         back.classList.remove("bg-img-winter");
         back.classList.add("bg-img-bistro");
-    </script>
-
-    <!-- Status UI -->
-    <script>
-
-        var list = document.getElementsByTagName('p');
-
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].innerHTML == 'Pending') {
-                list[i].style.backgroundColor = "#C2B638"
-            }
-            else if (list[i].innerHTML == 'Accepted') {
-                list[i].style.backgroundColor = "#659B81"
-            }
-            else if (list[i].innerHTML == 'Picked') {
-                list[i].style.backgroundColor = "#794F7E"
-            }
-            else if (list[i].innerHTML == 'Delivered') {
-                list[i].style.backgroundColor = "#3A9C27"
-            }
-            else {
-                list[i].style.backgroundColor = "#953030"
-            }
-        };
     </script>
 
     <script src="~/js/BusinessClientSite.js"></script>
