@@ -53,6 +53,10 @@ namespace DeliverNET.Controllers
         [HttpGet]
         public IActionResult IndexBusi()
         {
+            DeliverNETUser user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            BusinessCashier cashier = _masterManager.GetBusinessCashierManager().Get(user.Id);
+            Business business = _masterManager.GetBusinessManager().Get(cashier.BusinessId);
+            ViewData["BusinessTitle"] = business.Title;
             return View();
         }
 
