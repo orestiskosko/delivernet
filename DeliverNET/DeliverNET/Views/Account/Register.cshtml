@@ -78,13 +78,13 @@
     <script>
         var indiClicked = false;
         var busiClicked = false;
-        var indi = document.getElementById('btnIndi');
+        var overview = document.getElementById('btnIndi');
         var busi = document.getElementById('btnBusi');
         var input = document.getElementById('jobInput');
 
         function disableAll() {
             if (indiClicked) {
-                indi.classList.remove("bg-carmine-3d"),
+                overview.classList.remove("bg-carmine-3d"),
                     indiClicked = false, input.value = ""
             };
             if (busiClicked) {
@@ -93,10 +93,10 @@
             };
         };
 
-        indi.onclick = function () {
+        overview.onclick = function () {
             indiClicked ? disableAll() :
                 (disableAll(),
-                    indi.classList.add("bg-carmine-3d"),
+                    overview.classList.add("bg-carmine-3d"),
                     indiClicked = true,
                     input.value = "@JobTypes.Individual.ToString()");
         };

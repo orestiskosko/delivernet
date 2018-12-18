@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutIndi.cshtml";
+}
+
+<style>
+    button {
+        cursor: pointer;
+        text-align: start;
+    }
+</style>
+
+<div class="p-0 m-0">
+    <div class="row">
+        <div class="container col-md-2 bg-jet m-0 pl-4 pr-2" style="height:100vh;max-width:170px">
+
+            <!-- We DO want it to have a fixed width, don't freak out
+            "Shut up and sit down you big bald fuck"  // google it -->
+            <div class="d-flex flex-column justify-content-around h-50" style="font-size:medium">
+
+                <div></div>
+
+                <div style="color:#808080">Dashboards</div>
+
+                <button class="btn bg-jet jet-hov btn-shadow-none text-bone py-2 pl-1 text-left" style="border-radius:4px" id="btnOverview">
+                    <i class="fas fa-map-marker-alt"></i>
+                    &ensp;Overview
+                </button>
+
+                <button class="btn bg-jet jet-hov btn-shadow-none text-bone py-2 pl-1 text-left" style="border-radius:4px" id="btnOrders">
+                    <i class="fas fa-road"></i>
+                    &ensp;Orders
+                </button>
+
+                <button class="btn bg-jet jet-hov btn-shadow-none text-bone py-2 pl-1 text-left" style="border-radius:4px" id="btnProfit">
+                    <i class="fas fa-dollar-sign"></i>
+                    &ensp;Profit
+                </button>
+
+                <button class="btn bg-jet jet-hov btn-shadow-none text-bone py-2 pl-1 text-left" style="border-radius:4px" id="btnHistory">
+                    <i class="fas fa-archive"></i>
+                    &ensp;Order History
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-10" id="partialDiv">
+            <partial name="_OverviewPartial" />
+            <!--  -->
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <!-- This nice blue background. Blue like my sad soul -->
+    <script>
+
+        var back = document.getElementById('bodyDiv');
+        back.classList.remove("bg-img-carmine");
+        back.classList.add("bg-dashboard");
+
+    </script>
+
+    <!-- Buttons Pressed -->
+    <script>
+
+        var overviewClicked = false;
+        var ordersClicked = false;
+        var profitClicked = false;
+        var historyClicked = false;
+
+        var overview = document.getElementById('btnOverview');
+        var orders = document.getElementById('btnOrders');
+        var profit = document.getElementById('btnProfit');
+        var orderHistory = document.getElementById('btnHistory');
+
+        function disableAll() {
+            if (overviewClicked) {
+                overview.classList.remove("regiClicked"),
+                    overview.classList.remove("bg-jet-hover"),
+                    overviewClicked = false
+            };
+            if (ordersClicked) {
+                orders.classList.remove("regiClicked"),
+                    orders.classList.remove("bg-jet-hover"),
+                    ordersClicked = false
+            };
+            if (profitClicked) {
+                profit.classList.remove("regiClicked"),
+                    profit.classList.remove("bg-jet-hover"),
+                    profitClicked = false
+            };
+            if (historyClicked) {
+                orderHistory.classList.remove("regiClicked"),
+                    orderHistory.classList.remove("bg-jet-hover"),
+                    historyClicked = false
+            };
+        };
+
+        overview.onclick = function () {
+            overviewClicked ? disableAll() :
+                (disableAll(),
+                    overview.classList.add("regiClicked"),
+                    overview.classList.add("bg-jet-hover"),
+                    overviewClicked = true);
+        };
+        orders.onclick = function () {
+            ordersClicked ? disableAll() :
+                (disableAll(),
+                    orders.classList.add("regiClicked"),
+                    orders.classList.add("bg-jet-hover"),
+                    ordersClicked = true);
+        };
+        profit.onclick = function () {
+            profitClicked ? disableAll() :
+                (disableAll(),
+                    profit.classList.add("regiClicked"),
+                    profit.classList.add("bg-jet-hover"),
+                    profitClicked = true);
+        };
+        orderHistory.onclick = function () {
+            historyClicked ? disableAll() :
+                (disableAll(),
+                    orderHistory.classList.add("regiClicked"),
+                    orderHistory.classList.add("bg-jet-hover"),
+                    historyClicked = true);
+        };
+
+    </script>
+
+}
