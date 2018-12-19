@@ -1,6 +1,5 @@
 **Instructions for working in this repository**
 
-faaaaaak
 
 Initially, clone the repository to your local machine.
 We work with GitKraken.
@@ -31,4 +30,3 @@ Steps to merge a finished feature to develop branch.
 ## New Releases
 
 Don't.
-SELECT * FROM Hand WHERE Finger == 3 (fak uppercut);
